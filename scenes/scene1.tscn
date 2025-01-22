@@ -63,5 +63,5 @@ transform = Transform3D(0.5, -0.836516, 0.224144, 0.866026, 0.482963, -0.12941, 
 [node name="Area3D - coin" parent="." instance=ExtResource("5_yculx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.70792, 3.09337, 2)
 
-[node name="Player2" parent="." instance=ExtResource("6_bvy0k")]
+[node name="stabbert" parent="." instance=ExtResource("6_bvy0k")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.17067, 1.94874, 3.52537)

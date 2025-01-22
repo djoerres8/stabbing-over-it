@@ -1,6 +1,6 @@
-[gd_scene load_steps=13 format=4 uid="uid://c52mmlbh8e552"]
+[gd_scene load_steps=12 format=4 uid="uid://c52mmlbh8e552"]
 
-[ext_resource type="Script" path="res://scripts/player_sword.gd" id="2_e5hh5"]
+[ext_resource type="Script" path="res://scripts/stabbert.gd" id="1_n3x53"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_7of3c"]
 friction = 0.6
@@ -130,8 +130,7 @@ size = Vector3(0.388977, 0.283447, 0.213806)
 size = Vector3(0.215332, 1.06152, 0.164246)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_3kipt"]
-
-[sub_resource type="QuadMesh" id="QuadMesh_6n80t"]
+size = Vector3(15, 6, 1)
 
 [node name="Stabbert" type="RigidBody3D"]
 axis_lock_linear_z = true
@@ -139,7 +138,7 @@ axis_lock_angular_x = true
 axis_lock_angular_y = true
 physics_material_override = SubResource("PhysicsMaterial_7of3c")
 center_of_mass_mode = 1
-script = ExtResource("2_e5hh5")
+script = ExtResource("1_n3x53")
 
 [node name="Camera_Controller" type="Node3D" parent="."]
 top_level = true
@@ -286,15 +285,10 @@ shape = SubResource("BoxShape3D_6vy08")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00868648, 5.59313, 0)
 
 [node name="Area3D" type="Area3D" parent="Handle"]
-visible = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Handle/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -2.5, 0)
 shape = SubResource("BoxShape3D_3kipt")
 
-[node name="Scaler" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.60483, 0)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Scaler"]
-mesh = SubResource("QuadMesh_6n80t")
-
 [connection signal="input_event" from="." to="." method="_on_input_event"]
+[connection signal="input_event" from="Handle/Area3D" to="." method="_on_area_3d_input_event"]
