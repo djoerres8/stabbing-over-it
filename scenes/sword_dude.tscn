@@ -1,0 +1,40 @@
+[gd_scene load_steps=6 format=3 uid="uid://d3fk0x41fy7ia"]
+
+[ext_resource type="Script" path="res://scripts/dude.gd" id="1_ygkw8"]
+[ext_resource type="ArrayMesh" uid="uid://dpvl338hrggay" path="res://assets/meshes/sword-no-pommel-mesh.res" id="2_faker"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4odma"]
+size = Vector3(1.37097, 1, 0.269043)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_agwr7"]
+size = Vector3(0.661697, 3.13368, 0.251099)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_lq7cq"]
+size = Vector3(1.47195, 0.325439, 0.21637)
+
+[node name="Dude" type="CharacterBody3D"]
+script = ExtResource("1_ygkw8")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = ExtResource("2_faker")
+
+[node name="CollisionShape3D - tip" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.999976, 0.00689402, 0, -0.00689402, 0.999976, 0, 0, 0, 1, -0.00167078, 0.389167, -0.041748)
+shape = SubResource("BoxShape3D_4odma")
+
+[node name="CollisionShape3D - blade" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00153351, 2.52441, -0.0164185)
+shape = SubResource("BoxShape3D_agwr7")
+
+[node name="CollisionShape3D - hilt" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00440979, 4.16587, -0.0233459)
+shape = SubResource("BoxShape3D_lq7cq")
+
+[node name="Camera_Controller" type="Node3D" parent="."]
+top_level = true
+
+[node name="Camera_Target" type="Node3D" parent="Camera_Controller"]
+transform = Transform3D(0.99802, -0.0446914, -0.0442712, 0.0536799, 0.97196, 0.228936, 0.0327984, -0.230859, 0.972434, 1.90853, 4.40641, 8.90976)
+
+[node name="Camera3D" type="Camera3D" parent="Camera_Controller/Camera_Target"]
+current = true

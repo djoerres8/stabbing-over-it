@@ -1,0 +1,30 @@
+[gd_scene load_steps=2 format=3 uid="uid://b5ii0vwab5nem"]
+
+[ext_resource type="PackedScene" uid="uid://bgcy6fv368l8b" path="res://scenes/sword.tscn" id="1_sswmv"]
+
+[node name="Game" type="Node2D"]
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="CharacterBody2D"]
+offset_left = -660.0
+offset_top = -467.0
+offset_right = 815.0
+offset_bottom = 667.0
+
+[node name="SubViewport" type="SubViewport" parent="CharacterBody2D/SubViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(1024, 1024)
+render_target_update_mode = 4
+
+[node name="RigidBody3D" parent="CharacterBody2D/SubViewportContainer/SubViewport" instance=ExtResource("1_sswmv")]
+
+[node name="Camera3D" type="Camera3D" parent="CharacterBody2D/SubViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.7848, 7.59513)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
