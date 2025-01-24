@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=4 uid="uid://c52mmlbh8e552"]
+[gd_scene load_steps=13 format=4 uid="uid://c52mmlbh8e552"]
 
 [ext_resource type="Script" path="res://scripts/stabbert.gd" id="1_n3x53"]
+[ext_resource type="Script" path="res://scripts/stabbert_camera.gd" id="2_ce6pi"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_7of3c"]
-friction = 0.6
-bounce = 0.2
+friction = 0.56
+bounce = 0.25
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0bod1"]
 resource_name = "Hilt"
@@ -130,26 +131,29 @@ size = Vector3(0.388977, 0.283447, 0.213806)
 size = Vector3(0.215332, 1.06152, 0.164246)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_3kipt"]
-size = Vector3(15, 6, 1)
+size = Vector3(45.5983, 25.6266, 1)
 
 [node name="Stabbert" type="RigidBody3D"]
 axis_lock_linear_z = true
 axis_lock_angular_x = true
 axis_lock_angular_y = true
 physics_material_override = SubResource("PhysicsMaterial_7of3c")
+gravity_scale = 3.0
 center_of_mass_mode = 1
+center_of_mass = Vector3(0, 0.5, 0)
 script = ExtResource("1_n3x53")
 
 [node name="Camera_Controller" type="Node3D" parent="."]
 top_level = true
 
 [node name="Camera_Target" type="Node3D" parent="Camera_Controller"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.90853, 8.08901, 12.114)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 6, 12)
 
 [node name="Camera3D" type="Camera3D" parent="Camera_Controller/Camera_Target"]
-transform = Transform3D(0.999999, 0, 0, 0, 0.994102, 0.10845, 0, -0.10845, 0.994102, -2.46854, -3.12433, 0)
+transform = Transform3D(0.999999, 0, 0, 0, 0.994102, 0.10845, 0, -0.10845, 0.994102, 0, 0, 0)
 current = true
 fov = 102.825
+script = ExtResource("2_ce6pi")
 
 [node name="Skeleton3D" type="Skeleton3D" parent="."]
 bones/0/name = "Bone"
@@ -260,7 +264,9 @@ root_bone = &"Bone.002"
 tip_bone = &"Bone.008"
 target_node = NodePath("../../Handle")
 
-[node name="swordTip" type="CollisionShape3D" parent="."]
+[node name="SwordTipArea" type="Area3D" parent="."]
+
+[node name="swordTip" type="CollisionShape3D" parent="SwordTipArea"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.0774677, 0)
 shape = SubResource("CylinderShape3D_6ruyh")
 
@@ -282,13 +288,18 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00268555, 4.91359, -0.0019
 shape = SubResource("BoxShape3D_6vy08")
 
 [node name="Handle" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00868648, 5.59313, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.54722, 0)
 
-[node name="Area3D" type="Area3D" parent="Handle"]
+[node name="Area3D" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+collision_layer = 2
+collision_mask = 2
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Handle/Area3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -2.5, 0)
+[node name="bendableArea" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.028825, -2.84052, 0)
 shape = SubResource("BoxShape3D_3kipt")
 
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="input_event" from="." to="." method="_on_input_event"]
-[connection signal="input_event" from="Handle/Area3D" to="." method="_on_area_3d_input_event"]
+[connection signal="body_entered" from="SwordTipArea" to="." method="_on_sword_tip_area_body_entered"]
+[connection signal="input_event" from="Area3D" to="." method="_on_area_3d_input_event"]

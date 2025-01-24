@@ -46,6 +46,8 @@ shape = SubResource("BoxShape3D_rbiv0")
 
 [node name="StaticBody3D - wall" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 99.9901, -34.455)
+collision_layer = 0
+collision_mask = 0
 metadata/_edit_group_ = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D - wall"]
@@ -55,7 +57,10 @@ mesh = SubResource("BoxMesh_r77x7")
 shape = SubResource("BoxShape3D_rbiv0")
 
 [node name="Rock1" parent="." instance=ExtResource("4_n0k1x")]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 14.1969, -0.520914, 0)
+transform = Transform3D(5.35707, 0.522173, 2.65125, 0, 5.88691, -1.15945, -2.70218, 1.03521, 5.2561, 20.806, -0.0217264, -3.56721)
+
+[node name="Rock2" parent="." instance=ExtResource("4_n0k1x")]
+transform = Transform3D(3.15969, -5.10063, 0, 5.10063, 3.15969, 0, 0, 0, 6, 30.4697, 6.24716, -6.54729)
 
 [node name="Block" parent="." instance=ExtResource("5_krq3j")]
 transform = Transform3D(0.5, -0.836516, 0.224144, 0.866026, 0.482963, -0.12941, 0, 0.258819, 0.965926, 4, 3, -3)
@@ -64,4 +69,4 @@ transform = Transform3D(0.5, -0.836516, 0.224144, 0.866026, 0.482963, -0.12941, 
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.70792, 3.09337, 2)
 
 [node name="stabbert" parent="." instance=ExtResource("6_bvy0k")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.17067, 1.94874, 3.52537)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.171, 4.06449, 0)
