@@ -272,7 +272,6 @@ shape = SubResource("CylinderShape3D_6ruyh")
 
 [node name="swordBlade" type="CollisionPolygon3D" parent="."]
 depth = 0.25
-disabled = true
 polygon = PackedVector2Array(0.677073, 0.556605, -0.670913, 0.577917, -0.288546, 4.09877, 0.286879, 4.1041)
 
 [node name="swordHilt" type="CollisionPolygon3D" parent="."]
@@ -302,4 +301,5 @@ shape = SubResource("BoxShape3D_3kipt")
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="input_event" from="." to="." method="_on_input_event"]
 [connection signal="body_entered" from="SwordTipArea" to="." method="_on_sword_tip_area_body_entered"]
+[connection signal="body_exited" from="SwordTipArea" to="." method="_on_sword_tip_area_body_exited"]
 [connection signal="input_event" from="Area3D" to="." method="_on_area_3d_input_event"]

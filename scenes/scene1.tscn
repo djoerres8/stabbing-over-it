@@ -62,6 +62,9 @@ transform = Transform3D(5.35707, 0.522173, 2.65125, 0, 5.88691, -1.15945, -2.702
 [node name="Rock2" parent="." instance=ExtResource("4_n0k1x")]
 transform = Transform3D(3.15969, -5.10063, 0, 5.10063, 3.15969, 0, 0, 0, 6, 30.4697, 6.24716, -6.54729)
 
+[node name="Rock3" parent="." instance=ExtResource("4_n0k1x")]
+transform = Transform3D(0.186057, -5.99712, 0, 5.99712, 0.186057, 0, 0, 0, 6, -25.4199, 7.66509, -6.75525)
+
 [node name="Block" parent="." instance=ExtResource("5_krq3j")]
 transform = Transform3D(0.5, -0.836516, 0.224144, 0.866026, 0.482963, -0.12941, 0, 0.258819, 0.965926, 4, 3, -3)
 
