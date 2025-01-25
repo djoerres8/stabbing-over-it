@@ -8,19 +8,17 @@ extends RigidBody3D
 const GRAVITY_SCALE = 3
 const MANUAL_ROTATION_SPEED = 10.0 # Adjust rotation speed as needed
 
-const MAX_X_LAUNCH = 5
-const MIN_X_LAUNCH = -5
-const MAX_Y_LAUNCH = 6
-const MIN_Y_LAUNCH = -4
+const MAX_X_AREA = 5
+const MIN_X_AREA = -5
+const MAX_Y_AREA = 6
+const MIN_Y_AREA = -4
 
-const MAX_X_PULSE = 30
-const MAX_Y_PULSE = 20
+const MAX_X_PULSE = 50
+const MAX_Y_PULSE = 50
+const MIN_Y_PULSE = 5
 const MAX_TORQUE = 30
 
 var selected : bool = false
-
-var pulse : Vector3
-var torque : Vector3
 
 #wether or not stabbert is currently impaling a surface
 var stabbed = false
@@ -39,7 +37,7 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:	
 	#Make camera controller match position of self
-	$Camera_Controller.position = lerp($Camera_Controller.position, position, .05)
+	$Camera_Controller.position = lerp($Camera_Controller.position, position, .1)
 	
 	#launch box
 	if selected:
@@ -122,29 +120,30 @@ func draw_launch_direction(pulse: Vector3):
 	debug_mesh.surface_end()
 	
 func draw_launch_box():
-	# Clear any previously drawn surfaces
-	debug_mesh.clear_surfaces()
-	
-	# Start creating the line geometry
-	debug_mesh.surface_begin(Mesh.PRIMITIVE_LINES)
-
-	# Set line color
-	debug_mesh.surface_set_color(Color(1, 1, 0, 1))
-
-	# Define the box vertices
-	var v1 = Vector3(-5, -4, 0)            # Bottom-left
-	var v2 = Vector3(-5, 6, 0)            # Top-left
-	var v3 = Vector3(5, 6, 0)            # Top-right
-	var v4 = Vector3(5, -4, 0)            # Bottom-right
-
-	# Draw dotted lines for each edge
-	draw_dotted_line(v1, v2, 0.5)  # Bottom-left to Top-left
-	draw_dotted_line(v2, v3, 0.5)  # Top-left to Top-right
-	draw_dotted_line(v3, v4, 0.5)  # Top-right to Bottom-right
-	draw_dotted_line(v4, v1, 0.5)  # Bottom-right to Bottom-left
-	
-	# Finish creating the box
-	debug_mesh.surface_end()
+	pass
+	## Clear any previously drawn surfaces
+	#debug_mesh.clear_surfaces()
+	#
+	## Start creating the line geometry
+	#debug_mesh.surface_begin(Mesh.PRIMITIVE_LINES)
+#
+	## Set line color
+	#debug_mesh.surface_set_color(Color(1, 1, 0, 1))
+#
+	## Define the box vertices
+	#var v1 = Vector3(-5, -4, 0)            # Bottom-left
+	#var v2 = Vector3(-5, 6, 0)            # Top-left
+	#var v3 = Vector3(5, 6, 0)            # Top-right
+	#var v4 = Vector3(5, -4, 0)            # Bottom-right
+#
+	## Draw dotted lines for each edge
+	#draw_dotted_line(v1, v2, 0.5)  # Bottom-left to Top-left
+	#draw_dotted_line(v2, v3, 0.5)  # Top-left to Top-right
+	#draw_dotted_line(v3, v4, 0.5)  # Top-right to Bottom-right
+	#draw_dotted_line(v4, v1, 0.5)  # Bottom-right to Bottom-left
+	#
+	## Finish creating the box
+	#debug_mesh.surface_end()
 	
 func draw_dotted_line(start: Vector3, end: Vector3, segment_length: float) -> void:
 	var direction = (end - start).normalized()
@@ -175,51 +174,34 @@ func _on_area_3d_input_event(camera: Node, event: InputEvent, event_position: Ve
 			#vector at which mouse is released
 			#important to remember the area3D is at (0,5,0) so that the mouse follows the bend correctly
 			var areaCollision = camera.shoot_ray()
+			var area_x = clamp(areaCollision.x, MIN_X_AREA, MAX_X_AREA)
+			var area_y = clamp(areaCollision.y+5, MIN_Y_AREA, MAX_Y_AREA)
 			
-			# x relative to origin: (-5 - 5)
-			# y relative to origin (-4 - 6)
-			var pulse_x = clamp(areaCollision.x, -5, 5)
-			var pulse_y = clamp(areaCollision.y+5, -4, 6)
-
-			print("mouse x: ", pulse_x)
-			print("mouse y: ", pulse_y)
-			
-			const MAX_X_LAUNCH = 5
-			const MIN_X_LAUNCH = -5
-			const MAX_Y_LAUNCH = 6
-			const MIN_Y_LAUNCH = -4
-			
-			# for x value, between 0 and -5 should be between 0 and 30 
-			
-			# then, between 0 and 5 should be between 0 and -30 
-			
-			# for y value, between 6 and -4 should be between 0 and 20
-
-
 			#get relative values  
-			pulse_x = ((pulse_x - MIN_X_LAUNCH) / (MAX_X_LAUNCH - MIN_X_LAUNCH)) * (MAX_X_PULSE - -MAX_X_PULSE) + -MAX_X_PULSE
-			pulse_y = ((pulse_y - MIN_Y_LAUNCH) / (MAX_Y_LAUNCH - MIN_Y_LAUNCH)) * (MAX_Y_PULSE - -MAX_Y_PULSE) + -MAX_Y_PULSE
+			var pulse_x = ((area_x - MIN_X_AREA) / (MAX_X_AREA - MIN_X_AREA)) * (MAX_X_PULSE*2) - MAX_X_PULSE
+			var pulse_y = ((area_y - MIN_Y_AREA) / (MAX_Y_AREA - MIN_Y_AREA)) * (MAX_Y_PULSE - MIN_Y_PULSE) - MAX_Y_PULSE
 			
-			# max x pulse = 30, max y pulse = 20
-			pulse = Vector3(pulse_x, pulse_y, 0)
 			
-			print("Launch Vector: ", pulse)
-
-			
-			# Calculate launching values
-			if areaCollision.x <= 0:
-				pulse = Vector3(20,0,0)
-				torque = Vector3(0,0,-5)
-			else:
-				pulse = Vector3(-20,0,0)
-				torque = Vector3(0,0,5)
-				
 		
-			#pulse = pulse.limit_length(MAX_PULSE)
-			#torque = torque.limit_length(MAX_TORQUE)
+			var torque = ((pulse_x + MAX_X_PULSE) / (MAX_X_PULSE + MAX_X_PULSE)) * (MAX_TORQUE*2) - MAX_TORQUE
+			print("y: ", area_y)
+			if area_y < 4:
+				if torque > 0:
+					torque = torque - (.5 * pulse_y)
+				else:
+					torque = torque + (.5 * pulse_y)
+					
+			print("pre Torque: ", torque)
+			
+			#normalize
+			#torque = ((torque + MAX_X_PULSE) / (MAX_X_PULSE + MAX_X_PULSE)) * (MAX_TORQUE*2) - MAX_TORQUE
+				
+			print("Launch Vector: ", Vector3(pulse_x*-1, pulse_y*-1, 0))
+			print("Launch Torque: ", torque)
+
 
 			# Shoot
-			shoot(pulse, torque)
+			shoot(Vector3((pulse_x*-1), (pulse_y*-1), 0), Vector3(0, 0, torque))
 			selected = false
 			
 			#remove guidelines
@@ -240,14 +222,10 @@ func _on_area_3d_input_event(camera: Node, event: InputEvent, event_position: Ve
 			# add 5 to y because that is the Handle's offset
 			handle.position = Vector3(areaCollision.x, areaCollision.y + 5, handle.position.z)
 			
-			if areaCollision.x <= 0:
-				pulse = Vector3(30,20,0)
-				torque = Vector3(0,0,-50)
-			else:
-				pulse = Vector3(-30,20,0)
-				torque = Vector3(0,0,50)
-				
-			#draw_launch_direction(pulse)
+			#get relative values  
+			var pulse_x = ((clamp(areaCollision.x, -5, 5) - MIN_X_AREA) / (MAX_X_AREA - MIN_X_AREA)) * (MAX_X_PULSE*2) - MAX_X_PULSE
+			var pulse_y = ((clamp(areaCollision.y+5, -4, 6) - MIN_Y_AREA) / (MAX_Y_AREA - MIN_Y_AREA)) * (MAX_Y_PULSE - MIN_Y_PULSE) - MAX_Y_PULSE			
+			draw_launch_direction(Vector3(pulse_x*-1, pulse_y*-1, 0))
 
 
 
