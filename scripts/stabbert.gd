@@ -20,13 +20,22 @@ const MAX_Y_PULSE = 50
 const MIN_Y_PULSE = 5
 const MAX_TORQUE = 30
 
+var pulse : Vector3
+var torque : Vector3
+
+#vairable that holds if the user is holding the left mouse button and and bending the sword
 var selected : bool = false
 
 #wether or not stabbert is currently impaling a surface
-var stabbed = false
+var stabbed : bool = false
 
-var start_position : Vector3
-var end_position : Vector3
+#track while the sword is being animated from release to fling
+var flinging : bool = false
+var flingPos1 : Vector3
+var flingPos2 : Vector3
+var flingPos3 : Vector3
+var handleBasePos : Vector3 = Vector3(0,5,0)
+var handlePos : int
 
 
 # Called when the node enters the scene tree for the first time.
@@ -42,7 +51,7 @@ func _physics_process(delta: float) -> void:
 	$Camera_Controller.position = lerp($Camera_Controller.position, position, .1)
 
 	#launch box
-	if selected:
+	if selected and not flinging:
 		draw_launch_box()
 	
 	#stop linear motion if impaled
@@ -62,20 +71,43 @@ func _physics_process(delta: float) -> void:
 		self.rotation_degrees = Vector3(0, 0, 0)  # Reset rotation to (0, 0, 0)
 		self.linear_velocity = Vector3(0, 0, 0)  # Stop linear momentum
 		self.angular_velocity = Vector3(0, 0, 0)  # Stop angular momentum
+		
+	if flinging:
+		match handlePos:
+			1:
+				handle.position = flingPos1
+				handlePos += 1
+			2:
+				handle.position = flingPos2
+				handlePos += 1
+			3:
+				handle.position = flingPos3
+				handlePos += 1
+			_:
+				handle.position = handleBasePos
+				flinging = false
+				shoot(pulse, torque)
+		
 
-#stop all motion
+#stop all motion by setting gravity to 0
 func stop_motion() -> void:
 	linear_velocity = Vector3.ZERO
 	angular_velocity = Vector3.ZERO
 	gravity_scale = 0
 	
+#Allow sword to continue moving
 func continue_motion() -> void:
 	stabbed = false
 	gravity_scale = GRAVITY_SCALE
 	
+#check if sword is moveing. using .1 as that seems to be small enough that it wont actually move but the values get stuck lower a lot
 func is_motionless() -> bool:
 	return (abs(linear_velocity.x) <= 0.1 and abs(linear_velocity.y) <= 0.1)
 	
+#helper function to get midpoint of 3 vetecies
+func get_midpoint(vec1: Vector3, vec2: Vector3) -> Vector3:
+	return (vec1 + vec2) / 2
+
 # given a pulse and torque apply force and rotation to the sword
 func shoot(pulse:Vector3, torque:Vector3)->void:	
 	
@@ -91,7 +123,6 @@ func shoot(pulse:Vector3, torque:Vector3)->void:
 	var cos_angle = cos(angle)
 	var sin_angle = sin(angle)
 
-
   # Rotate the pulse vector in the X-Y plane
 	var adjusted_pulse = Vector3(
 		pulse.x * cos_angle - pulse.y * sin_angle,
@@ -99,8 +130,83 @@ func shoot(pulse:Vector3, torque:Vector3)->void:
 		pulse.z  # Z stays the same
 	)
 	
+	#Apply force to the sword
 	self.apply_impulse(adjusted_pulse) # just need x and y values
 	self.apply_torque_impulse(torque) # just need z value
+	
+	#selected is turned here because we dont want it false before the sword starts moving
+	selected = false
+	
+
+func _on_area_3d_input_event(camera: Node, event: InputEvent, event_position: Vector3, normal: Vector3, shape_idx: int) -> void:
+	#isten for mouse buttons
+	if event is InputEventMouseButton:
+		
+		if event.is_pressed() and event.button_index == MOUSE_BUTTON_LEFT and (stabbed or is_motionless()):
+			selected = true
+			
+	#raycast from camer to mouse position (x, y, 0)
+	#check if colliding with bendableArea
+	#if colliding, handle position = mouse position
+	if event is InputEventMouseMotion and selected and not flinging:
+		var areaCollision = camera.shoot_ray()
+		if areaCollision is Vector3:
+			# add 5 to y because that is the Handle's offset
+			handle.position = Vector3(areaCollision.x, areaCollision.y + 5, handle.position.z)
+			
+			#get relative values  
+			var pulse_x = ((clamp(areaCollision.x, -5, 5) - MIN_X_AREA) / (MAX_X_AREA - MIN_X_AREA)) * (MAX_X_PULSE*2) - MAX_X_PULSE
+			var pulse_y = ((clamp(areaCollision.y+5, -4, 6) - MIN_Y_AREA) / (MAX_Y_AREA - MIN_Y_AREA)) * (MAX_Y_PULSE - MIN_Y_PULSE) - MAX_Y_PULSE			
+			draw_launch_direction(Vector3(pulse_x*-1, pulse_y*-1, 0))
+		
+#listen for lmb release and fling
+func _input(event):
+			
+	if event is InputEventMouseButton:
+		if event.is_released() and event.button_index == MOUSE_BUTTON_LEFT and selected:
+						
+			#get vector the handle is at when releasing
+			var area_x = clamp(handle.position.x, MIN_X_AREA, MAX_X_AREA)
+			var area_y = clamp(handle.position.y, MIN_Y_AREA, MAX_Y_AREA)
+			
+			# trandform the vector from where the handle is when releasing to the coresponding value from min-max for x and y
+			var pulse_x = ((area_x - MIN_X_AREA) / (MAX_X_AREA - MIN_X_AREA)) * (MAX_X_PULSE*2) - MAX_X_PULSE
+			var pulse_y = ((area_y - MIN_Y_AREA) / (MAX_Y_AREA - MIN_Y_AREA)) * (MAX_Y_PULSE - MIN_Y_PULSE) - MAX_Y_PULSE
+			
+			#calculate pulse relative to the x vector, then add additional depending on how low the y axes is
+			var torque_z = ((pulse_x + MAX_X_PULSE) / (MAX_X_PULSE + MAX_X_PULSE)) * (MAX_TORQUE*2) - MAX_TORQUE
+			if area_y < 4:
+				if torque_z > 0:
+					torque_z = torque_z - (.5 * pulse_y)
+				else:
+					torque_z = torque_z + (.5 * pulse_y)
+			
+			#set pulse and torque
+			torque = Vector3(0, 0, torque_z)
+			pulse = Vector3((pulse_x*-1), (pulse_y*-1), 0)
+			
+			#get animation positions and start fling
+			flingPos2 = get_midpoint(handle.position, handleBasePos)
+			flingPos1 = get_midpoint(handle.position, flingPos2)
+			flingPos3 = get_midpoint(flingPos2, handleBasePos)
+			flinging = true
+			handlePos = 1
+			
+			#remove guidelines
+			debug_mesh.clear_surfaces()
+
+#when sword tip enters a body
+func _on_sword_tip_area_body_entered(_body: Node3D) -> void:
+	stabbed = true
+	stop_motion()
+
+#when the sword tip exits a body
+func _on_sword_tip_area_body_exited(body: Node3D) -> void:
+	continue_motion()
+	stabbed = false
+	
+	
+##GUIDELINES
 
 #display launch direction
 func draw_launch_direction(pulse: Vector3):
@@ -163,80 +269,3 @@ func draw_dotted_line(start: Vector3, end: Vector3, segment_length: float) -> vo
 
 		current_length += segment_length * 2  # Adjust gap size
 	
-
-func _on_area_3d_input_event(camera: Node, event: InputEvent, event_position: Vector3, normal: Vector3, shape_idx: int) -> void:
-	#isten for mouse buttons
-	if event is InputEventMouseButton:
-		
-		if event.is_pressed() and event.button_index == MOUSE_BUTTON_LEFT and (stabbed or is_motionless()):
-			selected = true
-			
-	#raycast from camer to mouse position (x, y, 0)
-	#check if colliding with bendableArea
-	#if colliding, handle position = mouse position
-	if event is InputEventMouseMotion and selected:
-		var areaCollision = camera.shoot_ray()
-		if areaCollision is Vector3:
-			# add 5 to y because that is the Handle's offset
-			handle.position = Vector3(areaCollision.x, areaCollision.y + 5, handle.position.z)
-			
-			#get relative values  
-			var pulse_x = ((clamp(areaCollision.x, -5, 5) - MIN_X_AREA) / (MAX_X_AREA - MIN_X_AREA)) * (MAX_X_PULSE*2) - MAX_X_PULSE
-			var pulse_y = ((clamp(areaCollision.y+5, -4, 6) - MIN_Y_AREA) / (MAX_Y_AREA - MIN_Y_AREA)) * (MAX_Y_PULSE - MIN_Y_PULSE) - MAX_Y_PULSE			
-			draw_launch_direction(Vector3(pulse_x*-1, pulse_y*-1, 0))
-		
-func _input(event):
-			
-	if event is InputEventMouseButton:
-		if event.is_released() and event.button_index == MOUSE_BUTTON_LEFT and selected:
-						
-			#vector the handle is at when mouse is released	
-			var area_x = clamp(handle.position.x, MIN_X_AREA, MAX_X_AREA)
-			var area_y = clamp(handle.position.y, MIN_Y_AREA, MAX_Y_AREA)
-			
-			#get relative values  
-			var pulse_x = ((area_x - MIN_X_AREA) / (MAX_X_AREA - MIN_X_AREA)) * (MAX_X_PULSE*2) - MAX_X_PULSE
-			var pulse_y = ((area_y - MIN_Y_AREA) / (MAX_Y_AREA - MIN_Y_AREA)) * (MAX_Y_PULSE - MIN_Y_PULSE) - MAX_Y_PULSE
-			
-			
-		
-			var torque = ((pulse_x + MAX_X_PULSE) / (MAX_X_PULSE + MAX_X_PULSE)) * (MAX_TORQUE*2) - MAX_TORQUE
-			print("y: ", area_y)
-			if area_y < 4:
-				if torque > 0:
-					torque = torque - (.5 * pulse_y)
-				else:
-					torque = torque + (.5 * pulse_y)
-					
-			print("pre Torque: ", torque)
-			
-			#normalize
-			#torque = ((torque + MAX_X_PULSE) / (MAX_X_PULSE + MAX_X_PULSE)) * (MAX_TORQUE*2) - MAX_TORQUE
-				
-			print("Launch Vector: ", Vector3(pulse_x*-1, pulse_y*-1, 0))
-			print("Launch Torque: ", torque)
-
-
-			# Shoot
-			shoot(Vector3((pulse_x*-1), (pulse_y*-1), 0), Vector3(0, 0, torque))
-			selected = false
-			
-			#remove guidelines
-			debug_mesh.clear_surfaces()
-			
-			#reset handle position
-			handle.position = Vector3(0,5,0)
-			
-
-
-
-func _on_sword_tip_area_body_entered(_body: Node3D) -> void:
-	print("STAB")
-	stabbed = true
-	stop_motion() # Replace with function body.
-
-
-func _on_sword_tip_area_body_exited(body: Node3D) -> void:
-	print("Bye Stab")
-	continue_motion()
-	stabbed = false

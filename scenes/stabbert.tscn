@@ -4,8 +4,8 @@
 [ext_resource type="Script" path="res://scripts/stabbert_camera.gd" id="2_ce6pi"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_7of3c"]
-friction = 0.56
-bounce = 0.25
+friction = 0.5
+bounce = 0.4
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0bod1"]
 resource_name = "Hilt"
@@ -121,8 +121,9 @@ bind/13/bone = -1
 bind/13/pose = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_6ruyh"]
-height = 0.42946
-radius = 0.461509
+margin = 0.05
+height = 0.3
+radius = 0.45
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_yltf1"]
 size = Vector3(0.388977, 0.283447, 0.213806)
@@ -131,7 +132,7 @@ size = Vector3(0.388977, 0.283447, 0.213806)
 size = Vector3(0.215332, 1.06152, 0.164246)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_3kipt"]
-size = Vector3(45.5983, 25.6266, 1)
+size = Vector3(40, 40, 1)
 
 [node name="Stabbert" type="RigidBody3D"]
 axis_lock_linear_z = true
@@ -296,7 +297,7 @@ collision_layer = 2
 collision_mask = 2
 
 [node name="bendableArea" type="CollisionShape3D" parent="Area3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.028825, -2.84052, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4, 0)
 shape = SubResource("BoxShape3D_3kipt")
 
 [node name="LeftHiltRay" type="RayCast3D" parent="."]
