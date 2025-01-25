@@ -4,9 +4,11 @@ extends RigidBody3D
 @onready var handle: Node3D = $Handle
 @onready var camera: Camera3D = $Camera_Controller/Camera_Target/Camera3D
 @onready var debug_mesh: ImmediateMesh = ImmediateMesh.new()
+@onready var left_hilt_ray: RayCast3D = $LeftHiltRay
+@onready var right_hilt_ray: RayCast3D = $RightHiltRay
 
 const GRAVITY_SCALE = 3
-const MANUAL_ROTATION_SPEED = 10.0 # Adjust rotation speed as needed
+const MANUAL_ROTATION_SPEED = 10 # Adjust rotation speed as needed
 
 const MAX_X_AREA = 5
 const MIN_X_AREA = -5
@@ -38,7 +40,7 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:	
 	#Make camera controller match position of self
 	$Camera_Controller.position = lerp($Camera_Controller.position, position, .1)
-	
+
 	#launch box
 	if selected:
 		draw_launch_box()
@@ -47,10 +49,11 @@ func _physics_process(delta: float) -> void:
 	if stabbed:
 		stop_motion()
 		
-		#rotate left/right while stabbed
-		if Input.is_action_just_pressed("scroll_down"):
+	if stabbed or is_motionless():
+			#rotate left/right while stabbed
+		if Input.is_action_just_pressed("scroll_down") and not left_hilt_ray.is_colliding():
 			rotation.z -= MANUAL_ROTATION_SPEED * delta
-		elif Input.is_action_just_pressed("scroll_up"):
+		elif Input.is_action_just_pressed("scroll_up") and not right_hilt_ray.is_colliding():
 			rotation.z += MANUAL_ROTATION_SPEED * delta
 
 	# reset position
@@ -70,6 +73,8 @@ func continue_motion() -> void:
 	stabbed = false
 	gravity_scale = GRAVITY_SCALE
 	
+func is_motionless() -> bool:
+	return (abs(linear_velocity.x) <= 0.1 and abs(linear_velocity.y) <= 0.1)
 	
 # given a pulse and torque apply force and rotation to the sword
 func shoot(pulse:Vector3, torque:Vector3)->void:	
@@ -119,31 +124,29 @@ func draw_launch_direction(pulse: Vector3):
 	# Finish creating the line
 	debug_mesh.surface_end()
 	
+#display launch box bounds
 func draw_launch_box():
-	pass
-	## Clear any previously drawn surfaces
-	#debug_mesh.clear_surfaces()
-	#
-	## Start creating the line geometry
-	#debug_mesh.surface_begin(Mesh.PRIMITIVE_LINES)
-#
-	## Set line color
-	#debug_mesh.surface_set_color(Color(1, 1, 0, 1))
-#
-	## Define the box vertices
-	#var v1 = Vector3(-5, -4, 0)            # Bottom-left
-	#var v2 = Vector3(-5, 6, 0)            # Top-left
-	#var v3 = Vector3(5, 6, 0)            # Top-right
-	#var v4 = Vector3(5, -4, 0)            # Bottom-right
-#
-	## Draw dotted lines for each edge
-	#draw_dotted_line(v1, v2, 0.5)  # Bottom-left to Top-left
-	#draw_dotted_line(v2, v3, 0.5)  # Top-left to Top-right
-	#draw_dotted_line(v3, v4, 0.5)  # Top-right to Bottom-right
-	#draw_dotted_line(v4, v1, 0.5)  # Bottom-right to Bottom-left
-	#
-	## Finish creating the box
-	#debug_mesh.surface_end()
+	
+	# Start creating the line geometry
+	debug_mesh.surface_begin(Mesh.PRIMITIVE_LINES)
+
+	# Set line color
+	debug_mesh.surface_set_color(Color(1, 1, 0, 1))
+
+	# Define the box vertices
+	var v1 = Vector3(-5, -4, 0)            # Bottom-left
+	var v2 = Vector3(-5, 6, 0)            # Top-left
+	var v3 = Vector3(5, 6, 0)            # Top-right
+	var v4 = Vector3(5, -4, 0)            # Bottom-right
+
+	# Draw dotted lines for each edge
+	draw_dotted_line(v1, v2, 0.5)  # Bottom-left to Top-left
+	draw_dotted_line(v2, v3, 0.5)  # Top-left to Top-right
+	draw_dotted_line(v3, v4, 0.5)  # Top-right to Bottom-right
+	draw_dotted_line(v4, v1, 0.5)  # Bottom-right to Bottom-left
+	
+	# Finish creating the box
+	debug_mesh.surface_end()
 	
 func draw_dotted_line(start: Vector3, end: Vector3, segment_length: float) -> void:
 	var direction = (end - start).normalized()
@@ -162,20 +165,34 @@ func draw_dotted_line(start: Vector3, end: Vector3, segment_length: float) -> vo
 	
 
 func _on_area_3d_input_event(camera: Node, event: InputEvent, event_position: Vector3, normal: Vector3, shape_idx: int) -> void:
-	
 	#isten for mouse buttons
 	if event is InputEventMouseButton:
 		
-		if event.is_pressed() and event.button_index == MOUSE_BUTTON_LEFT:
+		if event.is_pressed() and event.button_index == MOUSE_BUTTON_LEFT and (stabbed or is_motionless()):
 			selected = true
 			
-		elif event.is_released() and event.button_index == MOUSE_BUTTON_LEFT and selected:
+	#raycast from camer to mouse position (x, y, 0)
+	#check if colliding with bendableArea
+	#if colliding, handle position = mouse position
+	if event is InputEventMouseMotion and selected:
+		var areaCollision = camera.shoot_ray()
+		if areaCollision is Vector3:
+			# add 5 to y because that is the Handle's offset
+			handle.position = Vector3(areaCollision.x, areaCollision.y + 5, handle.position.z)
+			
+			#get relative values  
+			var pulse_x = ((clamp(areaCollision.x, -5, 5) - MIN_X_AREA) / (MAX_X_AREA - MIN_X_AREA)) * (MAX_X_PULSE*2) - MAX_X_PULSE
+			var pulse_y = ((clamp(areaCollision.y+5, -4, 6) - MIN_Y_AREA) / (MAX_Y_AREA - MIN_Y_AREA)) * (MAX_Y_PULSE - MIN_Y_PULSE) - MAX_Y_PULSE			
+			draw_launch_direction(Vector3(pulse_x*-1, pulse_y*-1, 0))
+		
+func _input(event):
+			
+	if event is InputEventMouseButton:
+		if event.is_released() and event.button_index == MOUSE_BUTTON_LEFT and selected:
 						
-			#vector at which mouse is released
-			#important to remember the area3D is at (0,5,0) so that the mouse follows the bend correctly
-			var areaCollision = camera.shoot_ray()
-			var area_x = clamp(areaCollision.x, MIN_X_AREA, MAX_X_AREA)
-			var area_y = clamp(areaCollision.y+5, MIN_Y_AREA, MAX_Y_AREA)
+			#vector the handle is at when mouse is released	
+			var area_x = clamp(handle.position.x, MIN_X_AREA, MAX_X_AREA)
+			var area_y = clamp(handle.position.y, MIN_Y_AREA, MAX_Y_AREA)
 			
 			#get relative values  
 			var pulse_x = ((area_x - MIN_X_AREA) / (MAX_X_AREA - MIN_X_AREA)) * (MAX_X_PULSE*2) - MAX_X_PULSE
@@ -210,22 +227,6 @@ func _on_area_3d_input_event(camera: Node, event: InputEvent, event_position: Ve
 			#reset handle position
 			handle.position = Vector3(0,5,0)
 			
-
-	
-	
-	#raycast from camer to mouse position (x, y, 0)
-	#check if colliding with bendableArea
-	#if colliding, handle position = mouse position
-	if event is InputEventMouseMotion and selected:
-		var areaCollision = camera.shoot_ray()
-		if areaCollision is Vector3:
-			# add 5 to y because that is the Handle's offset
-			handle.position = Vector3(areaCollision.x, areaCollision.y + 5, handle.position.z)
-			
-			#get relative values  
-			var pulse_x = ((clamp(areaCollision.x, -5, 5) - MIN_X_AREA) / (MAX_X_AREA - MIN_X_AREA)) * (MAX_X_PULSE*2) - MAX_X_PULSE
-			var pulse_y = ((clamp(areaCollision.y+5, -4, 6) - MIN_Y_AREA) / (MAX_Y_AREA - MIN_Y_AREA)) * (MAX_Y_PULSE - MIN_Y_PULSE) - MAX_Y_PULSE			
-			draw_launch_direction(Vector3(pulse_x*-1, pulse_y*-1, 0))
 
 
 

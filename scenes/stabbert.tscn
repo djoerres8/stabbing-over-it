@@ -141,6 +141,7 @@ physics_material_override = SubResource("PhysicsMaterial_7of3c")
 gravity_scale = 3.0
 center_of_mass_mode = 1
 center_of_mass = Vector3(0, 0.5, 0)
+continuous_cd = true
 script = ExtResource("1_n3x53")
 
 [node name="Camera_Controller" type="Node3D" parent="."]
@@ -297,6 +298,14 @@ collision_mask = 2
 [node name="bendableArea" type="CollisionShape3D" parent="Area3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.028825, -2.84052, 0)
 shape = SubResource("BoxShape3D_3kipt")
+
+[node name="LeftHiltRay" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.770996, 4.13835, 0)
+target_position = Vector3(1, 0, 0)
+
+[node name="RightHiltRay" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.758068, 4.13835, 0)
+target_position = Vector3(-1, 0, 0)
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="input_event" from="." to="." method="_on_input_event"]
