@@ -2,7 +2,7 @@ extends RigidBody3D
 
 #controls the bending of the sword when dragging
 @onready var handle: Node3D = $Handle
-@onready var camera: Camera3D = $Camera_Controller/Camera_Target/Camera3D
+#@onready var camera: Camera3D = $Camera_Controller/Camera_Target/Camera3D
 @onready var debug_mesh: ImmediateMesh = ImmediateMesh.new()
 @onready var left_hilt_ray: RayCast3D = $LeftHiltRay
 @onready var right_hilt_ray: RayCast3D = $RightHiltRay
@@ -86,7 +86,7 @@ func _physics_process(delta: float) -> void:
 			_:
 				handle.position = handleBasePos
 				flinging = false
-				shoot(pulse, torque)
+				shoot()
 		
 
 #stop all motion by setting gravity to 0
@@ -109,7 +109,7 @@ func get_midpoint(vec1: Vector3, vec2: Vector3) -> Vector3:
 	return (vec1 + vec2) / 2
 
 # given a pulse and torque apply force and rotation to the sword
-func shoot(pulse:Vector3, torque:Vector3)->void:	
+func shoot()->void:	
 	
 	# allow sword to leave a surface
 	continue_motion()
@@ -138,7 +138,7 @@ func shoot(pulse:Vector3, torque:Vector3)->void:
 	selected = false
 	
 
-func _on_area_3d_input_event(camera: Node, event: InputEvent, event_position: Vector3, normal: Vector3, shape_idx: int) -> void:
+func _on_area_3d_input_event(camera: Node, event: InputEvent, _event_position: Vector3, _normal: Vector3, _shape_idx: int) -> void:
 	#isten for mouse buttons
 	if event is InputEventMouseButton:
 		
@@ -201,7 +201,7 @@ func _on_sword_tip_area_body_entered(_body: Node3D) -> void:
 	stop_motion()
 
 #when the sword tip exits a body
-func _on_sword_tip_area_body_exited(body: Node3D) -> void:
+func _on_sword_tip_area_body_exited(_body: Node3D) -> void:
 	continue_motion()
 	stabbed = false
 	
@@ -209,7 +209,7 @@ func _on_sword_tip_area_body_exited(body: Node3D) -> void:
 ##GUIDELINES
 
 #display launch direction
-func draw_launch_direction(pulse: Vector3):
+func draw_launch_direction(projected_pulse: Vector3):
 	# Clear any previously drawn surfaces
 	debug_mesh.clear_surfaces()
 
@@ -223,8 +223,8 @@ func draw_launch_direction(pulse: Vector3):
 	var start = Vector3.ZERO
 	debug_mesh.surface_add_vertex(start)
 
-	# Line end (in the direction of the pulse)
-	var end = pulse * 10   # Adjust the length as needed
+	# Line end (in the direction of the projected_pulse)
+	var end = projected_pulse * 10   # Adjust the length as needed
 	debug_mesh.surface_add_vertex(end)
 
 	# Finish creating the line

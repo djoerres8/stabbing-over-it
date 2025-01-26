@@ -1,0 +1,16 @@
+[gd_scene load_steps=5 format=3 uid="uid://bvhrnkkpnpvn5"]
+
+[ext_resource type="Texture2D" uid="uid://dpljt6dj24vdt" path="res://assets/textures/craiyon_134453_low_poly_sand_texture.png" id="1_h7wsd"]
+[ext_resource type="Texture2D" uid="uid://yhnjxnknqu3j" path="res://assets/textures/damp_sand_nor_gl_4k.png" id="2_fa61i"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pp3hu"]
+albedo_texture = ExtResource("1_h7wsd")
+normal_texture = ExtResource("2_fa61i")
+uv1_scale = Vector3(2, 2, 2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_hbdtp"]
+material = SubResource("StandardMaterial3D_pp3hu")
+
+[node name="Sand" type="MeshInstance3D"]
+transform = Transform3D(2.65725, 0, 0, 0, 2.65725, 0, 0, 0, 2.65725, -0.0695152, 0, 0)
+mesh = SubResource("BoxMesh_hbdtp")
