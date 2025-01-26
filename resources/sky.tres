@@ -3,9 +3,10 @@
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_asti2"]
 sky_top_color = Color(0.3344, 0.6536, 0.76, 1)
 sky_horizon_color = Color(0.704888, 0.64926, 0.537387, 1)
-sky_curve = 0.0750001
 ground_horizon_color = Color(0.705882, 0.65098, 0.537255, 1)
 ground_curve = 0.101966
+sun_angle_max = 4.5
+sun_curve = 97.8864
 
 [sub_resource type="Sky" id="Sky_metdp"]
 sky_material = SubResource("ProceduralSkyMaterial_asti2")
@@ -13,4 +14,5 @@ sky_material = SubResource("ProceduralSkyMaterial_asti2")
 [resource]
 background_mode = 2
 sky = SubResource("Sky_metdp")
+sky_rotation = Vector3(-0.0785398, 0, 0)
 ambient_light_color = Color(0.766937, 0.215411, 0.517555, 1)

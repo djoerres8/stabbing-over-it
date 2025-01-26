@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://r44uj7bp63yv"
-path="res://.godot/imported/001_Broad_Sword.fbx-b4e561d9610d811a48ad8569a71e09eb.scn"
+uid="uid://cqje18644pnt0"
+path="res://.godot/imported/Dock.glb-57f18f9c2ae24b4f32b63144ee6664e8.scn"
 
 [deps]
 
-source_file="res://assets/001_Broad_Sword.fbx"
-dest_files=["res://.godot/imported/001_Broad_Sword.fbx-b4e561d9610d811a48ad8569a71e09eb.scn"]
+source_file="res://assets/Dock.glb"
+dest_files=["res://.godot/imported/Dock.glb-57f18f9c2ae24b4f32b63144ee6664e8.scn"]
 
 [params]
 
@@ -27,11 +27,10 @@ meshes/force_disable_compression=false
 skins/use_named_skins=true
 animation/import=true
 animation/fps=30
-animation/trimming=true
+animation/trimming=false
 animation/remove_immutable_tracks=true
 animation/import_rest_as_RESET=false
 import_script/path=""
 _subresources={}
-fbx/importer=0
-fbx/allow_geometry_helper_nodes=false
-fbx/embedded_image_handling=1
+gltf/naming_version=1
+gltf/embedded_image_handling=1

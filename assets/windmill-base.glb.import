@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://c0clwpk52yrrj"
-path="res://.godot/imported/Sword-no-pommel.glb-845fda228a9bf484e6a941e7027cf6eb.scn"
+uid="uid://cjam8ivp6hhil"
+path="res://.godot/imported/windmill-base.glb-2faf9475434c85013dc2605d4d9bb244.scn"
 
 [deps]
 
-source_file="res://assets/Sword-no-pommel.glb"
-dest_files=["res://.godot/imported/Sword-no-pommel.glb-845fda228a9bf484e6a941e7027cf6eb.scn"]
+source_file="res://assets/windmill-base.glb"
+dest_files=["res://.godot/imported/windmill-base.glb-2faf9475434c85013dc2605d4d9bb244.scn"]
 
 [params]
 
@@ -31,18 +31,6 @@ animation/trimming=false
 animation/remove_immutable_tracks=true
 animation/import_rest_as_RESET=false
 import_script/path=""
-_subresources={
-"meshes": {
-"Sword-no-pommel_Cube": {
-"generate/lightmap_uv": 0,
-"generate/lods": 0,
-"generate/shadow_meshes": 0,
-"lods/normal_merge_angle": 60.0,
-"lods/normal_split_angle": 25.0,
-"save_to_file/enabled": true,
-"save_to_file/path": "res://assets/sword-no-pommel-mesh.res"
-}
-}
-}
+_subresources={}
 gltf/naming_version=1
 gltf/embedded_image_handling=1

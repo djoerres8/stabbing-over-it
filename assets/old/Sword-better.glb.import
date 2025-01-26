@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://chscxgravu22h"
-path="res://.godot/imported/Sword-better.glb-07c68253458eddb85cd292380e33b5d0.scn"
+path="res://.godot/imported/Sword-better.glb-3492b893ef07b9fb4d2ef8833e447f59.scn"
 
 [deps]
 
-source_file="res://assets/Sword-better.glb"
-dest_files=["res://.godot/imported/Sword-better.glb-07c68253458eddb85cd292380e33b5d0.scn"]
+source_file="res://assets/old/Sword-better.glb"
+dest_files=["res://.godot/imported/Sword-better.glb-3492b893ef07b9fb4d2ef8833e447f59.scn"]
 
 [params]
 

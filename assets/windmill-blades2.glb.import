@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://bs2c8hqj2bcgf"
-path="res://.godot/imported/Sword-best.glb-e9f16184c43685bde0294f7389e4942c.scn"
+uid="uid://cutw7o0ubjtty"
+path="res://.godot/imported/windmill-blades2.glb-809e8414f4f77e744ec23eb68994f8a6.scn"
 
 [deps]
 
-source_file="res://assets/Sword-best.glb"
-dest_files=["res://.godot/imported/Sword-best.glb-e9f16184c43685bde0294f7389e4942c.scn"]
+source_file="res://assets/windmill-blades2.glb"
+dest_files=["res://.godot/imported/windmill-blades2.glb-809e8414f4f77e744ec23eb68994f8a6.scn"]
 
 [params]
 

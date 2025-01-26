@@ -37,6 +37,10 @@ var flingPos3 : Vector3
 var handleBasePos : Vector3 = Vector3(0,5,0)
 var handlePos : int
 
+var attached_object: Node3D = null
+var attached_object_is_moving: bool = false
+var local_offset: Transform3D = Transform3D.IDENTITY
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -50,6 +54,11 @@ func _physics_process(delta: float) -> void:
 	#Make camera controller match position of self
 	$Camera_Controller.position = lerp($Camera_Controller.position, position, .1)
 
+	# Update position and rotation when attached to any object
+	if stabbed and attached_object_is_moving:
+		var object_transform = attached_object.global_transform
+		position = object_transform * local_offset
+		
 	#launch box
 	if selected and not flinging:
 		draw_launch_box()
@@ -99,6 +108,9 @@ func stop_motion() -> void:
 func continue_motion() -> void:
 	stabbed = false
 	gravity_scale = GRAVITY_SCALE
+	
+	attached_object = null
+	local_offset = Transform3D.IDENTITY
 	
 #check if sword is moveing. using .1 as that seems to be small enough that it wont actually move but the values get stuck lower a lot
 func is_motionless() -> bool:
@@ -196,14 +208,24 @@ func _input(event):
 			debug_mesh.clear_surfaces()
 
 #when sword tip enters a body
-func _on_sword_tip_area_body_entered(_body: Node3D) -> void:
+func _on_sword_tip_area_body_entered(body: Node3D) -> void:
 	stabbed = true
 	stop_motion()
+	print("STAB")
+	
+	if body is Node3D and "rotation_speed" in body:
+		attached_object_is_moving
+		print("body: ", body.rotation_speed)
+		attached_object = body
+		attached_object_is_moving = true
+		local_offset = attached_object.global_transform.affine_inverse() * global_transform
 
 #when the sword tip exits a body
 func _on_sword_tip_area_body_exited(_body: Node3D) -> void:
 	continue_motion()
 	stabbed = false
+	print("BYE STAB")
+	attached_object_is_moving = false
 	
 	
 ##GUIDELINES

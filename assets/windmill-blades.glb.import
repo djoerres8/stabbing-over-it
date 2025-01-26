@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://bboxwigoeigs5"
-path="res://.godot/imported/Sword2.glb-dcf91d9582c246abd3e589b2ee21dbf5.scn"
+uid="uid://d0mryhm1qc6ge"
+path="res://.godot/imported/windmill-blades.glb-dcde6ec11388ecf26de25f26d1d7c52d.scn"
 
 [deps]
 
-source_file="res://assets/Sword2.glb"
-dest_files=["res://.godot/imported/Sword2.glb-dcf91d9582c246abd3e589b2ee21dbf5.scn"]
+source_file="res://assets/windmill-blades.glb"
+dest_files=["res://.godot/imported/windmill-blades.glb-dcde6ec11388ecf26de25f26d1d7c52d.scn"]
 
 [params]
 

@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://bs2c8hqj2bcgf"
-path="res://.godot/imported/Sword-best.glb-e9f16184c43685bde0294f7389e4942c.scn"
+uid="uid://by0b4geurc1b1"
+path="res://.godot/imported/Sword-pommel.glb-23204d4a533223fa0a95df5e856b9816.scn"
 
 [deps]
 
-source_file="res://assets/Sword-best.glb"
-dest_files=["res://.godot/imported/Sword-best.glb-e9f16184c43685bde0294f7389e4942c.scn"]
+source_file="res://assets/old/Sword-pommel.glb"
+dest_files=["res://.godot/imported/Sword-pommel.glb-23204d4a533223fa0a95df5e856b9816.scn"]
 
 [params]
 
@@ -31,6 +31,18 @@ animation/trimming=false
 animation/remove_immutable_tracks=true
 animation/import_rest_as_RESET=false
 import_script/path=""
-_subresources={}
+_subresources={
+"meshes": {
+"Sword-pommel_Cube": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"lods/normal_split_angle": 25.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://pommel-mesh.res"
+}
+}
+}
 gltf/naming_version=1
 gltf/embedded_image_handling=1

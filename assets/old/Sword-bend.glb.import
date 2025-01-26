@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://exeotr1myert"
-path="res://.godot/imported/Sword-bend.glb-ac08f2ca4a04e811d37d40623765fec2.scn"
+path="res://.godot/imported/Sword-bend.glb-b5f7d93043fbaeca6a0fbba7372e0d82.scn"
 
 [deps]
 
-source_file="res://assets/Sword-bend.glb"
-dest_files=["res://.godot/imported/Sword-bend.glb-ac08f2ca4a04e811d37d40623765fec2.scn"]
+source_file="res://assets/old/Sword-bend.glb"
+dest_files=["res://.godot/imported/Sword-bend.glb-b5f7d93043fbaeca6a0fbba7372e0d82.scn"]
 
 [params]
 

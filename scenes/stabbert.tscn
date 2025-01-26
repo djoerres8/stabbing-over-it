@@ -123,7 +123,7 @@ bind/13/pose = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_6ruyh"]
 margin = 0.05
 height = 0.3
-radius = 0.45
+radius = 0.481814
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_yltf1"]
 size = Vector3(0.388977, 0.283447, 0.213806)
@@ -272,9 +272,14 @@ target_node = NodePath("../../Handle")
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.0774677, 0)
 shape = SubResource("CylinderShape3D_6ruyh")
 
+[node name="swordBladeAdj" type="CollisionPolygon3D" parent="."]
+depth = 0.25
+disabled = true
+polygon = PackedVector2Array(0.29879, 4.09989, -0.281628, 4.09989, -0.606491, 0.956439, -0.430293, 0.775059, 0.440334, 0.743965, 0.621715, 0.961622)
+
 [node name="swordBlade" type="CollisionPolygon3D" parent="."]
 depth = 0.25
-polygon = PackedVector2Array(0.677073, 0.556605, -0.670913, 0.577917, -0.288546, 4.09877, 0.286879, 4.1041)
+polygon = PackedVector2Array(0.660233, 0.741041, -0.644103, 0.762192, -0.288546, 4.09877, 0.286879, 4.1041)
 
 [node name="swordHilt" type="CollisionPolygon3D" parent="."]
 depth = 0.25
