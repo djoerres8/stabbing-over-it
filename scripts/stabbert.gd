@@ -7,15 +7,21 @@ extends RigidBody3D
 @onready var right_hilt_ray: RayCast3D = $RightHiltRay
 
 #sfx
-@onready var hit_wood_1_sfx: AudioStreamPlayer = $SFX/AudioStreamPlayer
-@onready var hit_dirt1_sfx: AudioStreamPlayer = $SFX/hitDirt
-@onready var hilt_hit_dirt: AudioStreamPlayer = $SFX/hilthitDirt
-@onready var pommel_hit_dirt: AudioStreamPlayer = $SFX/pommelhitDirt
-
+@onready var sword_flying: AudioStreamPlayer = $SFX/swordFlying
+@onready var tip_wood: AudioStreamPlayer = $SFX/tipWood
+@onready var body_wood: AudioStreamPlayer = $SFX/bodyWood
+@onready var tip_ground: AudioStreamPlayer = $SFX/tipGround
+@onready var body_ground: AudioStreamPlayer = $SFX/bodyGround
+@onready var tip_stone: AudioStreamPlayer = $SFX/tipStone
+@onready var body_stone: AudioStreamPlayer = $SFX/bodyStone
+@onready var tip_cloud: AudioStreamPlayer = $SFX/tipCloud
+@onready var body_cloud: AudioStreamPlayer = $SFX/bodyCloud
+@onready var tip_sand: AudioStreamPlayer = $SFX/tipSand
+@onready var body_sand: AudioStreamPlayer = $SFX/bodySand
 
 # Minimum and maximum volume settings
-const MAX_VOL: float = -15.0 # Loudest
-const MIN_VOL: float = -40.0 # verrry quite
+var MAX_VOL: float = -15.0 # Loudest
+var MIN_VOL: float = -40.0 # verrry quite
 const MAX_SPD_FOR_VOL: float = 30.0 # max speed for volume calculation
 
 const GRAVITY_SCALE = 3
@@ -75,6 +81,8 @@ func _physics_process(delta: float) -> void:
 	#stop linear motion if impaled
 	if stabbed:
 		stop_motion()
+	else:
+		sword_flying.volume_db += -.5
 		
 	if stabbed or is_motionless():
 			#rotate left/right while stabbed
@@ -115,6 +123,7 @@ func _physics_process(delta: float) -> void:
 				handle.position = handleBasePos
 				flinging = false
 				shoot()
+		
 		
 
 #stop all motion by setting gravity to 0
@@ -220,13 +229,22 @@ func _input(event):
 			flinging = true
 			handlePos = 1
 			
+			#play sound
+			var speed = pulse.length() if pulse.length() > torque.length() else torque.length()
+			#60 = max speed
+			sword_flying.volume_db = lerp(-45, -14, clamp(speed / 60, 0.0, 1.0))
+			sword_flying.pitch_scale = .5 #if speed > 20 else .33
+			sword_flying.play()
+			
 			#remove guidelines
 			debug_mesh.clear_surfaces()
 
 #when sword tip enters a body
 func _on_sword_tip_area_body_entered(body: Node3D) -> void:
 	stabbed = true
-	play_sound(hit_dirt1_sfx)
+	var material = body.get_meta("material") if body.has_meta("material") else "ground"
+	play_sound("tip", material)
+	sword_flying.stop()
 	stop_motion()
 	
 	#handles when stabbert hits a moving obj
@@ -246,13 +264,58 @@ func _on_sword_tip_area_body_exited(_body: Node3D) -> void:
 # if spin out of wall, and holding bent, you can flip from air
 ##SOUND EFFECTS
 
-func play_sound(sound: AudioStreamPlayer, _speedBased: bool = true) -> void:
+#any other collision occurs, play sound
+func _on_sword_collisions_body_entered(body: Node3D) -> void:
+		
+	var material = body.get_meta("material") if body.has_meta("material") else "ground"
+	play_sound("body", material)
+	#stop sword flying sound
+	sword_flying.stop()
+
+
+#func pick_random_sound(soundList: ) -> AudioStreamPlayer:
+	#var random_index = randi() % soundList.size()
+	#return soundList[random_index]
+
+#play sound based on sword part and coliding material volume based on speed of contact
+func play_sound(swordPart: String, material: String, _speedBased: bool = true) -> void:
 	
-	# Map the total speed to the volume range
+	var sound
+	# Minimum and maximum volume settings
+	MAX_VOL = -15.0 # Loudest
+	MIN_VOL = -40.0 # verrry quite
+	
+	match material:
+		"ground":
+			if swordPart == "tip":
+				sound = tip_ground
+			else:
+				sound = body_ground
+				MAX_VOL = -10.0
+				MIN_VOL = -30.0
+		"sand":
+			sound = tip_sand if swordPart == "tip" else body_sand
+		"wood":
+			if swordPart == "tip":
+				sound = tip_wood
+			else:
+				sound = body_wood
+				MAX_VOL = -10.0
+				MIN_VOL = -30.0
+		"stone":
+			sound = tip_stone if swordPart == "tip" else body_stone
+		"cloud":
+			sound = tip_cloud if swordPart == "tip" else body_cloud
+		_:
+			sound = tip_ground if swordPart == "tip" else body_ground
+	
+	
+	# Map the total speed to the volume range get whichever is greater angularV or linearV
 	if _speedBased:
-		hit_dirt1_sfx.volume_db = lerp(MIN_VOL, MAX_VOL, clamp(linear_velocity.length() / MAX_SPD_FOR_VOL, 0.0, 1.0))
+		var speed = linear_velocity.length() if linear_velocity.length() > angular_velocity.length() else angular_velocity.length()
+		sound.volume_db = lerp(MIN_VOL, MAX_VOL, clamp(speed / MAX_SPD_FOR_VOL, 0.0, 1.0))
 	
-	hit_dirt1_sfx.play()
+	sound.play()
 
 ##GUIDELINES
 

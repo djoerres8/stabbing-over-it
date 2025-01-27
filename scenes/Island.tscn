@@ -1167,6 +1167,7 @@ directional_shadow_pancake_size = 67.0
 [node name="Mountain" parent="." instance=ExtResource("5_ly6dr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 285.359, -25.501, 0)
 metadata/_edit_lock_ = true
+metadata/material = &"ground"
 
 [node name="Floor" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -18.258, 0)
@@ -1180,6 +1181,7 @@ mesh = SubResource("SphereMesh_86un4")
 [node name="Sand" type="StaticBody3D" parent="."]
 metadata/_edit_group_ = true
 metadata/_edit_lock_ = true
+metadata/material = &"sand"
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Sand"]
 transform = Transform3D(0.74513, 53.5577, 0, -6.18003, 6.45748, 0, 0, 0, 118.607, 0, -12.7683, -30.5206)
@@ -1535,7 +1537,8 @@ skeleton = NodePath("")
 [node name="Beach" type="Node" parent="Obstacles"]
 
 [node name="log1" type="StaticBody3D" parent="Obstacles/Beach"]
-transform = Transform3D(0.75, 0, 0, 0, 0.749032, 0.0381016, 0, -0.0381016, 0.749032, 39.9307, 0, 0.264526)
+transform = Transform3D(0.560501, -0.497693, -0.0253165, 0.498336, 0.559777, 0.0284746, -1.35015e-09, -0.0381016, 0.749031, 115.424, 41.6065, 0.264526)
+metadata/material = &"wood"
 
 [node name="Plane_019" type="MeshInstance3D" parent="Obstacles/Beach/log1"]
 transform = Transform3D(-127.157, -118.775, 80.8512, -95.68, 128.37, 101.767, -127.729, 22.0825, -156.721, -2.54498, -1.09577, 0.496143)
@@ -1547,7 +1550,8 @@ depth = 3.0
 polygon = PackedVector2Array(-4.17356, 7.53661, -1.66054, 9.30242, 5.9226, -1.38068, 11.5659, -8.53218, 6.58392, -12.1521, 4.55588, -12.1962, 4.4677, -10.8277, 3.85046, -5.6186)
 
 [node name="log2" type="StaticBody3D" parent="Obstacles/Beach"]
-transform = Transform3D(0.560501, -0.497693, -0.0253165, 0.498336, 0.559777, 0.0284746, -1.35015e-09, -0.0381016, 0.749031, 115.424, 41.6065, 0.264526)
+transform = Transform3D(0.75, 0, 0, 0, 0.749032, 0.0381016, 0, -0.0381016, 0.749032, 39.9307, 0, 0.264526)
+metadata/material = &"wood"
 
 [node name="Plane_019" type="MeshInstance3D" parent="Obstacles/Beach/log2"]
 transform = Transform3D(-127.157, -118.775, 80.8512, -95.68, 128.37, 101.767, -127.729, 22.0825, -156.721, -2.54498, -1.09577, 0.496143)
@@ -1560,6 +1564,7 @@ polygon = PackedVector2Array(-4.17356, 7.53661, -1.66054, 9.30242, 5.9226, -1.38
 
 [node name="rock pile" type="StaticBody3D" parent="Obstacles/Beach"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 7.53521)
+metadata/material = &"stone"
 
 [node name="Sphere_003" type="MeshInstance3D" parent="Obstacles/Beach/rock pile"]
 transform = Transform3D(-0.780354, 0, 2.30235, 0, 2.865, 0, -2.30235, 0, -0.780354, 8.9919, -8.78276, -7.7418)
@@ -1588,6 +1593,7 @@ polygon = PackedVector2Array(6.94753, -9.14068, 6.94753, -7.84974, 7.84942, -6.9
 
 [node name="bentTree" type="StaticBody3D" parent="Obstacles/Beach"]
 transform = Transform3D(1.99434, -0.150306, 0, 0.150306, 1.99434, 0, 0, 0, 2, 71.2014, 18.1254, -1.87705)
+metadata/material = &"wood"
 
 [node name="Cylinder_002" type="MeshInstance3D" parent="Obstacles/Beach/bentTree"]
 transform = Transform3D(1.90522e-07, -0.206221, 0.978505, 4.01528e-08, 0.978505, 0.206221, -1, 0, 1.94707e-07, 0.0846329, -0.346485, 0.923062)
@@ -1629,6 +1635,7 @@ depth = 3.0
 polygon = PackedVector2Array(-1.52683, 7.4235, -2.17653, 4.77288, -2.0274, 4.76164, -2.40378, 3.38568, -2.26514, 3.41613, -2.54514, 2.41467, -2.318, 2.53389, -2.46344, 1.50865, -2.28617, 1.50892, -2.33569, 0.490087, -2.14972, 0.53966, -2.29693, -0.689964, -0.933857, -0.151883, -0.674698, -0.512271, -0.66692, -1.49452, 1.20622, -1.06306, 0.884861, -0.261683, 0.430241, 0.399754, 1.49506, 0.960314, 0.377434, 1.50811, 0.528328, 1.70125, -0.390022, 2.17949, -0.137814, 2.26956, -1.0243, 3.71343, -0.864952, 3.83776, -1.25998, 4.84894, -1.10778, 4.87837)
 
 [node name="large arch" type="StaticBody3D" parent="Obstacles/Beach"]
+metadata/material = &"stone"
 
 [node name="Sphere" type="MeshInstance3D" parent="Obstacles/Beach/large arch"]
 transform = Transform3D(-6.29775, 1.23514, -4.72429, 0.586616, 22.124, -0.0513742, 4.70823, -1.10438, -6.31282, 90.0605, 21.5163, -12.567)
@@ -1646,38 +1653,54 @@ polygon = PackedVector2Array(87.2951, 49.2812, 93.4781, 50.8085, 93.4945, 52.755
 
 [node name="cloud" parent="Obstacles/Beach" instance=ExtResource("7_3dtwo")]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 65.989, 71.7886, 0)
+metadata/material = &"cloud"
 
 [node name="cloud2" parent="Obstacles/Beach" instance=ExtResource("7_3dtwo")]
 transform = Transform3D(-5, 0, -4.37114e-07, 0, 5, 0, 4.37114e-07, 0, -5, 90.0565, 90.4455, -3.8147e-06)
+metadata/material = &"cloud"
 
 [node name="Hill1-tower" type="Node" parent="Obstacles"]
 
 [node name="Wall" parent="Obstacles/Hill1-tower" instance=ExtResource("8_lmv7a")]
 transform = Transform3D(-3.0598e-07, 0, 7, 0, 7, 0, -7, 0, -3.0598e-07, 161.53, 124.125, -1.49609)
+metadata/material = &"stone"
 
 [node name="Wall5" parent="Obstacles/Hill1-tower" instance=ExtResource("8_lmv7a")]
 transform = Transform3D(-3.0598e-07, 0, 7, 0, 7, 0, -7, 0, -3.0598e-07, 161.53, 137.806, -1.49609)
+metadata/material = &"stone"
 
 [node name="Wall7" parent="Obstacles/Hill1-tower" instance=ExtResource("8_lmv7a")]
-transform = Transform3D(-3.0598e-07, 0, 7, 0, 7, 0, -7, 0, -3.0598e-07, 161.53, 156.074, -1.49609)
+transform = Transform3D(-3.0598e-07, 0, 7, 0, 7, 0, -7, 0, -3.0598e-07, 161.53, 158.73, -1.49609)
+metadata/material = &"stone"
+
+[node name="Wall8" parent="Obstacles/Hill1-tower" instance=ExtResource("8_lmv7a")]
+transform = Transform3D(-3.0598e-07, 0, 7, 0, 7, 0, -7, 0, -3.0598e-07, 161.53, 158.73, -1.49609)
+metadata/material = &"stone"
 
 [node name="Wall2" parent="Obstacles/Hill1-tower" instance=ExtResource("8_lmv7a")]
 transform = Transform3D(0.487564, 0, -6.983, 0, 7, 0, 6.983, 0, 0.487564, 174.674, 114.758, -1.3063)
+metadata/material = &"stone"
 
 [node name="Wall3" parent="Obstacles/Hill1-tower" instance=ExtResource("8_lmv7a")]
 transform = Transform3D(0.487564, 0, -6.983, 0, 7, 0, 6.983, 0, 0.487564, 174.674, 128.523, -1.3063)
+metadata/material = &"stone"
 
 [node name="Wall4" parent="Obstacles/Hill1-tower" instance=ExtResource("8_lmv7a")]
 transform = Transform3D(0.487564, 0, -6.983, 0, 7, 0, 6.983, 0, 0.487564, 174.674, 142.132, -1.3063)
-
-[node name="Wall8" parent="Obstacles/Hill1-tower" instance=ExtResource("8_lmv7a")]
-transform = Transform3D(0.487564, 0, -6.983, 0, 7, 0, 6.983, 0, 0.487564, 174.674, 142.132, -1.3063)
+metadata/material = &"stone"
 
 [node name="Wall9" parent="Obstacles/Hill1-tower" instance=ExtResource("8_lmv7a")]
-transform = Transform3D(0.487564, 0, -6.983, 0, 7, 0, 6.983, 0, 0.487564, 174.674, 142.132, -1.3063)
+transform = Transform3D(0.487564, 0, -6.983, 0, 7, 0, 6.983, 0, 0.487564, 174.674, 155.89, -1.3063)
+metadata/material = &"stone"
 
 [node name="wallEnv" parent="Obstacles/Hill1-tower" instance=ExtResource("9_6j8o8")]
 transform = Transform3D(7, 0, 0, 0, 7, 0, 0, 0, 7, 167.095, 110.252, -6.88015)
+
+[node name="wallEnv6" parent="Obstacles/Hill1-tower" instance=ExtResource("9_6j8o8")]
+transform = Transform3D(6.24363, -0.415083, 3.13764, 2.9486, -1.75895, -6.10015, 1.15014, 6.76268, -1.39404, 167.095, 113.603, 5.23639)
+
+[node name="wallEnv7" parent="Obstacles/Hill1-tower" instance=ExtResource("9_6j8o8")]
+transform = Transform3D(5.79509, -1.52613, 3.61771, 2.89669, -2.69231, -5.77587, 2.65067, 6.27873, -1.59735, 159.602, 106.647, 18.3202)
 
 [node name="wallEnv2" parent="Obstacles/Hill1-tower" instance=ExtResource("9_6j8o8")]
 transform = Transform3D(7, 0, 0, 0, 7, 0, 0, 0, 7, 167.095, 123.907, -6.88015)
@@ -1688,38 +1711,28 @@ transform = Transform3D(7, 0, 0, 0, 7, 0, 0, 0, 7, 167.095, 137.743, -6.88015)
 [node name="wallEnv4" parent="Obstacles/Hill1-tower" instance=ExtResource("9_6j8o8")]
 transform = Transform3D(7, 0, 0, 0, 7, 0, 0, 0, 7, 167.095, 151.47, -6.88015)
 
-[node name="wallEnv8" parent="Obstacles/Hill1-tower" instance=ExtResource("9_6j8o8")]
-transform = Transform3D(0.358909, 0, -6.99079, 0, 7, 0, 6.99079, 0, 0.358909, 175.314, 154.928, 10.5968)
-visible = false
-
-[node name="wallEnv9" parent="Obstacles/Hill1-tower" instance=ExtResource("9_6j8o8")]
-transform = Transform3D(0.358909, 0, -6.99079, 0, 7, 0, 6.99079, 0, 0.358909, 175.33, 141.477, 10.6119)
-visible = false
-
-[node name="wallEnv10" parent="Obstacles/Hill1-tower" instance=ExtResource("9_6j8o8")]
-transform = Transform3D(0.358909, 0, -6.99079, 0, 7, 0, 6.99079, 0, 0.358909, 175.33, 128.091, 10.6119)
-visible = false
-
 [node name="wallEnv5" parent="Obstacles/Hill1-tower" instance=ExtResource("9_6j8o8")]
-transform = Transform3D(-3.0598e-07, 0, 7, 0, 7, 0, -7, 0, -3.0598e-07, 161.698, 151.47, -9.2064)
+transform = Transform3D(7, 0, 0, 0, 7, 0, 0, 0, 7, 168.016, 158.687, -6.68168)
 
 [node name="Mushroom" parent="Obstacles/Hill1-tower" instance=ExtResource("9_vyjog")]
 transform = Transform3D(8.71709, -2.23882, 0, 2.23882, 8.71709, 0, 0, 0, 9, 204.937, 137.494, 0)
+metadata/material = &"ground"
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Obstacles/Hill1-tower"]
+[node name="mushroom2" type="StaticBody3D" parent="Obstacles/Hill1-tower"]
 transform = Transform3D(-18.3061, -4.84426, -1.5551, -4.04409, 17.3784, -6.52953, 3.08716, -5.96008, -17.7749, 226.623, 138.39, 0)
+metadata/material = &"ground"
 
-[node name="Cylinder_015" type="MeshInstance3D" parent="Obstacles/Hill1-tower/StaticBody3D"]
+[node name="Cylinder_015" type="MeshInstance3D" parent="Obstacles/Hill1-tower/mushroom2"]
 transform = Transform3D(0.0726786, 0, 0.0423526, 0, 0.0841186, 0, -0.0423526, 0, 0.0726786, 0.050826, 0.128071, 0.046374)
 mesh = SubResource("ArrayMesh_lbm0f")
 skeleton = NodePath("")
 
-[node name="Cylinder_014" type="MeshInstance3D" parent="Obstacles/Hill1-tower/StaticBody3D"]
+[node name="Cylinder_014" type="MeshInstance3D" parent="Obstacles/Hill1-tower/mushroom2"]
 transform = Transform3D(0.0897114, 0, 0.0522783, 0, 0.011128, 0, -0.0522783, 0, 0.0897114, 0.168078, 1.49682, -0.164871)
 mesh = SubResource("ArrayMesh_vs3sk")
 skeleton = NodePath("")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Obstacles/Hill1-tower/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Obstacles/Hill1-tower/mushroom2"]
 transform = Transform3D(0.910639, 0.388777, -0.139942, -0.318906, 0.876649, 0.360262, 0.262742, -0.283439, 0.922297, 0.195817, 1.11589, -0.34417)
 shape = SubResource("BoxShape3D_0j5vo")
 
@@ -1747,3 +1760,4 @@ transform = Transform3D(9.21123, -28.5509, 0, 28.5509, 9.21123, 0, 0, 0, 30, 256
 
 [node name="WindmillBlades" parent="Windmill" instance=ExtResource("12_42vh1")]
 transform = Transform3D(0.307041, -0.951696, 0, 0.951696, 0.307041, 0, 0, 0, 1, 232.502, 223.354, -0.219903)
+metadata/material = &"wood"
