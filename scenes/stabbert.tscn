@@ -1,7 +1,11 @@
-[gd_scene load_steps=13 format=4 uid="uid://c52mmlbh8e552"]
+[gd_scene load_steps=17 format=4 uid="uid://c52mmlbh8e552"]
 
 [ext_resource type="Script" path="res://scripts/stabbert.gd" id="1_n3x53"]
 [ext_resource type="Script" path="res://scripts/stabbert_camera.gd" id="2_ce6pi"]
+[ext_resource type="AudioStream" uid="uid://ticep77aqo2m" path="res://assets/sounds/hitting-wood-1.wav" id="3_7n05r"]
+[ext_resource type="AudioStream" uid="uid://d0b6cwh8h6vg1" path="res://assets/sounds/hitting-ground.wav" id="4_ffhwn"]
+[ext_resource type="AudioStream" uid="uid://cyeo7e2v0nxtn" path="res://assets/sounds/thud.wav" id="5_bv65o"]
+[ext_resource type="AudioStream" uid="uid://cgtbchsirmpd8" path="res://assets/sounds/smack.wav" id="6_oliow"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_7of3c"]
 friction = 0.5
@@ -312,6 +316,24 @@ target_position = Vector3(1, 0, 0)
 [node name="RightHiltRay" type="RayCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.758068, 4.13835, 0)
 target_position = Vector3(-1, 0, 0)
+
+[node name="SFX" type="Node" parent="."]
+
+[node name="hitWood" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("3_7n05r")
+volume_db = -5.639
+
+[node name="hitDirt" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("4_ffhwn")
+volume_db = -5.639
+
+[node name="hiltHitDirt" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("5_bv65o")
+volume_db = -5.639
+
+[node name="pommelHitDirt" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("6_oliow")
+volume_db = -5.639
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="input_event" from="." to="." method="_on_input_event"]

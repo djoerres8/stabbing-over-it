@@ -1201,7 +1201,7 @@ mesh = SubResource("ArrayMesh_iegh7")
 skin = SubResource("Skin_7rgrl")
 
 [node name="stabbert" parent="." instance=ExtResource("3_7gehv")]
-transform = Transform3D(0.569509, 0.821985, 0, -0.821985, 0.569509, 0, 0, 0, 1, 183.447, 136.629, 7.62939e-06)
+transform = Transform3D(0.999812, 0.0193893, 0, -0.0193893, 0.999812, 0, 0, 0, 1, -1.43655, 2.54041, 0)
 
 [node name="environment" type="Node" parent="."]
 
@@ -1743,7 +1743,7 @@ transform = Transform3D(-5.10063, -3.15969, 0, 3.15969, -5.10063, 0, 0, 0, 6, 45
 [node name="Windmill" type="Node" parent="."]
 
 [node name="Windmill" parent="Windmill" instance=ExtResource("11_8fj1h")]
-transform = Transform3D(23.017, -19.2411, 0, 19.2411, 23.017, 0, 0, 0, 30, 280.531, 261.404, -11.0703)
+transform = Transform3D(9.21123, -28.5509, 0, 28.5509, 9.21123, 0, 0, 0, 30, 256.734, 214.815, -11.0703)
 
 [node name="WindmillBlades" parent="Windmill" instance=ExtResource("12_42vh1")]
-transform = Transform3D(0.767232, -0.641369, 0, 0.641369, 0.767232, 0, 0, 0, 1, 264.585, 281.548, -0.219903)
+transform = Transform3D(0.307041, -0.951696, 0, 0.951696, 0.307041, 0, 0, 0, 1, 232.502, 223.354, -0.219903)

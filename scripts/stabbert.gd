@@ -2,10 +2,21 @@ extends RigidBody3D
 
 #controls the bending of the sword when dragging
 @onready var handle: Node3D = $Handle
-#@onready var camera: Camera3D = $Camera_Controller/Camera_Target/Camera3D
 @onready var debug_mesh: ImmediateMesh = ImmediateMesh.new()
 @onready var left_hilt_ray: RayCast3D = $LeftHiltRay
 @onready var right_hilt_ray: RayCast3D = $RightHiltRay
+
+#sfx
+@onready var hit_wood_1_sfx: AudioStreamPlayer = $SFX/AudioStreamPlayer
+@onready var hit_dirt1_sfx: AudioStreamPlayer = $SFX/hitDirt
+@onready var hilt_hit_dirt: AudioStreamPlayer = $SFX/hilthitDirt
+@onready var pommel_hit_dirt: AudioStreamPlayer = $SFX/pommelhitDirt
+
+
+# Minimum and maximum volume settings
+const MAX_VOL: float = -15.0 # Loudest
+const MIN_VOL: float = -40.0 # verrry quite
+const MAX_SPD_FOR_VOL: float = 30.0 # max speed for volume calculation
 
 const GRAVITY_SCALE = 3
 const MANUAL_ROTATION_SPEED = 10 # Adjust rotation speed as needed
@@ -58,8 +69,8 @@ func _physics_process(delta: float) -> void:
 		global_transform = moving_body.global_transform * relative_transform
 		
 	#launch box
-	if selected and not flinging:
-		draw_launch_box()
+	#if selected and not flinging:
+		#draw_launch_box()
 	
 	#stop linear motion if impaled
 	if stabbed:
@@ -215,12 +226,11 @@ func _input(event):
 #when sword tip enters a body
 func _on_sword_tip_area_body_entered(body: Node3D) -> void:
 	stabbed = true
+	play_sound(hit_dirt1_sfx)
 	stop_motion()
-	print("STAB")
 	
 	#handles when stabbert hits a moving obj
 	if body is AnimatableBody3D:
-		print(body)
 		moving_body = body
 		is_on_moving_obj = true
 		relative_transform = moving_body.global_transform.affine_inverse() * global_transform
@@ -230,10 +240,20 @@ func _on_sword_tip_area_body_entered(body: Node3D) -> void:
 func _on_sword_tip_area_body_exited(_body: Node3D) -> void:
 	continue_motion()
 	stabbed = false
-	print("BYE STAB")
 	is_on_moving_obj = false
 	
 	
+# if spin out of wall, and holding bent, you can flip from air
+##SOUND EFFECTS
+
+func play_sound(sound: AudioStreamPlayer, _speedBased: bool = true) -> void:
+	
+	# Map the total speed to the volume range
+	if _speedBased:
+		hit_dirt1_sfx.volume_db = lerp(MIN_VOL, MAX_VOL, clamp(linear_velocity.length() / MAX_SPD_FOR_VOL, 0.0, 1.0))
+	
+	hit_dirt1_sfx.play()
+
 ##GUIDELINES
 
 #display launch direction
