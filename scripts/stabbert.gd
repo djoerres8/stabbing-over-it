@@ -37,10 +37,10 @@ var flingPos3 : Vector3
 var handleBasePos : Vector3 = Vector3(0,5,0)
 var handlePos : int
 
-var attached_object: Node3D = null
-var attached_object_is_moving: bool = false
-var local_offset: Transform3D = Transform3D.IDENTITY
-
+#handle stabbert on moving objects
+var is_on_moving_obj : bool = false
+var moving_body: Node3D = null
+var relative_transform: Transform3D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -54,10 +54,8 @@ func _physics_process(delta: float) -> void:
 	#Make camera controller match position of self
 	$Camera_Controller.position = lerp($Camera_Controller.position, position, .1)
 
-	# Update position and rotation when attached to any object
-	if stabbed and attached_object_is_moving:
-		var object_transform = attached_object.global_transform
-		position = object_transform * local_offset
+	if stabbed and is_on_moving_obj:
+		global_transform = moving_body.global_transform * relative_transform
 		
 	#launch box
 	if selected and not flinging:
@@ -73,6 +71,16 @@ func _physics_process(delta: float) -> void:
 			rotation.z -= MANUAL_ROTATION_SPEED * delta
 		elif Input.is_action_just_pressed("scroll_up") and not right_hilt_ray.is_colliding():
 			rotation.z += MANUAL_ROTATION_SPEED * delta
+			
+	if stabbed or is_motionless():
+	# Rotate left/right while stabbed
+		if Input.is_action_just_pressed("scroll_down") and not left_hilt_ray.is_colliding():
+			# Add manual rotation to the relative transform
+			relative_transform.basis = Basis(Vector3(0, 0, 1), -MANUAL_ROTATION_SPEED * delta) * relative_transform.basis
+		elif Input.is_action_just_pressed("scroll_up") and not right_hilt_ray.is_colliding():
+			# Add manual rotation to the relative transform
+			relative_transform.basis = Basis(Vector3(0, 0, 1), MANUAL_ROTATION_SPEED * delta) * relative_transform.basis
+
 
 	# reset position
 	if Input.is_action_pressed("reset_position"):
@@ -108,9 +116,6 @@ func stop_motion() -> void:
 func continue_motion() -> void:
 	stabbed = false
 	gravity_scale = GRAVITY_SCALE
-	
-	attached_object = null
-	local_offset = Transform3D.IDENTITY
 	
 #check if sword is moveing. using .1 as that seems to be small enough that it wont actually move but the values get stuck lower a lot
 func is_motionless() -> bool:
@@ -213,19 +218,20 @@ func _on_sword_tip_area_body_entered(body: Node3D) -> void:
 	stop_motion()
 	print("STAB")
 	
-	if body is Node3D and "rotation_speed" in body:
-		attached_object_is_moving
-		print("body: ", body.rotation_speed)
-		attached_object = body
-		attached_object_is_moving = true
-		local_offset = attached_object.global_transform.affine_inverse() * global_transform
+	#handles when stabbert hits a moving obj
+	if body is AnimatableBody3D:
+		print(body)
+		moving_body = body
+		is_on_moving_obj = true
+		relative_transform = moving_body.global_transform.affine_inverse() * global_transform
+
 
 #when the sword tip exits a body
 func _on_sword_tip_area_body_exited(_body: Node3D) -> void:
 	continue_motion()
 	stabbed = false
 	print("BYE STAB")
-	attached_object_is_moving = false
+	is_on_moving_obj = false
 	
 	
 ##GUIDELINES

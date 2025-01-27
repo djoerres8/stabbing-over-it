@@ -95,27 +95,32 @@ radius = 0.0598574
 [node name="Mushroom" type="StaticBody3D"]
 
 [node name="Cylinder_015" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.0726786, 0, 0.0423526, 0, 0.0841186, 0, -0.0423526, 0, 0.0726786, 0.050826, 0.128071, 0.046374)
+transform = Transform3D(0.0726786, 1.09581e-16, 0.0423526, -2.22045e-16, 0.0841186, 0, -0.0423526, 0, 0.0726786, -0.0555404, -0.0428556, 0.0137881)
 mesh = SubResource("ArrayMesh_3x67l")
 skeleton = NodePath("")
 
 [node name="Cylinder_014" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.0897114, 0, 0.0522783, 0, 0.011128, 0, -0.0522783, 0, 0.0897114, 0.168078, 1.49682, -0.164871)
+transform = Transform3D(0.0897114, -1.44964e-17, 0.0522783, 0, 0.011128, 4.44089e-16, -0.0522783, 0, 0.0897114, 0.0617111, 1.3259, -0.197457)
 mesh = SubResource("ArrayMesh_hflv5")
 skeleton = NodePath("")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(0.609623, 0.406928, 0.680272, -0.271575, 0.91346, -0.303047, -0.744719, 0, 0.667378, 0.126471, 1.13266, -0.12434)
+transform = Transform3D(0.609623, 0.406928, 0.680272, -0.271575, 0.91346, -0.303047, -0.744719, -1.06432e-08, 0.667378, 0.0201044, 0.961736, -0.156926)
 shape = SubResource("CylinderShape3D_sxsfw")
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
-transform = Transform3D(0.897143, 0.441741, 0, -0.441741, 0.897143, 0, 0, 0, 1, 0.138785, 1.30637, -0.11551)
+transform = Transform3D(0.897143, 0.441741, 1.77636e-15, -0.441741, 0.897143, 0, -1.77636e-15, 0, 1, 0.0324187, 1.13545, -0.148096)
 shape = SubResource("CylinderShape3D_10x3e")
 
 [node name="CollisionShape3D3" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0492682, 0.278673, 0.047626)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0570982, 0.107746, 0.0150401)
 shape = SubResource("CylinderShape3D_43pq0")
 
 [node name="CollisionShape3D4" type="CollisionShape3D" parent="."]
-transform = Transform3D(0.769043, 0.206562, -0.604901, 0.0431747, 0.927397, 0.371578, 0.637738, -0.311875, 0.70429, 0.104181, 0.792141, -0.0427671)
+transform = Transform3D(0.769043, 0.206562, -0.604901, 0.0431747, 0.927397, 0.371578, 0.637738, -0.311876, 0.70429, -0.00218558, 0.621213, -0.075353)
 shape = SubResource("CylinderShape3D_43pq0")
+
+[node name="CollisionPolygon3D" type="CollisionPolygon3D" parent="."]
+transform = Transform3D(0.931964, 0, -0.362552, -0.362552, -4.37114e-08, -0.931964, -1.58476e-08, 1, -4.07374e-08, 0, 0.908893, -0.181453)
+depth = 0.1
+polygon = PackedVector2Array(0.402117, 0.529479, 0.495937, 0.141172, 0.506361, -0.228892, 0.373451, -0.445197, 0.10763, -0.502531, -0.210312, -0.387863, -0.463102, -0.228892, -0.502194, -0.00737455, -0.322374, 0.370508, 0.199674, 0.567836)

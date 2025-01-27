@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=4 uid="uid://47n57u7un6my"]
 
-[ext_resource type="Script" path="res://scripts/windmill_blades.gd" id="1_pirjr"]
+[ext_resource type="Script" path="res://scripts/windmill_blades.tres.gd" id="1_aj8km"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hvuoa"]
 resource_name = "Wood"
@@ -68,13 +68,13 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_ta2m4")
 
-[node name="WindmillBlades" type="StaticBody3D"]
+[node name="WindmillBlades" type="AnimatableBody3D"]
 axis_lock_linear_x = true
 axis_lock_linear_y = true
 axis_lock_linear_z = true
 axis_lock_angular_x = true
 axis_lock_angular_y = true
-script = ExtResource("1_pirjr")
+script = ExtResource("1_aj8km")
 
 [node name="RootNode" type="Node3D" parent="."]
 transform = Transform3D(5, 0, 0, 0, -2.18557e-07, -5, 0, 5, -2.18557e-07, 0, 0, 0)
