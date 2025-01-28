@@ -1,6 +1,7 @@
-[gd_scene load_steps=105 format=4 uid="uid://cr8lkpttdhxa1"]
+[gd_scene load_steps=104 format=4 uid="uid://cr8lkpttdhxa1"]
 
 [ext_resource type="Environment" uid="uid://b5rs1rje7ejsu" path="res://resources/sky.tres" id="2_m6u05"]
+[ext_resource type="PackedScene" uid="uid://x66v0k3wphao" path="res://scenes/hud.tscn" id="2_mvvqr"]
 [ext_resource type="PackedScene" uid="uid://c52mmlbh8e552" path="res://scenes/stabbert.tscn" id="3_7gehv"]
 [ext_resource type="PackedScene" uid="uid://bkx31r3e8afob" path="res://scenes/rock_1.tscn" id="4_p3wmb"]
 [ext_resource type="PackedScene" uid="uid://cpdmqd1rfmi4h" path="res://scenes/environment/env_tree_1.tscn" id="5_alfo5"]
@@ -13,11 +14,11 @@
 [ext_resource type="PackedScene" uid="uid://8kvbowjnsrm0" path="res://scenes/environment/windmill.tscn" id="11_8fj1h"]
 [ext_resource type="PackedScene" uid="uid://47n57u7un6my" path="res://scenes/environment/windmill_blades.tscn" id="12_42vh1"]
 [ext_resource type="PackedScene" uid="uid://c22hsjjn7tg3g" path="res://scenes/title.tscn" id="13_8kwqk"]
+[ext_resource type="PackedScene" uid="uid://5vsik6wshdre" path="res://scenes/finish.tscn" id="14_xqbom"]
 [ext_resource type="PackedScene" uid="uid://fi5seh06mqr6" path="res://scenes/play_btn.tscn" id="15_exuou"]
 [ext_resource type="PackedScene" uid="uid://dla0wjwutwhil" path="res://scenes/tutorial_sign_1.tscn" id="15_ib3jq"]
 [ext_resource type="PackedScene" uid="uid://nqg0qq7rr1uj" path="res://scenes/tutorial_sign_2.tscn" id="16_hukxr"]
 [ext_resource type="FontFile" uid="uid://b0vxmih2c1kfg" path="res://assets/fonts/Molot.otf" id="17_1styw"]
-[ext_resource type="FontFile" uid="uid://ft8hw5skbwbo" path="res://assets/fonts/MotionControl-Bold.otf" id="18_v5myi"]
 
 [sub_resource type="GDScript" id="GDScript_xa0gf"]
 
@@ -1171,12 +1172,6 @@ errect upon the stone.
 become the legendary sword!"
 font = ExtResource("17_1styw")
 
-[sub_resource type="LabelSettings" id="LabelSettings_3uaeg"]
-font = ExtResource("18_v5myi")
-
-[sub_resource type="LabelSettings" id="LabelSettings_e5ly1"]
-font = ExtResource("18_v5myi")
-
 [node name="Island" type="Node3D"]
 script = SubResource("GDScript_xa0gf")
 
@@ -1188,6 +1183,8 @@ transform = Transform3D(0.506538, -0.759069, 0.408943, 0.197877, 0.563975, 0.801
 light_color = Color(0.75, 0.75, 0.75, 1)
 shadow_enabled = true
 directional_shadow_pancake_size = 67.0
+
+[node name="Hud" parent="." instance=ExtResource("2_mvvqr")]
 
 [node name="Mountain" parent="." instance=ExtResource("5_ly6dr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 285.359, -25.501, 0)
@@ -1231,7 +1228,7 @@ mesh = SubResource("ArrayMesh_iegh7")
 skin = SubResource("Skin_7rgrl")
 
 [node name="stabbert" parent="." instance=ExtResource("3_7gehv")]
-transform = Transform3D(0.999812, 0.0193893, 0, -0.0193893, 0.999812, 0, 0, 0, 1, -7.4019, 50.0558, 0)
+transform = Transform3D(-0.589521, -0.807753, 0, 0.807753, -0.589521, 0, 0, 0, 1, 434.432, 409.903, 1.90735e-06)
 freeze = true
 
 [node name="environment" type="Node" parent="."]
@@ -1780,16 +1777,26 @@ metadata/material = &"wood"
 transform = Transform3D(6, 2.84217e-14, 0, 2.84217e-14, 6, 0, 0, 0, 6, 440.968, 401.432, -2)
 
 [node name="Rock4" parent="Pedastal" instance=ExtResource("4_p3wmb")]
-transform = Transform3D(2.5, -1.18424e-14, 0, 1.18424e-14, 2.5, 0, 0, 0, 2.5, 440.968, 403.958, 0)
-
-[node name="Finish" parent="Pedastal" instance=ExtResource("4_p3wmb")]
-transform = Transform3D(-6.55671e-08, 6.55671e-08, 1.5, 1.5, -6.55671e-08, 6.55671e-08, 6.55671e-08, 1.5, -6.55671e-08, 440.968, 404.611, 0)
+transform = Transform3D(-1.31134e-07, 6.21177e-22, -3, 1.42109e-14, 3, 0, 3, -1.42109e-14, -1.31134e-07, 441.156, 403.562, 0)
 
 [node name="Rock2" parent="Pedastal" instance=ExtResource("4_p3wmb")]
 transform = Transform3D(4.98655, -3.33682, 0, 3.33682, 4.98655, 0, 0, 0, 6, 428.901, 397.757, -2)
 
 [node name="Rock3" parent="Pedastal" instance=ExtResource("4_p3wmb")]
 transform = Transform3D(-5.10063, -3.15969, 0, 3.15969, -5.10063, 0, 0, 0, 6, 453.262, 397.941, -2)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Pedastal"]
+transform = Transform3D(1, 0, 0, 0, 0.541635, 0.840614, 0, -0.840614, 0.541635, 440.985, 442.392, 20.6692)
+light_color = Color(1, 0.789167, 0.45, 1)
+light_energy = 1.784
+light_specular = 0.188
+spot_range = 52.776
+spot_attenuation = -0.2
+spot_angle = 10.3
+spot_angle_attenuation = 0.392292
+
+[node name="Finish3" parent="Pedastal" instance=ExtResource("14_xqbom")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 441.173, 406.498, 0.0543718)
 
 [node name="tutorial" type="Node" parent="."]
 
@@ -1812,27 +1819,3 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.46603, 49.9886, 0)
 [node name="playBtn" parent="title" instance=ExtResource("15_exuou")]
 transform = Transform3D(0.929094, 0.369844, 0, -0.369844, 0.929094, 0, 0, 0, 1, -0.330265, 43.0574, 10.5464)
 gravity_scale = 2.4
-
-[node name="Hud" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="MarginContainer" type="MarginContainer" parent="Hud"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Hud/MarginContainer"]
-layout_mode = 2
-
-[node name="time" type="Label" parent="Hud/MarginContainer/VBoxContainer"]
-layout_mode = 2
-text = "Time: 00:00:00"
-label_settings = SubResource("LabelSettings_3uaeg")
-
-[node name="flings" type="Label" parent="Hud/MarginContainer/VBoxContainer"]
-layout_mode = 2
-text = "Flings: 0"
-label_settings = SubResource("LabelSettings_e5ly1")

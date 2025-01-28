@@ -160,11 +160,6 @@ top_level = true
 [node name="Camera_Target" type="Node3D" parent="Camera_Controller"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 6, 12)
 
-[node name="Camera3D1" type="Camera3D" parent="Camera_Controller/Camera_Target"]
-transform = Transform3D(1, 0, 0, 0, 0.994102, 0.10845, 0, -0.10845, 0.994102, -1.95804, 0, 0)
-fov = 102.825
-script = ExtResource("2_ce6pi")
-
 [node name="Camera3D" type="Camera3D" parent="Camera_Controller/Camera_Target"]
 transform = Transform3D(1, 0, 0, 0, 0.994102, 0.10845, 0, -0.10845, 0.994102, 8.34997, -8.45983, 0.635567)
 current = true

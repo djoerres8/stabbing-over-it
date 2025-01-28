@@ -1,0 +1,90 @@
+[gd_scene load_steps=9 format=3 uid="uid://5vsik6wshdre"]
+
+[ext_resource type="Script" path="res://scripts/finish.gd" id="1_k40p6"]
+[ext_resource type="ArrayMesh" uid="uid://dt52v5jqhbmpf" path="res://assets/meshes/sword_mesh.res" id="1_kx4y6"]
+[ext_resource type="AudioStream" uid="uid://c7i6tfsvd1n7t" path="res://assets/sounds/you-win-sequence-1-183948.mp3" id="3_unhkr"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v0jq4"]
+albedo_color = Color(0.548963, 0.548963, 0.548963, 1)
+metallic = 0.5
+roughness = 0.5
+
+[sub_resource type="BoxMesh" id="BoxMesh_nv4vk"]
+material = SubResource("StandardMaterial3D_v0jq4")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q47xt"]
+albedo_color = Color(0.548963, 0.548963, 0.548963, 1)
+metallic = 0.5
+roughness = 0.5
+
+[sub_resource type="PrismMesh" id="PrismMesh_iwmua"]
+material = SubResource("StandardMaterial3D_q47xt")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_hyi40"]
+size = Vector3(1.08774, 0.137802, 0.618683)
+
+[node name="Finish" type="StaticBody3D"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+script = ExtResource("1_k40p6")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.394, 0, 0, 0, 1.003, 0, 0, 0, 0.689, 0, 0, 0)
+mesh = SubResource("BoxMesh_nv4vk")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.394, 0, 0, 0, 1.003, 0, 0, 0, 0.689, 0.696868, 0, 0)
+mesh = SubResource("PrismMesh_iwmua")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.394, 0, 0, 0, 1.003, 0, 0, 0, 0.689, -0.696868, 0, 0)
+mesh = SubResource("PrismMesh_iwmua")
+
+[node name="CollisionPolygon3D" type="CollisionPolygon3D" parent="."]
+depth = 0.7
+polygon = PackedVector2Array(1.37935, -0.492585, -1.37883, -0.492585, -0.693703, 0.499795, 0.687154, 0.496264)
+
+[node name="finishArea" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="finishArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00526428, 0.452293, 0.0100555)
+shape = SubResource("BoxShape3D_hyi40")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.0141421, 0.0141421, 0, -0.0141421, 0.0141421, 0, 0, 0, 0.048, 0, -0.128612, 0.342073)
+mesh = ExtResource("1_kx4y6")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.0141421, -0.0141421, 0, 0.0141421, 0.0141421, 0, 0, 0, 0.048, 0, -0.128612, 0.342073)
+mesh = ExtResource("1_kx4y6")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Panel" type="Panel" parent="CanvasLayer"]
+visible = false
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -394.0
+offset_right = 316.0
+offset_bottom = 295.0
+grow_horizontal = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Panel"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+offset_left = 4.0
+offset_top = 130.0
+offset_right = 194.0
+offset_bottom = 251.0
+
+[node name="winSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_unhkr")
+volume_db = -3.133
+
+[connection signal="area_entered" from="finishArea" to="." method="_on_finish_area_area_entered"]
+[connection signal="area_exited" from="finishArea" to="." method="_on_finish_area_area_exited"]
+[connection signal="body_entered" from="finishArea" to="." method="_on_finish_area_body_entered"]
+[connection signal="body_exited" from="finishArea" to="." method="_on_finish_area_body_exited"]

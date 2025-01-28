@@ -1,5 +1,7 @@
 extends RigidBody3D
 
+@onready var hud: CanvasLayer = $"../Hud"
+
 #controls the bending of the sword when dragging
 @onready var handle: Node3D = $Handle
 @onready var debug_mesh: ImmediateMesh = ImmediateMesh.new()
@@ -61,6 +63,12 @@ var relative_transform: Transform3D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	
+	#temp debug
+	freeze = false
+	$Camera_Controller/Camera_Target/Camera3D.position = Vector3(-1.958, 0, 0)
+	hud.started = true
+	
 	$Skeleton3D/SkeletonIK3D.start()
 	# Add a MeshInstance3D to display the ImmediateMesh
 	var mesh_instance = MeshInstance3D.new()
@@ -173,6 +181,9 @@ func shoot()->void:
 	
 	#selected is turned here because we dont want it false before the sword starts moving
 	selected = false
+	
+	#iterate number of flings
+	hud.count_fling()
 	
 
 func _on_area_3d_input_event(camera: Node, event: InputEvent, _event_position: Vector3, _normal: Vector3, _shape_idx: int) -> void:

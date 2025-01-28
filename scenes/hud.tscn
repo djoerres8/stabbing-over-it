@@ -1,0 +1,35 @@
+[gd_scene load_steps=4 format=3 uid="uid://x66v0k3wphao"]
+
+[ext_resource type="FontFile" uid="uid://ft8hw5skbwbo" path="res://assets/fonts/MotionControl-Bold.otf" id="1_7j6ie"]
+[ext_resource type="Script" path="res://scripts/hud.gd" id="1_tued3"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_bjkff"]
+font = ExtResource("1_7j6ie")
+font_size = 20
+
+[node name="Hud" type="CanvasLayer"]
+script = ExtResource("1_tued3")
+
+[node name="time" type="Label" parent="."]
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 96.0
+offset_bottom = 25.0
+text = "Time: 00:00.0"
+label_settings = SubResource("LabelSettings_bjkff")
+
+[node name="flings" type="Label" parent="."]
+offset_left = 4.0
+offset_top = 27.0
+offset_right = 123.0
+offset_bottom = 54.0
+text = "Flings: 0"
+label_settings = SubResource("LabelSettings_bjkff")
+
+[node name="Collectables" type="Label" parent="."]
+offset_left = 4.0
+offset_top = 50.0
+offset_right = 130.0
+offset_bottom = 77.0
+text = "Collectables: 0/3"
+label_settings = SubResource("LabelSettings_bjkff")

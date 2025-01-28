@@ -4,6 +4,7 @@ extends RigidBody3D
 @onready var stabbert: RigidBody3D = $"../../stabbert"
 @onready var camera_3d: Camera3D = $"../../stabbert/Camera_Controller/Camera_Target/Camera3D"
 @onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
+@onready var hud: CanvasLayer = $"../../Hud"
 
 var COLOR
 var target_position = Vector3(-1.958, 0, 0)
@@ -45,6 +46,7 @@ func _on_area_3d_2_mouse_exited() -> void:
 		material.albedo_color = COLOR
 		play.mesh.surface_set_material(0, material)
 
+# Play button Pressed!
 func _on_area_3d_2_input_event(camera: Node, event: InputEvent, event_position: Vector3, normal: Vector3, shape_idx: int) -> void:
 	if event is InputEventMouseButton:
 		if event.is_released() and event.button_index == MOUSE_BUTTON_LEFT:
@@ -54,4 +56,7 @@ func _on_area_3d_2_input_event(camera: Node, event: InputEvent, event_position: 
 			audio_stream_player.play()
 			self.apply_impulse(Vector3(5, 0, -10))
 			applyTorque = 1
+			
+			#start timer
+			hud.started = true
 			
