@@ -1,4 +1,4 @@
-[gd_scene load_steps=94 format=4 uid="uid://cr8lkpttdhxa1"]
+[gd_scene load_steps=105 format=4 uid="uid://cr8lkpttdhxa1"]
 
 [ext_resource type="Environment" uid="uid://b5rs1rje7ejsu" path="res://resources/sky.tres" id="2_m6u05"]
 [ext_resource type="PackedScene" uid="uid://c52mmlbh8e552" path="res://scenes/stabbert.tscn" id="3_7gehv"]
@@ -12,6 +12,12 @@
 [ext_resource type="PackedScene" uid="uid://dyvpsyy5f8l6i" path="res://scenes/environment/mushroom.tscn" id="9_vyjog"]
 [ext_resource type="PackedScene" uid="uid://8kvbowjnsrm0" path="res://scenes/environment/windmill.tscn" id="11_8fj1h"]
 [ext_resource type="PackedScene" uid="uid://47n57u7un6my" path="res://scenes/environment/windmill_blades.tscn" id="12_42vh1"]
+[ext_resource type="PackedScene" uid="uid://c22hsjjn7tg3g" path="res://scenes/title.tscn" id="13_8kwqk"]
+[ext_resource type="PackedScene" uid="uid://fi5seh06mqr6" path="res://scenes/play_btn.tscn" id="15_exuou"]
+[ext_resource type="PackedScene" uid="uid://dla0wjwutwhil" path="res://scenes/tutorial_sign_1.tscn" id="15_ib3jq"]
+[ext_resource type="PackedScene" uid="uid://nqg0qq7rr1uj" path="res://scenes/tutorial_sign_2.tscn" id="16_hukxr"]
+[ext_resource type="FontFile" uid="uid://b0vxmih2c1kfg" path="res://assets/fonts/Molot.otf" id="17_1styw"]
+[ext_resource type="FontFile" uid="uid://ft8hw5skbwbo" path="res://assets/fonts/MotionControl-Bold.otf" id="18_v5myi"]
 
 [sub_resource type="GDScript" id="GDScript_xa0gf"]
 
@@ -32,6 +38,9 @@ material = SubResource("StandardMaterial3D_644bp")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_kdwvr"]
 size = Vector3(6, 108, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_yy8rq"]
+size = Vector3(70.5525, 1, 49.3068)
 
 [sub_resource type="Shader" id="Shader_py3ov"]
 code = "// NOTE: Shader automatically converted from Godot Engine 4.3.stable's StandardMaterial3D.
@@ -1152,6 +1161,22 @@ shadow_mesh = SubResource("ArrayMesh_lpesv")
 [sub_resource type="BoxShape3D" id="BoxShape3D_0j5vo"]
 size = Vector3(0.895146, 0.0970535, 0.0655518)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_avq6w"]
+albedo_color = Color(0.237539, 0.237539, 0.237539, 1)
+
+[sub_resource type="TextMesh" id="TextMesh_o33aw"]
+material = SubResource("StandardMaterial3D_avq6w")
+text = "Asend the mountain.
+errect upon the stone.
+become the legendary sword!"
+font = ExtResource("17_1styw")
+
+[sub_resource type="LabelSettings" id="LabelSettings_3uaeg"]
+font = ExtResource("18_v5myi")
+
+[sub_resource type="LabelSettings" id="LabelSettings_e5ly1"]
+font = ExtResource("18_v5myi")
+
 [node name="Island" type="Node3D"]
 script = SubResource("GDScript_xa0gf")
 
@@ -1180,7 +1205,6 @@ mesh = SubResource("SphereMesh_86un4")
 
 [node name="Sand" type="StaticBody3D" parent="."]
 metadata/_edit_group_ = true
-metadata/_edit_lock_ = true
 metadata/material = &"sand"
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Sand"]
@@ -1190,6 +1214,10 @@ mesh = SubResource("CylinderMesh_gjvtw")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Sand"]
 transform = Transform3D(0.120137, 0.992757, 0, -0.992757, 0.120137, 0, 0, 0, 1, 0, -13.2497, 0)
 shape = SubResource("BoxShape3D_kdwvr")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Sand"]
+transform = Transform3D(0.992658, -0.120951, 0, 0.120951, 0.992658, 0, 0, 0, 1, 14.1678, -8.57764, -29.7306)
+shape = SubResource("BoxShape3D_yy8rq")
 
 [node name="Water" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.20526, -17.2445, -422.367)
@@ -1203,7 +1231,8 @@ mesh = SubResource("ArrayMesh_iegh7")
 skin = SubResource("Skin_7rgrl")
 
 [node name="stabbert" parent="." instance=ExtResource("3_7gehv")]
-transform = Transform3D(0.999812, 0.0193893, 0, -0.0193893, 0.999812, 0, 0, 0, 1, -1.43655, 2.54041, 0)
+transform = Transform3D(0.999812, 0.0193893, 0, -0.0193893, 0.999812, 0, 0, 0, 1, -7.4019, 50.0558, 0)
+freeze = true
 
 [node name="environment" type="Node" parent="."]
 
@@ -1736,6 +1765,15 @@ skeleton = NodePath("")
 transform = Transform3D(0.910639, 0.388777, -0.139942, -0.318906, 0.876649, 0.360262, 0.262742, -0.283439, 0.922297, 0.195817, 1.11589, -0.34417)
 shape = SubResource("BoxShape3D_0j5vo")
 
+[node name="Windmill" type="Node" parent="Obstacles"]
+
+[node name="Windmill" parent="Obstacles/Windmill" instance=ExtResource("11_8fj1h")]
+transform = Transform3D(9.21123, -28.5509, 0, 28.5509, 9.21123, 0, 0, 0, 30, 256.734, 214.815, -11.0703)
+
+[node name="WindmillBlades" parent="Obstacles/Windmill" instance=ExtResource("12_42vh1")]
+transform = Transform3D(0.307041, -0.951696, 0, 0.951696, 0.307041, 0, 0, 0, 1, 232.502, 223.354, -0.219903)
+metadata/material = &"wood"
+
 [node name="Pedastal" type="Node" parent="."]
 
 [node name="Rock1" parent="Pedastal" instance=ExtResource("4_p3wmb")]
@@ -1753,11 +1791,48 @@ transform = Transform3D(4.98655, -3.33682, 0, 3.33682, 4.98655, 0, 0, 0, 6, 428.
 [node name="Rock3" parent="Pedastal" instance=ExtResource("4_p3wmb")]
 transform = Transform3D(-5.10063, -3.15969, 0, 3.15969, -5.10063, 0, 0, 0, 6, 453.262, 397.941, -2)
 
-[node name="Windmill" type="Node" parent="."]
+[node name="tutorial" type="Node" parent="."]
 
-[node name="Windmill" parent="Windmill" instance=ExtResource("11_8fj1h")]
-transform = Transform3D(9.21123, -28.5509, 0, 28.5509, 9.21123, 0, 0, 0, 30, 256.734, 214.815, -11.0703)
+[node name="tutorial sign 1" parent="tutorial" instance=ExtResource("15_ib3jq")]
+transform = Transform3D(0.873933, -0.160647, 0.458731, 0.0786132, 0.978092, 0.19276, -0.479647, -0.132397, 0.867416, -11.3193, -17.1554, 6.62312)
 
-[node name="WindmillBlades" parent="Windmill" instance=ExtResource("12_42vh1")]
-transform = Transform3D(0.307041, -0.951696, 0, 0.951696, 0.307041, 0, 0, 0, 1, 232.502, 223.354, -0.219903)
-metadata/material = &"wood"
+[node name="tutorial sign 2" parent="tutorial" instance=ExtResource("16_hukxr")]
+transform = Transform3D(0.859187, 0.172536, -0.481695, 0.0910981, 0.874805, 0.475833, 0.503487, -0.452711, 0.735903, -4.51148, -15.4022, 8.73479)
+
+[node name="goal" type="MeshInstance3D" parent="tutorial"]
+transform = Transform3D(2.9787, 0.0337388, -0.35523, 0.352701, 0.174588, 2.97407, 0.0541202, -2.99473, 0.169382, -7.68793, -11.3431, 7.31952)
+mesh = SubResource("TextMesh_o33aw")
+skeleton = NodePath("../..")
+
+[node name="title" type="Node" parent="."]
+
+[node name="Title" parent="title" instance=ExtResource("13_8kwqk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.46603, 49.9886, 0)
+
+[node name="playBtn" parent="title" instance=ExtResource("15_exuou")]
+transform = Transform3D(0.929094, 0.369844, 0, -0.369844, 0.929094, 0, 0, 0, 1, -0.330265, 43.0574, 10.5464)
+gravity_scale = 2.4
+
+[node name="Hud" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="MarginContainer" type="MarginContainer" parent="Hud"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Hud/MarginContainer"]
+layout_mode = 2
+
+[node name="time" type="Label" parent="Hud/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Time: 00:00:00"
+label_settings = SubResource("LabelSettings_3uaeg")
+
+[node name="flings" type="Label" parent="Hud/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Flings: 0"
+label_settings = SubResource("LabelSettings_e5ly1")

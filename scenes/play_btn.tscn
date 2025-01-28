@@ -1,0 +1,68 @@
+[gd_scene load_steps=11 format=3 uid="uid://fi5seh06mqr6"]
+
+[ext_resource type="Script" path="res://scripts/play_btn.gd" id="1_rdfl1"]
+[ext_resource type="FontFile" uid="uid://b0vxmih2c1kfg" path="res://assets/fonts/Molot.otf" id="1_ueg3m"]
+[ext_resource type="ArrayMesh" uid="uid://cg0bwaavgsfsu" path="res://assets/sign.res" id="2_llgr0"]
+[ext_resource type="AudioStream" uid="uid://cyeo7e2v0nxtn" path="res://assets/sounds/thud.wav" id="4_lujxm"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7m8u0"]
+albedo_color = Color(0.237539, 0.237539, 0.237539, 1)
+
+[sub_resource type="TextMesh" id="TextMesh_nvpet"]
+material = SubResource("StandardMaterial3D_7m8u0")
+text = "Play"
+font = ExtResource("1_ueg3m")
+font_size = 40
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4kwoi"]
+size = Vector3(1.42212, 0.828125, 0.262695)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_agjnr"]
+size = Vector3(1.38666, 0.806366, 0.124084)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dc6jy"]
+size = Vector3(0.164917, 1.3017, 0.0700073)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_och4q"]
+radius = 0.239495
+
+[node name="playBtn" type="RigidBody3D"]
+gravity_scale = 3.0
+freeze = true
+script = ExtResource("1_rdfl1")
+
+[node name="Sign" type="MeshInstance3D" parent="."]
+transform = Transform3D(199.999, 0.516702, -2.25856e-08, -0.516702, 199.999, -8.74225e-06, -1.60982e-13, 8.74228e-06, 200, 0.0100063, -0.313154, 0.0159957)
+mesh = ExtResource("2_llgr0")
+skeleton = NodePath("")
+
+[node name="Play" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.99965, 0.0372082, 0, -0.0372082, 1.99965, 0, 0, 0, 2, 0.0597737, 3.23375, 0.0348623)
+mesh = SubResource("TextMesh_nvpet")
+skeleton = NodePath("../..")
+
+[node name="Area3D2" type="Area3D" parent="."]
+transform = Transform3D(0.942151, -0.335189, 0, 0.335189, 0.942151, 0, 0, 0, 1, 0.136783, 1.39136, -0.16647)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D2"]
+transform = Transform3D(1.88462, 0.669489, 0, -0.669489, 1.88462, 0, 0, 0, 2, 0.502781, 1.6103, 0.161621)
+shape = SubResource("BoxShape3D_4kwoi")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0.0711975, 3.13454, -0.0247109)
+shape = SubResource("BoxShape3D_agjnr")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0.127019, 1.02955, -0.0751982)
+shape = SubResource("BoxShape3D_dc6jy")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.134532, 0, -0.0432426)
+shape = SubResource("SphereShape3D_och4q")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_lujxm")
+
+[connection signal="input_event" from="Area3D2" to="." method="_on_area_3d_2_input_event"]
+[connection signal="mouse_entered" from="Area3D2" to="." method="_on_area_3d_2_mouse_entered"]
+[connection signal="mouse_exited" from="Area3D2" to="." method="_on_area_3d_2_mouse_exited"]

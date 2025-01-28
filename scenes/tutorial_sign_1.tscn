@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3 uid="uid://dla0wjwutwhil"]
+
+[ext_resource type="ArrayMesh" uid="uid://cg0bwaavgsfsu" path="res://assets/sign.res" id="1_5rfyi"]
+[ext_resource type="FontFile" uid="uid://b0vxmih2c1kfg" path="res://assets/fonts/Molot.otf" id="2_ojqn6"]
+[ext_resource type="ArrayMesh" uid="uid://dmscuyunnbr30" path="res://assets/mouse-mesh.res" id="3_h61hp"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_58dmm"]
+albedo_color = Color(0.237539, 0.237539, 0.237539, 1)
+
+[sub_resource type="TextMesh" id="TextMesh_mtgt2"]
+material = SubResource("StandardMaterial3D_58dmm")
+text = "Click and Drag the sword 
+handle with your mouse. 
+Release to fling."
+font = ExtResource("2_ojqn6")
+font_size = 40
+
+[node name="tutorial sign 1" type="Node3D"]
+
+[node name="Sign" type="MeshInstance3D" parent="."]
+transform = Transform3D(609.998, 1.0334, -4.51712e-08, -1.57594, 399.999, -1.74845e-05, -4.95229e-13, 1.74846e-05, 400, 0.0100063, -0.313154, 0.0159957)
+mesh = ExtResource("1_5rfyi")
+skeleton = NodePath("")
+
+[node name="Play" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.49974, 0.0279062, 0, -0.0279062, 1.49974, 0, 0, 0, 1.5, 0.554624, 6.97801, -0.0216257)
+mesh = SubResource("TextMesh_mtgt2")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.209434, 1.23419e-08, 0.136518, 0.136518, -2.10895e-08, 0.209434, 2.18557e-08, 0.25, 1.09278e-08, -3.049, 5.91026, 0)
+mesh = ExtResource("3_h61hp")

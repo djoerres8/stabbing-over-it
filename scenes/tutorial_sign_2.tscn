@@ -1,20 +1,25 @@
-[gd_scene load_steps=22 format=4 uid="uid://c52mmlbh8e552"]
+[gd_scene load_steps=14 format=4 uid="uid://nqg0qq7rr1uj"]
 
-[ext_resource type="Script" path="res://scripts/stabbert.gd" id="1_n3x53"]
-[ext_resource type="Script" path="res://scripts/stabbert_camera.gd" id="2_ce6pi"]
-[ext_resource type="AudioStream" uid="uid://ticep77aqo2m" path="res://assets/sounds/hitting-wood-1.wav" id="3_7n05r"]
-[ext_resource type="AudioStream" uid="uid://d0b6cwh8h6vg1" path="res://assets/sounds/hitting-ground.wav" id="4_ffhwn"]
-[ext_resource type="AudioStream" uid="uid://cyeo7e2v0nxtn" path="res://assets/sounds/thud.wav" id="5_bv65o"]
-[ext_resource type="AudioStream" uid="uid://cgtbchsirmpd8" path="res://assets/sounds/smack.wav" id="6_oliow"]
-[ext_resource type="AudioStream" uid="uid://cw78koxnrto2" path="res://assets/sounds/sword-into-stone.wav" id="7_ord6a"]
-[ext_resource type="AudioStream" uid="uid://mr204hex80r3" path="res://assets/sounds/sword-body-into-stone-2.wav" id="8_yd1b2"]
-[ext_resource type="AudioStream" uid="uid://dci1jswpxhg05" path="res://assets/sounds/tipCloud.wav" id="9_ubsxk"]
-[ext_resource type="AudioStream" uid="uid://b27cgxvkakqbm" path="res://assets/sounds/bodyCloud.wav" id="10_lvkrc"]
-[ext_resource type="AudioStream" uid="uid://cxhwvrkr51yj7" path="res://assets/sounds/swordFlying.wav" id="11_3oejw"]
+[ext_resource type="ArrayMesh" uid="uid://cg0bwaavgsfsu" path="res://assets/sign.res" id="1_tox6m"]
+[ext_resource type="FontFile" uid="uid://b0vxmih2c1kfg" path="res://assets/fonts/Molot.otf" id="2_hatik"]
+[ext_resource type="ArrayMesh" uid="uid://dmscuyunnbr30" path="res://assets/mouse-mesh.res" id="3_w1gt4"]
+[ext_resource type="Script" path="res://scripts/mini_sword.gd" id="4_66f0l"]
 
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_7of3c"]
-friction = 0.5
-bounce = 0.4
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_58dmm"]
+albedo_color = Color(0.237539, 0.237539, 0.237539, 1)
+
+[sub_resource type="TextMesh" id="TextMesh_ji8s2"]
+material = SubResource("StandardMaterial3D_58dmm")
+text = "Rotate the sword
+with the scroll wheel
+or arrow keys
+"
+font = ExtResource("2_hatik")
+font_size = 40
+
+[sub_resource type="BoxMesh" id="BoxMesh_3nbrn"]
+
+[sub_resource type="PrismMesh" id="PrismMesh_4e4wo"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0bod1"]
 resource_name = "Hilt"
@@ -34,7 +39,7 @@ cull_mode = 2
 albedo_color = Color(0.35672, 0.184834, 0, 1)
 roughness = 0.5
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_0yeoo"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_c0e6o"]
 resource_name = "Sword-best_Cube"
 _surfaces = [{
 "aabb": AABB(-0.774066, 4.04048, -0.129012, 1.54814, 1.69915, 0.258023),
@@ -83,7 +88,7 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
-[sub_resource type="Skin" id="Skin_542ay"]
+[sub_resource type="Skin" id="Skin_yfus8"]
 resource_name = "Skin"
 bind_count = 14
 bind/0/name = &"Bone"
@@ -129,265 +134,48 @@ bind/13/name = &"neutral_bone"
 bind/13/bone = -1
 bind/13/pose = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_6ruyh"]
-margin = 0.05
-height = 0.3
-radius = 0.481814
+[node name="tutorial sign 2" type="Node3D"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_yltf1"]
-size = Vector3(0.388977, 0.283447, 0.213806)
+[node name="Sign" type="MeshInstance3D" parent="."]
+transform = Transform3D(609.998, 1.0334, -4.51712e-08, -1.57594, 399.999, -1.74845e-05, -4.95229e-13, 1.74846e-05, 400, 0.0100063, -0.313154, 0.0159957)
+mesh = ExtResource("1_tox6m")
+skeleton = NodePath("")
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_6vy08"]
-size = Vector3(0.215332, 1.06152, 0.164246)
+[node name="Play2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.49974, 0.0279062, 0, -0.0279062, 1.49974, 0, 0, 0, 1.5, 0.44788, 7.05459, -0.0175974)
+mesh = SubResource("TextMesh_ji8s2")
+skeleton = NodePath("../..")
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_3kipt"]
-size = Vector3(40, 40, 1)
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.0439776, -0.0438765, 0.242159, 0.0850509, 0.233547, 0.0268704, -0.230938, 0.0776565, 0.0560103, -3.2326, 5.25946, 0)
+mesh = ExtResource("3_w1gt4")
 
-[node name="Stabbert" type="RigidBody3D"]
-axis_lock_linear_z = true
-axis_lock_angular_x = true
-axis_lock_angular_y = true
-physics_material_override = SubResource("PhysicsMaterial_7of3c")
-gravity_scale = 3.0
-center_of_mass_mode = 1
-center_of_mass = Vector3(0, 0.5, 0)
-continuous_cd = true
-script = ExtResource("1_n3x53")
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.600433, -0.086792, 0, 0.693673, 0.0751259, 0, 0, 0, 0.99862, -2.48035, 6.22044, -0.345703)
+mesh = SubResource("BoxMesh_3nbrn")
 
-[node name="Camera_Controller" type="Node3D" parent="."]
-top_level = true
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.272012, -0.302824, 0, 0.204775, -0.402255, 0, 0, 0, 1, -2.81229, 5.82015, -0.293091)
+mesh = SubResource("PrismMesh_4e4wo")
 
-[node name="Camera_Target" type="Node3D" parent="Camera_Controller"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 6, 12)
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.917436, -0.000436772, 0, 0.00349075, -0.114789, 0, 0, 0, 0.99862, 3.55575, 5.45916, -0.345703)
+mesh = SubResource("BoxMesh_3nbrn")
 
-[node name="Camera3D1" type="Camera3D" parent="Camera_Controller/Camera_Target"]
-transform = Transform3D(1, 0, 0, 0, 0.994102, 0.10845, 0, -0.10845, 0.994102, -1.95804, 0, 0)
-fov = 102.825
-script = ExtResource("2_ce6pi")
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.0219005, 0.502457, 0, -0.33977, 0.0323867, 0, 0, 0, 1, 3.96875, 5.46819, -0.293091)
+mesh = SubResource("PrismMesh_4e4wo")
 
-[node name="Camera3D" type="Camera3D" parent="Camera_Controller/Camera_Target"]
-transform = Transform3D(1, 0, 0, 0, 0.994102, 0.10845, 0, -0.10845, 0.994102, 8.34997, -8.45983, 0.635567)
-current = true
-fov = 102.825
-script = ExtResource("2_ce6pi")
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.917436, 0.000436762, 0, -0.00349067, 0.114789, 0, 0, 0, 0.99862, 2.31122, 5.46819, -0.345703)
+mesh = SubResource("BoxMesh_3nbrn")
 
-[node name="Skeleton3D" type="Skeleton3D" parent="."]
-bones/0/name = "Bone"
-bones/0/parent = -1
-bones/0/rest = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-bones/0/enabled = true
-bones/0/position = Vector3(0, 0, 0)
-bones/0/rotation = Quaternion(0, 0, 0, 1)
-bones/0/scale = Vector3(1, 1, 1)
-bones/1/name = "Bone.001"
-bones/1/parent = 0
-bones/1/rest = Transform3D(0.999971, -0.00534752, 0.00534744, 0.00534744, 0.999986, 2.84616e-05, -0.00534752, 1.34358e-07, 0.999986, 0, 0.620027, 0)
-bones/1/enabled = true
-bones/1/position = Vector3(0, 0.620027, 0)
-bones/1/rotation = Quaternion(-7.08186e-06, 0.00267376, 0.00267376, 0.999993)
-bones/1/scale = Vector3(1, 1, 1)
-bones/2/name = "Bone.002"
-bones/2/parent = 1
-bones/2/rest = Transform3D(0.999993, 0.00265934, -0.00265938, -0.00265936, 0.999996, -7.14883e-06, 0.00265936, 1.4221e-05, 0.999996, 5.48868e-10, 0.532314, -9.45022e-13)
-bones/2/enabled = true
-bones/2/position = Vector3(5.48868e-10, 0.532314, -9.45022e-13)
-bones/2/rotation = Quaternion(5.34248e-06, -0.00132969, -0.00132968, 0.999998)
-bones/2/scale = Vector3(1, 1, 1)
-bones/3/name = "Bone.003"
-bones/3/parent = 2
-bones/3/rest = Transform3D(0.999971, 0.00536191, -0.0053619, -0.00536191, 0.999986, 1.43367e-05, 0.0053619, 1.44138e-05, 0.999986, -1.50649e-10, 0.529462, -1.66267e-12)
-bones/3/enabled = true
-bones/3/position = Vector3(-1.50649e-10, 0.529462, -1.66267e-12)
-bones/3/rotation = Quaternion(1.92682e-08, -0.00268097, -0.00268098, 0.999993)
-bones/3/scale = Vector3(1, 1, 1)
-bones/4/name = "Bone.004"
-bones/4/parent = 3
-bones/4/rest = Transform3D(1, -1.42228e-05, 1.42243e-05, 1.42228e-05, 1, -3.7827e-08, -1.42243e-05, 3.80293e-08, 1, -1.25835e-10, 0.532308, 2.43006e-12)
-bones/4/enabled = true
-bones/4/position = Vector3(-1.25835e-10, 0.532308, 2.43006e-12)
-bones/4/rotation = Quaternion(1.89641e-08, 7.11213e-06, 7.1114e-06, 1)
-bones/4/scale = Vector3(1, 1, 1)
-bones/5/name = "Bone.005"
-bones/5/parent = 4
-bones/5/rest = Transform3D(0.999993, -0.00265956, 0.00265957, 0.00265957, 0.999996, -2.27374e-13, -0.00265956, 7.07329e-06, 0.999996, 1.78763e-10, 0.535155, 1.93268e-12)
-bones/5/enabled = true
-bones/5/position = Vector3(1.78763e-10, 0.535155, 1.93268e-12)
-bones/5/rotation = Quaternion(1.76833e-06, 0.00132978, 0.00132978, 0.999998)
-bones/5/scale = Vector3(1, 1, 1)
-bones/6/name = "Bone.006"
-bones/6/parent = 5
-bones/6/rest = Transform3D(1, 1.85357e-10, 1.47423e-17, -1.85357e-10, 1, -1.03739e-12, -1.47425e-17, 1.03739e-12, 1, 2.64485e-11, 0.53373, -3.6138e-14)
-bones/6/enabled = true
-bones/6/position = Vector3(2.64485e-11, 0.53373, -3.6138e-14)
-bones/6/rotation = Quaternion(5.18696e-13, 7.3712e-18, -9.26787e-11, 1)
-bones/6/scale = Vector3(1, 1, 1)
-bones/7/name = "Bone.007"
-bones/7/parent = 6
-bones/7/rest = Transform3D(1, 1.55254e-17, 1.47426e-17, -1.55254e-17, 1, 1.34359e-07, -1.47426e-17, -1.34359e-07, 1, 5.29091e-17, 0.52946, 2.07054e-14)
-bones/7/enabled = true
-bones/7/position = Vector3(5.29091e-17, 0.52946, 2.07054e-14)
-bones/7/rotation = Quaternion(-6.71794e-08, 7.3713e-18, -7.76272e-18, 1)
-bones/7/scale = Vector3(1, 1, 1)
-bones/8/name = "Bone.008"
-bones/8/parent = 7
-bones/8/rest = Transform3D(0.999998, 0.00124675, -0.00124675, -0.00124675, 0.999999, 1.43462e-06, 0.00124675, 1.1977e-07, 0.999999, 0, 0.52946, -3.38912e-14)
-bones/8/enabled = true
-bones/8/position = Vector3(0, 0.52946, -3.38912e-14)
-bones/8/rotation = Quaternion(-3.28713e-07, -0.000623376, -0.000623376, 1)
-bones/8/scale = Vector3(1, 1, 1)
-bones/9/name = "Bone.009"
-bones/9/parent = 7
-bones/9/rest = Transform3D(0.0260122, 0.972789, 0.230226, 0.230226, -0.229943, 0.94558, 0.972789, 0.0284073, -0.229943, 0, 0.52946, -3.38912e-14)
-bones/9/enabled = true
-bones/9/position = Vector3(0, 0.52946, -3.38912e-14)
-bones/9/rotation = Quaternion(0.609487, 0.493454, 0.493454, -0.376207)
-bones/9/scale = Vector3(1, 1, 1)
-bones/10/name = "Bone.012"
-bones/10/parent = 9
-bones/10/rest = Transform3D(0.983321, -0.0343951, -0.178598, 0.0632501, 0.985334, 0.158481, 0.170528, -0.167134, 0.971075, -5.68107e-08, 0.466644, 3.48315e-07)
-bones/10/enabled = true
-bones/10/position = Vector3(-5.68107e-08, 0.466644, 3.48315e-07)
-bones/10/rotation = Quaternion(-0.0820242, -0.0879465, 0.0245973, 0.992438)
-bones/10/scale = Vector3(1, 1, 1)
-bones/11/name = "Bone.010"
-bones/11/parent = 7
-bones/11/rest = Transform3D(0.0549544, -0.978589, -0.198352, -0.198352, -0.205392, 0.958369, -0.978589, -0.0133231, -0.205392, 0, 0.52946, -3.38912e-14)
-bones/11/enabled = true
-bones/11/position = Vector3(0, 0.52946, -3.38912e-14)
-bones/11/rotation = Quaternion(0.605339, -0.486067, -0.486067, -0.401301)
-bones/11/scale = Vector3(1, 1, 1)
-bones/12/name = "Bone.011"
-bones/12/parent = 11
-bones/12/rest = Transform3D(0.975607, 0.0360369, 0.216547, -0.0803362, 0.976617, 0.199413, -0.204298, -0.211945, 0.955689, 7.07805e-08, 0.444757, -7.65198e-07)
-bones/12/enabled = true
-bones/12/position = Vector3(7.07805e-08, 0.444757, -7.65198e-07)
-bones/12/rotation = Quaternion(-0.104044, 0.106444, -0.0294341, 0.988422)
-bones/12/scale = Vector3(1, 1, 1)
-bones/13/name = "neutral_bone"
-bones/13/parent = -1
-bones/13/rest = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0, 0, 0)
-bones/13/enabled = true
-bones/13/position = Vector3(0, 0, 0)
-bones/13/rotation = Quaternion(-0.707107, 0, 0, 0.707107)
-bones/13/scale = Vector3(1, 1, 1)
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.0219005, -0.502457, 0, 0.33977, -0.0323868, 0, 0, 0, 1, 1.87533, 5.45916, -0.293091)
+mesh = SubResource("PrismMesh_4e4wo")
 
-[node name="Cube" type="MeshInstance3D" parent="Skeleton3D"]
-mesh = SubResource("ArrayMesh_0yeoo")
-skin = SubResource("Skin_542ay")
-
-[node name="SkeletonIK3D" type="SkeletonIK3D" parent="Skeleton3D"]
-root_bone = &"Bone.002"
-tip_bone = &"Bone.008"
-target_node = NodePath("../../Handle")
-
-[node name="SwordTipArea" type="Area3D" parent="."]
-
-[node name="swordTip" type="CollisionShape3D" parent="SwordTipArea"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.0774677, 0)
-shape = SubResource("CylinderShape3D_6ruyh")
-
-[node name="swordCollisions" type="Area3D" parent="."]
-
-[node name="swordBlade" type="CollisionPolygon3D" parent="swordCollisions"]
-depth = 0.25
-polygon = PackedVector2Array(0.660233, 0.741041, -0.644103, 0.762192, -0.288546, 4.09877, 0.286879, 4.1041)
-
-[node name="swordHilt" type="CollisionPolygon3D" parent="swordCollisions"]
-depth = 0.25
-polygon = PackedVector2Array(0.756536, 4.07213, 0.773324, 4.18628, 0.390563, 4.38102, -0.401819, 4.38438, -0.75772, 4.18293, -0.764435, 4.04527, -0.576412, 4.03855, -0.374959, 4.12249, 0.390563, 4.11577, 0.575228, 4.03855)
-
-[node name="swordPommel" type="CollisionShape3D" parent="swordCollisions"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00686646, 5.60473, 0.000396729)
-shape = SubResource("BoxShape3D_yltf1")
-
-[node name="swordHandle" type="CollisionShape3D" parent="swordCollisions"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00268555, 4.91359, -0.00192261)
-shape = SubResource("BoxShape3D_6vy08")
-
-[node name="swordBlade" type="CollisionPolygon3D" parent="."]
-depth = 0.25
-polygon = PackedVector2Array(0.660233, 0.741041, -0.644103, 0.762192, -0.288546, 4.09877, 0.286879, 4.1041)
-
-[node name="swordHilt" type="CollisionPolygon3D" parent="."]
-depth = 0.25
-polygon = PackedVector2Array(0.756536, 4.07213, 0.773324, 4.18628, 0.390563, 4.38102, -0.401819, 4.38438, -0.75772, 4.18293, -0.764435, 4.04527, -0.576412, 4.03855, -0.374959, 4.12249, 0.390563, 4.11577, 0.575228, 4.03855)
-
-[node name="swordPommel" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00686646, 5.60473, 0.000396729)
-shape = SubResource("BoxShape3D_yltf1")
-
-[node name="swordHandle" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00268555, 4.91359, -0.00192261)
-shape = SubResource("BoxShape3D_6vy08")
-
-[node name="Handle" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.54722, 0)
-
-[node name="Area3D" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
-collision_layer = 2
-collision_mask = 2
-
-[node name="bendableArea" type="CollisionShape3D" parent="Area3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4, 0)
-shape = SubResource("BoxShape3D_3kipt")
-
-[node name="LeftHiltRay" type="RayCast3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.770996, 4.13835, 0)
-target_position = Vector3(1, 0, 0)
-
-[node name="RightHiltRay" type="RayCast3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.758068, 4.13835, 0)
-target_position = Vector3(-1, 0, 0)
-
-[node name="SFX" type="Node" parent="."]
-
-[node name="tipWood" type="AudioStreamPlayer" parent="SFX"]
-stream = ExtResource("3_7n05r")
-volume_db = -5.639
-
-[node name="bodyWood" type="AudioStreamPlayer" parent="SFX"]
-stream = ExtResource("5_bv65o")
-
-[node name="tipSand" type="AudioStreamPlayer" parent="SFX"]
-stream = ExtResource("4_ffhwn")
-volume_db = -5.639
-
-[node name="bodySand" type="AudioStreamPlayer" parent="SFX"]
-stream = ExtResource("6_oliow")
-volume_db = -5.639
-
-[node name="tipGround" type="AudioStreamPlayer" parent="SFX"]
-stream = ExtResource("4_ffhwn")
-volume_db = -5.639
-
-[node name="bodyGround" type="AudioStreamPlayer" parent="SFX"]
-stream = ExtResource("5_bv65o")
-volume_db = -5.639
-
-[node name="tipStone" type="AudioStreamPlayer" parent="SFX"]
-stream = ExtResource("7_ord6a")
-volume_db = -5.639
-
-[node name="bodyStone" type="AudioStreamPlayer" parent="SFX"]
-stream = ExtResource("8_yd1b2")
-volume_db = -5.639
-
-[node name="tipCloud" type="AudioStreamPlayer" parent="SFX"]
-stream = ExtResource("9_ubsxk")
-volume_db = -5.639
-
-[node name="bodyCloud" type="AudioStreamPlayer" parent="SFX"]
-stream = ExtResource("10_lvkrc")
-volume_db = -5.639
-
-[node name="swordFlying" type="AudioStreamPlayer" parent="SFX"]
-stream = ExtResource("11_3oejw")
-volume_db = -11.278
-
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]
-[connection signal="input_event" from="." to="." method="_on_input_event"]
-[connection signal="body_entered" from="SwordTipArea" to="." method="_on_sword_tip_area_body_entered"]
-[connection signal="body_exited" from="SwordTipArea" to="." method="_on_sword_tip_area_body_exited"]
-[connection signal="body_entered" from="swordCollisions" to="." method="_on_sword_collisions_body_entered"]
-[connection signal="input_event" from="Area3D" to="." method="_on_area_3d_input_event"]
+[node name="miniSword" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.0904832, -0.119636, 0, 0.119636, 0.0904832, 0, 0, 0, 0.049, -0.235767, 5.2467, 0.124626)
+mesh = SubResource("ArrayMesh_c0e6o")
+skin = SubResource("Skin_yfus8")
+script = ExtResource("4_66f0l")

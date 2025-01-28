@@ -103,7 +103,7 @@ func _physics_process(delta: float) -> void:
 
 	# reset position
 	if Input.is_action_pressed("reset_position"):
-		self.position = Vector3(0, 5, 0)  # Reset position to (0, 0, 0)
+		self.position = Vector3(-7.402, 50.056, 0)  # Reset position to (0, 0, 0)
 		self.rotation_degrees = Vector3(0, 0, 0)  # Reset rotation to (0, 0, 0)
 		self.linear_velocity = Vector3(0, 0, 0)  # Stop linear momentum
 		self.angular_velocity = Vector3(0, 0, 0)  # Stop angular momentum
