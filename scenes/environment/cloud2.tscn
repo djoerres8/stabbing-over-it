@@ -1,10 +1,10 @@
-[gd_scene load_steps=8 format=4 uid="uid://dw2r3jkqmf4od"]
+[gd_scene load_steps=9 format=4 uid="uid://doruxrnu10ss8"]
 
-[ext_resource type="Script" path="res://scripts/cloud.gd" id="1_u87lf"]
+[ext_resource type="Script" path="res://scripts/cloud_2.gd" id="1_ft3mn"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8d6oi"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4k17n"]
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_dke4p"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_g3n0g"]
 _surfaces = [{
 "aabb": AABB(-0.942887, -0.890587, -0.924759, 1.83766, 1.60154, 1.61809),
 "format": 34896613377,
@@ -28,7 +28,7 @@ _surfaces = [{
 "index_count": 276,
 "index_data": PackedByteArray("ZgB7AH4AewBXAF0AVwBmAFoAewBmAFcALgAsADIALAAeACIAHgAuABsALAAuAB4AiACMAI4AgwB5AIUAeQCAAH0AeQCDAIAACwARAA4AKAAEACUAKAAZAAQAIwAFABoABQAGAAEABgAjAB8ABQAjAAYACAAWABMAFgAKAA0ACgAgAB0AIAAWAAgAFgAgAAoAIQAnACoAIQAYACcAMwAtADAAMwA2AC0AbgBgAHAAbgBkAGAAKQAxACsAMQBAADQAQAAmAD4AJgAxACkAMQAmAEAAWwA6AFkASABMAE8ATQBiAGUAYgA1AEEANQBJADcASQBiAE0AYgBJADUACQBGAA8ARgBKAFAASgAvADgALwAJABwACQBKAEYASgAJAC8AEgACAAcAAgBVAFMAAgASAFUAAwA8ACQAPABYADkAWABRAF4AUQADAAAAAwBYADwAWAADAFEAagBjAGwAYwBOAEsATgBDAEUAQwBjAGoAYwBDAE4AcQBcAGgAXAA9ADsAPQBhAD8AYQBcAHEAXABhAD0AaQByAEIAaQB1AHIAawCBAHYAgQBnAH8AZwBtAG8AbQCBAGsAgQBtAGcAUgB8AF8AfABUAHgAfABSAFQAjQCCAIQAggBzAHcAcwCNAIoAggCNAHMAegCPAIYAjwAXAIkAFwBWABQAVgCPAHoAjwBWABcAEAAVAAwAFQCLAIcAiwBEAHQARAAQAEcAEACLABUAiwAQAEQA"),
 "lods": [0.454232, PackedByteArray("VwCiAJcAnACiAFcAcQCXAKMAnwCXAHEAlwCfAJgApgChAJ8ApgCfAG8AogBtAG8AbQCiAKUApQCiAKcAogCdAKcAogCcAJ0AqQCdABcAFwCdABQACgAQAAwAEAAVAAwAEACLABUAiwAQAEcAFgAKAA0AFgCTAAoAkwAWAJEAkQAWABMAlACQADwAkgCQAJQAlAAJAB4AkABYADwAPABYADkAWACQAFEAkACeAFEAkAASAJ4AEgCQAAYABQAfAAYACQBGAA8ACQCbAEYARgCbAFAAmwAJAJYAmgBjAE4AYwCoAE4ATgCoAEUAqABjAKQApABjAGwAmgCgAGUAoACaAJUAoACVAJkA")],
-"material": SubResource("StandardMaterial3D_8d6oi"),
+"material": SubResource("StandardMaterial3D_4k17n"),
 "name": "Material.045",
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),
@@ -36,7 +36,7 @@ _surfaces = [{
 "vertex_data": PackedByteArray("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")
 }]
 blend_shape_mode = 0
-shadow_mesh = SubResource("ArrayMesh_dke4p")
+shadow_mesh = SubResource("ArrayMesh_g3n0g")
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_saonb"]
 radius = 0.450336
@@ -47,32 +47,51 @@ radius = 0.559627
 [sub_resource type="SphereShape3D" id="SphereShape3D_gs0fj"]
 radius = 0.57049
 
-[node name="cloud" type="AnimatableBody3D"]
-script = ExtResource("1_u87lf")
+[sub_resource type="SphereShape3D" id="SphereShape3D_c3y1d"]
+radius = 0.444447
+
+[node name="cloud2" type="AnimatableBody3D"]
+script = ExtResource("1_ft3mn")
 
 [node name="Sphere_005" type="MeshInstance3D" parent="."]
-transform = Transform3D(-0.350959, 0, 0.263955, 0, 0.516812, 0, -0.224052, 0, -0.413463, 0.0403646, 0.0252093, -0.0508127)
+transform = Transform3D(-0.350959, 0, 0.263955, 0.210739, -0.175497, 0.388895, 0.0760825, 0.486103, 0.140402, -1.23906, 0.779089, 0.00192264)
 cast_shadow = 0
 mesh = SubResource("ArrayMesh_w8hau")
 skeleton = NodePath("")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.339575, -0.940579, 0, 0.940579, -0.339575, -1.2952, 0.7448, -0.0527353)
+shape = SubResource("SphereShape3D_saonb")
 
 [node name="Sphere_007" type="MeshInstance3D" parent="."]
-transform = Transform3D(-0.434928, 0, 0.327701, 0.23366, -0.346266, 0.431975, 0.14999, 0.539427, 0.277291, 0.732412, 0.113619, -0.0508127)
+transform = Transform3D(0.201547, -0.381373, -0.4278, 0.23366, -0.346266, 0.431975, -0.413568, -0.381492, 0.0355781, 0.429055, 0.17685, 0.0285302)
 cast_shadow = 0
 mesh = SubResource("ArrayMesh_w8hau")
 skeleton = NodePath("")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
+transform = Transform3D(-0.707218, 0, -0.706996, 0, 1, 0, 0.706996, 0, -0.707218, 0.465091, 0.181944, -0.0793429)
+shape = SubResource("SphereShape3D_saonb")
 
 [node name="Sphere_009" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.401323, 0, -0.382795, 0, 0.641, 0, 0.324339, 0, 0.473655, 1.46968, 0.101374, -0.0508127)
+transform = Transform3D(0.401323, 0, -0.382795, 0, 0.641, 0, 0.324339, 0, 0.473655, 0.826564, 0.883118, -0.0508127)
 cast_shadow = 0
 mesh = SubResource("ArrayMesh_w8hau")
 skeleton = NodePath("")
 
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.836814, 0.83634, 0)
+shape = SubResource("SphereShape3D_saonb")
+
 [node name="Sphere_006" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.237184, -0.818385, -0.178699, -0.554943, -0.34978, 0.418105, -0.385277, 0, -0.712236, -0.789561, 0.202455, -0.0508127)
+transform = Transform3D(-0.522581, -0.374141, 0.455503, 0.487816, -0.340747, 0.527185, -0.0400161, 0.732127, 0.47814, -0.751206, 0.204819, 0.0147884)
 cast_shadow = 0
 mesh = SubResource("ArrayMesh_w8hau")
 skeleton = NodePath("")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.030783, 0.997625, -0.0616253, 0.445808, -0.068886, -0.892474, -0.894599, 0, -0.446869, -0.763437, 0.188981, -0.0656011)
+shape = SubResource("SphereShape3D_pfaxl")
 
 [node name="Sphere_008" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.611878, 0.00990972, -0.438728, 0.172626, -0.795665, 0.319122, -0.329336, -0.398646, -0.647846, -0.0733744, 0.842073, -0.0508127)
@@ -80,22 +99,76 @@ cast_shadow = 0
 mesh = SubResource("ArrayMesh_w8hau")
 skeleton = NodePath("")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.47993, 0.0545959, 0)
-shape = SubResource("SphereShape3D_saonb")
-
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.630661, 0.118713, 0)
-shape = SubResource("SphereShape3D_saonb")
-
-[node name="CollisionShape3D3" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.725082, 0.191345, 0)
-shape = SubResource("SphereShape3D_pfaxl")
-
-[node name="CollisionShape3D4" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0157738, -0.0145569, 0)
-shape = SubResource("SphereShape3D_saonb")
-
 [node name="CollisionShape3D5" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0364516, 0.932478, 0)
 shape = SubResource("SphereShape3D_gs0fj")
+
+[node name="Sphere_010" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.181776, -0.574034, 0.165586, 0.360966, 0.0377947, -0.4337, 0.320807, 0.282733, 0.394166, -1.73158, 0.208131, -0.0508129)
+cast_shadow = 0
+mesh = SubResource("ArrayMesh_w8hau")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D6" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.71281, 0.27872, -0.0667215)
+shape = SubResource("SphereShape3D_c3y1d")
+
+[node name="Sphere_011" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.170287, -0.0992407, 0.437613, -0.372271, 0.144742, -0.171481, -0.0760826, -0.486103, -0.140402, 1.92487, -0.150713, -0.0638557)
+cast_shadow = 0
+mesh = SubResource("ArrayMesh_w8hau")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D7" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.824758, -0.192025, -0.531884, 0.565485, 0.280068, 0.77575, 8.74228e-08, -0.940579, 0.339575, 1.85918, -0.154178, -0.00919772)
+shape = SubResource("SphereShape3D_saonb")
+
+[node name="Sphere_012" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.298358, -0.510349, -0.108556, -0.0787414, 0.0699252, -0.598189, 0.413568, 0.381492, -0.0355781, 2.96011, 1.28929, -0.0904631)
+cast_shadow = 0
+mesh = SubResource("ArrayMesh_w8hau")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D8" type="CollisionShape3D" parent="."]
+transform = Transform3D(-0.583284, 0.565485, -0.583101, -0.399921, -0.824758, -0.399796, -0.706996, 0, 0.707218, 2.99271, 1.30546, 0.01741)
+shape = SubResource("SphereShape3D_saonb")
+
+[node name="Sphere_013" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.330994, 0.362476, -0.315713, 0.226942, -0.52867, -0.216465, -0.324339, 0, -0.473655, 3.68734, 0.931571, -0.0111202)
+cast_shadow = 0
+mesh = SubResource("ArrayMesh_w8hau")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D9" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.824758, 0.565485, 7.21027e-08, 0.565485, -0.824758, 4.94363e-08, 8.74228e-08, 0, -1, 3.66934, 0.975947, -0.0619329)
+shape = SubResource("SphereShape3D_saonb")
+
+[node name="Sphere_014" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.15515, -0.501264, 0.673795, -0.697842, 0.0694629, -0.17722, 0.0400161, -0.732126, -0.47814, 2.00249, 0.598797, -0.0767214)
+cast_shadow = 0
+mesh = SubResource("ArrayMesh_w8hau")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D10" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.277486, 0.783845, -0.555507, -0.350276, 0.620956, 0.701227, 0.894599, 8.31092e-08, 0.446869, 1.98345, 0.604944, 0.00366808)
+shape = SubResource("SphereShape3D_pfaxl")
+
+[node name="Sphere_015" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.602269, -0.441764, -0.181386, 0.203633, 0.661835, -0.511293, 0.329336, 0.398646, 0.647846, 2.9219, 0.456521, -0.0111203)
+cast_shadow = 0
+mesh = SubResource("ArrayMesh_w8hau")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D11" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.824758, 0.565485, 7.21027e-08, 0.565485, -0.824758, 4.94363e-08, 8.74228e-08, 0, -1, 3.00347, 0.402838, -0.061933)
+shape = SubResource("SphereShape3D_gs0fj")
+
+[node name="Sphere_016" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.354042, -0.452067, -0.108682, -0.194918, -0.355779, 0.451334, -0.320807, -0.282733, -0.394166, 1.19579, 0.0416775, -0.0111202)
+cast_shadow = 0
+mesh = SubResource("ArrayMesh_w8hau")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D12" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.824758, 0.565485, 7.21027e-08, 0.565485, -0.824758, 4.94363e-08, 8.74228e-08, 0, -1, 1.25119, -0.00592715, 0.0047884)
+shape = SubResource("SphereShape3D_c3y1d")

@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=3 uid="uid://cksbafb3qi0la"]
+
+[ext_resource type="ArrayMesh" uid="uid://cuhfsv7prjhht" path="res://assets/meshes/pillar.mesh.res" id="1_pq3db"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_g4nf0"]
+height = 4.50096
+radius = 0.188513
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jjkfj"]
+size = Vector3(0.614258, 0.182495, 0.62146)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_w3i7u"]
+size = Vector3(0.487122, 0.113836, 0.493515)
+
+[node name="Pillar" type="StaticBody3D"]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = ExtResource("1_pq3db")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CylinderShape3D_g4nf0")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00244141, 2.46512, 0.00311279)
+shape = SubResource("BoxShape3D_jjkfj")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.002, -2.29486, 0.003)
+shape = SubResource("BoxShape3D_jjkfj")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00143433, -2.14329, 0.00144196)
+shape = SubResource("BoxShape3D_w3i7u")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00143433, 2.32072, 0.00144196)
+shape = SubResource("BoxShape3D_w3i7u")

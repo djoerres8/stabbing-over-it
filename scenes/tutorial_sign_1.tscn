@@ -9,8 +9,8 @@ albedo_color = Color(0.237539, 0.237539, 0.237539, 1)
 
 [sub_resource type="TextMesh" id="TextMesh_mtgt2"]
 material = SubResource("StandardMaterial3D_58dmm")
-text = "Click and Drag the sword 
-handle with your mouse. 
+text = "Click and Drag the 
+sword handle to aim. 
 Release to fling."
 font = ExtResource("2_ojqn6")
 font_size = 40

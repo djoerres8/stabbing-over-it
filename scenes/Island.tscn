@@ -1,4 +1,4 @@
-[gd_scene load_steps=104 format=4 uid="uid://cr8lkpttdhxa1"]
+[gd_scene load_steps=119 format=4 uid="uid://cr8lkpttdhxa1"]
 
 [ext_resource type="Environment" uid="uid://b5rs1rje7ejsu" path="res://resources/sky.tres" id="2_m6u05"]
 [ext_resource type="PackedScene" uid="uid://x66v0k3wphao" path="res://scenes/hud.tscn" id="2_mvvqr"]
@@ -8,17 +8,24 @@
 [ext_resource type="PackedScene" uid="uid://bohepmm3pio1l" path="res://scenes/mountain.tscn" id="5_ly6dr"]
 [ext_resource type="PackedScene" uid="uid://5igbvwwh3ai6" path="res://scenes/environment/env_tree_2.tscn" id="6_01bio"]
 [ext_resource type="PackedScene" uid="uid://dw2r3jkqmf4od" path="res://scenes/environment/cloud.tscn" id="7_3dtwo"]
+[ext_resource type="PackedScene" uid="uid://vc0ghkjyfmfc" path="res://scenes/environment/cloudRotating.tscn" id="7_l6ms3"]
 [ext_resource type="PackedScene" uid="uid://cxcbu35q7xpq8" path="res://scenes/environment/wall.tscn" id="8_lmv7a"]
 [ext_resource type="PackedScene" uid="uid://doc00i4uvq6el" path="res://scenes/environment/wall_env.tscn" id="9_6j8o8"]
 [ext_resource type="PackedScene" uid="uid://dyvpsyy5f8l6i" path="res://scenes/environment/mushroom.tscn" id="9_vyjog"]
 [ext_resource type="PackedScene" uid="uid://8kvbowjnsrm0" path="res://scenes/environment/windmill.tscn" id="11_8fj1h"]
 [ext_resource type="PackedScene" uid="uid://47n57u7un6my" path="res://scenes/environment/windmill_blades.tscn" id="12_42vh1"]
+[ext_resource type="PackedScene" uid="uid://cksbafb3qi0la" path="res://scenes/pillar.tscn" id="13_8eppc"]
 [ext_resource type="PackedScene" uid="uid://c22hsjjn7tg3g" path="res://scenes/title.tscn" id="13_8kwqk"]
+[ext_resource type="PackedScene" uid="uid://dgekw1md8q1to" path="res://scenes/tree_shallow_bend.tscn" id="14_hedw8"]
+[ext_resource type="PackedScene" uid="uid://doruxrnu10ss8" path="res://scenes/environment/cloud2.tscn" id="14_w25ou"]
 [ext_resource type="PackedScene" uid="uid://5vsik6wshdre" path="res://scenes/finish.tscn" id="14_xqbom"]
+[ext_resource type="PackedScene" uid="uid://kmodbyxwr8qj" path="res://scenes/environment/cloud3.tscn" id="15_cwd0x"]
 [ext_resource type="PackedScene" uid="uid://fi5seh06mqr6" path="res://scenes/play_btn.tscn" id="15_exuou"]
 [ext_resource type="PackedScene" uid="uid://dla0wjwutwhil" path="res://scenes/tutorial_sign_1.tscn" id="15_ib3jq"]
 [ext_resource type="PackedScene" uid="uid://nqg0qq7rr1uj" path="res://scenes/tutorial_sign_2.tscn" id="16_hukxr"]
+[ext_resource type="PackedScene" uid="uid://bcqio0stnv33m" path="res://scenes/environment/log.tscn" id="16_qgxun"]
 [ext_resource type="FontFile" uid="uid://b0vxmih2c1kfg" path="res://assets/fonts/Molot.otf" id="17_1styw"]
+[ext_resource type="FontFile" uid="uid://ft8hw5skbwbo" path="res://assets/fonts/MotionControl-Bold.otf" id="18_v5myi"]
 
 [sub_resource type="GDScript" id="GDScript_xa0gf"]
 
@@ -1162,15 +1169,53 @@ shadow_mesh = SubResource("ArrayMesh_lpesv")
 [sub_resource type="BoxShape3D" id="BoxShape3D_0j5vo"]
 size = Vector3(0.895146, 0.0970535, 0.0655518)
 
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_0c7xy"]
+height = 2.12703
+radius = 0.783675
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dbn5i"]
+albedo_color = Color(0.872042, 0.916097, 0.945077, 1)
+
+[sub_resource type="TextMesh" id="TextMesh_8qvbh"]
+material = SubResource("StandardMaterial3D_dbn5i")
+text = "YOU
+"
+font = ExtResource("17_1styw")
+font_size = 127
+
+[sub_resource type="TextMesh" id="TextMesh_bdnrf"]
+material = SubResource("StandardMaterial3D_dbn5i")
+text = "WIN!"
+font = ExtResource("17_1styw")
+font_size = 127
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oopew"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="TextMesh" id="TextMesh_67yww"]
+material = SubResource("StandardMaterial3D_oopew")
+text = "YOU
+"
+font = ExtResource("17_1styw")
+font_size = 127
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_81oio"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="TextMesh" id="TextMesh_fjwfb"]
+material = SubResource("StandardMaterial3D_81oio")
+text = "WIN!"
+font = ExtResource("17_1styw")
+font_size = 127
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_avq6w"]
 albedo_color = Color(0.237539, 0.237539, 0.237539, 1)
 
 [sub_resource type="TextMesh" id="TextMesh_o33aw"]
 material = SubResource("StandardMaterial3D_avq6w")
-text = "Asend the mountain.
-errect upon the stone.
-become the legendary sword!"
-font = ExtResource("17_1styw")
+text = "Ascend the mountain. Plunge into the stone. Become the legendary sword!"
+font = ExtResource("18_v5myi")
+font_size = 23
 
 [node name="Island" type="Node3D"]
 script = SubResource("GDScript_xa0gf")
@@ -1222,13 +1267,12 @@ mesh = SubResource("BoxMesh_rsq86")
 metadata/_edit_lock_ = true
 
 [node name="Cube" type="MeshInstance3D" parent="."]
-transform = Transform3D(2.08883, 2.15332, 0, -2.15332, 2.08883, 0, 0, 0, 1, 214.022, 156.531, 8.58307e-06)
-visible = false
+transform = Transform3D(2.08883, 2.15332, 0, -2.15332, 2.08883, 0, 0, 0, 3, 248.611, 317.23, 8.58307e-06)
 mesh = SubResource("ArrayMesh_iegh7")
 skin = SubResource("Skin_7rgrl")
 
 [node name="stabbert" parent="." instance=ExtResource("3_7gehv")]
-transform = Transform3D(-0.589521, -0.807753, 0, 0.807753, -0.589521, 0, 0, 0, 1, 434.432, 409.903, 1.90735e-06)
+transform = Transform3D(0.882357, -0.470581, 0, 0.470581, 0.882357, 0, 0, 0, 1, 275.075, 340.195, -3.8147e-06)
 freeze = true
 
 [node name="environment" type="Node" parent="."]
@@ -1246,6 +1290,18 @@ transform = Transform3D(2.1424, -0.500129, 0, 0.500129, 2.1424, 0, 0, 0, 2.2, 66
 
 [node name="env_tree_3" parent="environment/beach" instance=ExtResource("6_01bio")]
 transform = Transform3D(1.67431, -1.42712, 0, 1.42712, 1.67431, 0, 0, 0, 2.2, 121.671, 89.8211, -32.7077)
+
+[node name="env_tree_4" parent="environment/beach" instance=ExtResource("6_01bio")]
+transform = Transform3D(1.94782, -0.453882, 0, 0.453882, 1.94782, 0, 0, 0, 2, 143.602, 105.138, -51.3821)
+
+[node name="env_tree_7" parent="environment/beach" instance=ExtResource("6_01bio")]
+transform = Transform3D(0.973908, -0.226941, 0, 0.226941, 0.973908, 0, 0, 0, 1, 158.062, 110.302, -42.8566)
+
+[node name="env_tree_5" parent="environment/beach" instance=ExtResource("6_01bio")]
+transform = Transform3D(3.11651, -0.726211, 0, 0.726211, 3.11651, 0, 0, 0, 3.2, 168.038, 111.845, -59.0164)
+
+[node name="env_tree_6" parent="environment/beach" instance=ExtResource("6_01bio")]
+transform = Transform3D(2.1426, -0.499269, 0, 0.499269, 2.1426, 0, 0, 0, 2.2, 168.038, 112.822, -26.0899)
 
 [node name="Sphere_002" type="MeshInstance3D" parent="environment/beach"]
 transform = Transform3D(-7.09982, -7.87779e-14, -6.3857, 4.50816, 6.15816, -6.95409, 3.01123, -9.21947, -4.64499, 47.2007, -7.73241, -21.1792)
@@ -1325,6 +1381,9 @@ transform = Transform3D(0.853487, -0.521114, 0, 0.521114, 0.853487, 0, 0, 0, 1, 
 transform = Transform3D(123.676, -4.19617e-05, 0, 3.05176e-05, 115.52, 0, 0, 0, 125.522, 1.89571, -1.3879, -2.26737)
 mesh = SubResource("ArrayMesh_8tv2y")
 skeleton = NodePath("")
+
+[node name="cloud2" parent="environment/beach" instance=ExtResource("7_l6ms3")]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 299.358, 332.738, 0)
 
 [node name="hill1" type="Node" parent="environment"]
 
@@ -1771,6 +1830,144 @@ transform = Transform3D(9.21123, -28.5509, 0, 28.5509, 9.21123, 0, 0, 0, 30, 256
 transform = Transform3D(0.307041, -0.951696, 0, 0.951696, 0.307041, 0, 0, 0, 1, 232.502, 223.354, -0.219903)
 metadata/material = &"wood"
 
+[node name="final hill" type="Node" parent="Obstacles"]
+
+[node name="bentTree" type="StaticBody3D" parent="Obstacles/final hill"]
+transform = Transform3D(1.6567, 1.2122, -3.43306, -2.78078, -2.01327, -2.0528, -2.35002, 3.23687, 0.00887179, 313.998, 304.762, -12.6905)
+metadata/material = &"wood"
+
+[node name="Cylinder_002" type="MeshInstance3D" parent="Obstacles/final hill/bentTree"]
+transform = Transform3D(1.90522e-07, -0.206221, 0.978505, 4.01528e-08, 0.978505, 0.206221, -1, 0, 1.94707e-07, 0.0846329, -0.346485, 0.923062)
+mesh = SubResource("ArrayMesh_n4dw8")
+skeleton = NodePath("")
+
+[node name="Circle_012" type="MeshInstance3D" parent="Obstacles/final hill/bentTree"]
+transform = Transform3D(4.01924e-07, -0.435043, 2.06425, 8.4706e-08, 2.06425, 0.435043, -2.10959, 0, 4.10753e-07, -0.30735, 0.199944, 0.923062)
+mesh = SubResource("ArrayMesh_c7xg3")
+skeleton = NodePath("")
+
+[node name="Circle_011" type="MeshInstance3D" parent="Obstacles/final hill/bentTree"]
+transform = Transform3D(4.01924e-07, -0.435043, 2.06425, 8.4706e-08, 2.06425, 0.435043, -2.10959, 0, 4.10753e-07, -0.30735, 0.199944, 0.923062)
+mesh = SubResource("ArrayMesh_ha8cb")
+skeleton = NodePath("")
+
+[node name="Circle_010" type="MeshInstance3D" parent="Obstacles/final hill/bentTree"]
+transform = Transform3D(4.01924e-07, -0.435043, 2.06425, 8.4706e-08, 2.06425, 0.435043, -2.10959, 0, 4.10753e-07, -0.30735, 0.199944, 0.923062)
+mesh = SubResource("ArrayMesh_khu8t")
+skeleton = NodePath("")
+
+[node name="Circle_009" type="MeshInstance3D" parent="Obstacles/final hill/bentTree"]
+transform = Transform3D(4.01924e-07, -0.435043, 2.06425, 8.4706e-08, 2.06425, 0.435043, -2.10959, 0, 4.10753e-07, -0.30735, 0.199944, 0.923062)
+mesh = SubResource("ArrayMesh_qfa4m")
+skeleton = NodePath("")
+
+[node name="Circle_008" type="MeshInstance3D" parent="Obstacles/final hill/bentTree"]
+transform = Transform3D(4.01924e-07, -0.435043, 2.06425, 8.4706e-08, 2.06425, 0.435043, -2.10959, 0, 4.10753e-07, -0.30735, 0.199944, 0.923062)
+mesh = SubResource("ArrayMesh_s6pnv")
+skeleton = NodePath("")
+
+[node name="Circle_007" type="MeshInstance3D" parent="Obstacles/final hill/bentTree"]
+transform = Transform3D(4.01924e-07, -0.435043, 2.06425, 8.4706e-08, 2.06425, 0.435043, -2.10959, 0, 4.10753e-07, -0.30735, 0.199944, 0.923062)
+mesh = SubResource("ArrayMesh_cn4u6")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Obstacles/final hill/bentTree"]
+transform = Transform3D(0.92638, -0.0728012, -0.369488, 0.0876686, 0.99587, 0.0235819, 0.366244, -0.0542377, 0.928936, -1.53116, 2.38474, 0.925865)
+shape = SubResource("CylinderShape3D_0c7xy")
+
+[node name="treeShallowBend" parent="Obstacles/final hill" instance=ExtResource("14_hedw8")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 324.887, 308.531, 0)
+metadata/material = &"wood"
+
+[node name="Pillar" parent="Obstacles/final hill" instance=ExtResource("13_8eppc")]
+transform = Transform3D(5.12972, -8.58405, 0, 8.58405, 5.12972, 0, 0, 0, 10, 335.228, 343.7, 0)
+metadata/material = &"stone"
+
+[node name="Pillar2" parent="Obstacles/final hill" instance=ExtResource("13_8eppc")]
+transform = Transform3D(5.12972, -8.58405, 0, 8.58405, 5.12972, 0, 0, 0, 10, 288.454, 371.557, 0)
+metadata/material = &"stone"
+
+[node name="Pillar3" parent="Obstacles/final hill" instance=ExtResource("13_8eppc")]
+transform = Transform3D(0.538621, -0.901326, 0, 0.901326, 0.538621, 0, 0, 0, 1.05, 312.493, 360.174, -2.34398)
+metadata/material = &"stone"
+
+[node name="Pillar10" parent="Obstacles/final hill" instance=ExtResource("13_8eppc")]
+transform = Transform3D(0.538621, -0.901326, 0, 0.901326, 0.538621, 0, 0, 0, 1.05, 312.493, 360.174, 2.51959)
+metadata/material = &"stone"
+
+[node name="Pillar9" parent="Obstacles/final hill" instance=ExtResource("13_8eppc")]
+transform = Transform3D(0.538621, -0.901326, 0, 0.901326, 0.538621, 0, 0, 0, 1.05, 310.049, 355.795, -2.34398)
+metadata/material = &"stone"
+
+[node name="Pillar11" parent="Obstacles/final hill" instance=ExtResource("13_8eppc")]
+transform = Transform3D(0.538621, -0.901326, 0, 0.901326, 0.538621, 0, 0, 0, 1.05, 310.049, 355.795, 2.45451)
+metadata/material = &"stone"
+
+[node name="Pillar4" parent="Obstacles/final hill" instance=ExtResource("13_8eppc")]
+transform = Transform3D(9.99591, -0.285845, -3.32645e-09, 0.280981, 9.82582, -1.83694, 0.052508, 1.83619, 9.82984, 268.494, 356.767, -9.82126)
+
+[node name="Pillar5" parent="Obstacles/final hill" instance=ExtResource("13_8eppc")]
+transform = Transform3D(9.99591, -0.285845, 2.30833e-09, 0.282551, 9.88072, -1.51382, 0.0432717, 1.5132, 9.88475, 270.115, 304.985, -17.7355)
+
+[node name="Pillar7" parent="Obstacles/final hill" instance=ExtResource("13_8eppc")]
+transform = Transform3D(9.99591, -0.285845, 2.83341e-09, -0.028683, -1.00303, -9.94953, 0.284403, 9.94546, -1.00344, 271.338, 279.946, -24.4832)
+metadata/material = &"stone"
+
+[node name="Pillar8" parent="Obstacles/final hill" instance=ExtResource("13_8eppc")]
+transform = Transform3D(8.99941, 4.33547, -0.463012, -0.028683, -1.00303, -9.94953, -4.36003, 8.95531, -0.890235, 264.001, 332.488, -22.5909)
+metadata/material = &"stone"
+
+[node name="Pillar6" parent="Obstacles/final hill" instance=ExtResource("13_8eppc")]
+transform = Transform3D(9.99591, -0.285845, 2.30833e-09, 0.28405, 9.93313, -1.11903, 0.0319868, 1.11857, 9.93719, 271.43, 253.059, -24.0654)
+
+[node name="cloud" parent="Obstacles/final hill" instance=ExtResource("7_3dtwo")]
+transform = Transform3D(2.9999, 0.0240336, 0, -0.0240336, 2.9999, 0, 0, 0, 3, 246.73, 317.979, 0.867126)
+metadata/material = &"cloud"
+
+[node name="cloud7" parent="Obstacles/final hill" instance=ExtResource("7_3dtwo")]
+transform = Transform3D(2.9999, 0.0240336, 0, -0.0240336, 2.9999, 0, 0, 0, 3, 219.425, 358.119, 0.867126)
+metadata/material = &"cloud"
+
+[node name="cloud10" parent="Obstacles/final hill" instance=ExtResource("7_3dtwo")]
+transform = Transform3D(1.99994, 0.0160224, 0, -0.0160224, 1.99994, 0, 0, 0, 2, 251.376, 369.764, 0.867126)
+metadata/material = &"cloud"
+
+[node name="cloud8" parent="Obstacles/final hill" instance=ExtResource("7_3dtwo")]
+transform = Transform3D(2.9999, 0.0240336, 0, -0.0240336, 2.9999, 0, 0, 0, 3, 276.072, 353.633, 0.867126)
+metadata/material = &"cloud"
+
+[node name="cloud2" parent="Obstacles/final hill" instance=ExtResource("14_w25ou")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 238.706, 345.096, 0)
+metadata/material = &"cloud"
+
+[node name="cloud3" parent="Obstacles/final hill" instance=ExtResource("14_w25ou")]
+transform = Transform3D(-2.48872, -0.237225, 0, 0.237225, -2.48872, 0, 0, 0, 2.5, 215.161, 301.88, 0)
+metadata/material = &"cloud"
+
+[node name="cloud9" parent="Obstacles/final hill" instance=ExtResource("14_w25ou")]
+transform = Transform3D(2.49964, -0.0425408, 0, 0.0425408, 2.49964, 0, 0, 0, 2.5, 268.33, 302.013, 0)
+metadata/material = &"cloud"
+
+[node name="cloud4" parent="Obstacles/final hill" instance=ExtResource("14_w25ou")]
+transform = Transform3D(2.97691, 0.371532, 0, -0.371532, 2.97691, 0, 0, 0, 3, 179.389, 264.216, 7.62939e-06)
+metadata/material = &"cloud"
+
+[node name="cloud5" parent="Obstacles/final hill" instance=ExtResource("15_cwd0x")]
+transform = Transform3D(3.4, 0, 0, 0, 3.4, 0, 0, 0, 3.4, 193.333, 345.176, 0)
+metadata/material = &"cloud"
+
+[node name="cloud6" parent="Obstacles/final hill" instance=ExtResource("15_cwd0x")]
+transform = Transform3D(-3.39968, -0.046819, 0, 0.046819, -3.39968, 0, 0, 0, 3.4, 218.47, 391.147, 0)
+metadata/material = &"cloud"
+
+[node name="log" parent="Obstacles/final hill" instance=ExtResource("16_qgxun")]
+transform = Transform3D(-2.18397, -1.99786, -0.488683, 1.89974, -2.23263, 0.637446, -0.788193, 0.154597, 2.89048, 285.846, 267.299, -0.358953)
+metadata/material = &"wood"
+
+[node name="log2" parent="Obstacles/final hill" instance=ExtResource("16_qgxun")]
+transform = Transform3D(2.54824, -1.55226, -0.311421, 1.49214, 2.552, -0.510688, 0.529156, 0.278889, 2.93976, 300.006, 281.892, -0.952277)
+metadata/material = &"wood"
+
 [node name="Pedastal" type="Node" parent="."]
 
 [node name="Rock1" parent="Pedastal" instance=ExtResource("4_p3wmb")]
@@ -1798,6 +1995,29 @@ spot_angle_attenuation = 0.392292
 [node name="Finish3" parent="Pedastal" instance=ExtResource("14_xqbom")]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 441.173, 406.498, 0.0543718)
 
+[node name="youWin" type="Node3D" parent="Pedastal"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0126343, -3001.33, 0.221375)
+
+[node name="You" type="MeshInstance3D" parent="Pedastal/youWin"]
+transform = Transform3D(700, 0, 0, 0, 700, 0, 0, 0, 1978.22, 454.932, 1288.31, -1358.94)
+mesh = SubResource("TextMesh_8qvbh")
+skeleton = NodePath("../../..")
+
+[node name="Win" type="MeshInstance3D" parent="Pedastal/youWin"]
+transform = Transform3D(700, 0, 0, 0, 700, 0, 0, 0, 1978.22, 454.932, 566.086, -1358.94)
+mesh = SubResource("TextMesh_bdnrf")
+skeleton = NodePath("../../..")
+
+[node name="You2" type="MeshInstance3D" parent="Pedastal/youWin"]
+transform = Transform3D(730, 0, 0, 0, 770, 0, 0, 0, 1978.22, 454.932, 1288.31, -1374.94)
+mesh = SubResource("TextMesh_67yww")
+skeleton = NodePath("../../..")
+
+[node name="Win2" type="MeshInstance3D" parent="Pedastal/youWin"]
+transform = Transform3D(730, 0, 0, 0, 780, 0, 0, 0, 1978.22, 454.932, 566.086, -1364.2)
+mesh = SubResource("TextMesh_fjwfb")
+skeleton = NodePath("../../..")
+
 [node name="tutorial" type="Node" parent="."]
 
 [node name="tutorial sign 1" parent="tutorial" instance=ExtResource("15_ib3jq")]
@@ -1805,11 +2025,6 @@ transform = Transform3D(0.873933, -0.160647, 0.458731, 0.0786132, 0.978092, 0.19
 
 [node name="tutorial sign 2" parent="tutorial" instance=ExtResource("16_hukxr")]
 transform = Transform3D(0.859187, 0.172536, -0.481695, 0.0910981, 0.874805, 0.475833, 0.503487, -0.452711, 0.735903, -4.51148, -15.4022, 8.73479)
-
-[node name="goal" type="MeshInstance3D" parent="tutorial"]
-transform = Transform3D(2.9787, 0.0337388, -0.35523, 0.352701, 0.174588, 2.97407, 0.0541202, -2.99473, 0.169382, -7.68793, -11.3431, 7.31952)
-mesh = SubResource("TextMesh_o33aw")
-skeleton = NodePath("../..")
 
 [node name="title" type="Node" parent="."]
 
@@ -1819,3 +2034,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.46603, 49.9886, 0)
 [node name="playBtn" parent="title" instance=ExtResource("15_exuou")]
 transform = Transform3D(0.929094, 0.369844, 0, -0.369844, 0.929094, 0, 0, 0, 1, -0.330265, 43.0574, 10.5464)
 gravity_scale = 2.4
+
+[node name="goal" type="MeshInstance3D" parent="title"]
+transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 0.5, 2.727, 56.2132, 1)
+mesh = SubResource("TextMesh_o33aw")
+skeleton = NodePath("../..")
+
+[node name="Pillar" parent="." instance=ExtResource("13_8eppc")]
+transform = Transform3D(10, 0, 0, 0, 6.76015, 7.36888, 0, -7.36888, 6.76015, 332.368, 311.102, 7.095)
