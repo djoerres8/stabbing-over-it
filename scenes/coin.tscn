@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://bte7lnu36qrqd"]
+[gd_scene load_steps=5 format=3 uid="uid://bte7lnu36qrqd"]
 
 [ext_resource type="Script" path="res://scripts/coin.gd" id="1_5v8ub"]
+[ext_resource type="AudioStream" uid="uid://pxpggkg2j4et" path="res://assets/sounds/collected.mp3" id="2_sdxoh"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_hltvf"]
 top_radius = 0.3
@@ -10,7 +11,7 @@ height = 0.2
 [sub_resource type="BoxShape3D" id="BoxShape3D_7bn88"]
 size = Vector3(0.640991, 0.640686, 0.201111)
 
-[node name="Area3D - coin" type="Area3D"]
+[node name="Callectable" type="Area3D"]
 script = ExtResource("1_5v8ub")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
@@ -20,5 +21,10 @@ mesh = SubResource("CylinderMesh_hltvf")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00115967, -0.0116272, -0.00253296)
 shape = SubResource("BoxShape3D_7bn88")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_sdxoh")
+volume_db = -5.172
+pitch_scale = 0.52
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

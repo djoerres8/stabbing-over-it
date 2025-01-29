@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=4 uid="uid://c52mmlbh8e552"]
+[gd_scene load_steps=23 format=4 uid="uid://c52mmlbh8e552"]
 
 [ext_resource type="Script" path="res://scripts/stabbert.gd" id="1_n3x53"]
 [ext_resource type="Script" path="res://scripts/stabbert_camera.gd" id="2_ce6pi"]
@@ -128,6 +128,10 @@ bind/12/pose = Transform3D(0.172753, -0.372806, -0.911687, -0.911686, -0.410859,
 bind/13/name = &"neutral_bone"
 bind/13/bone = -1
 bind/13/pose = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_ioggn"]
+height = 0.266945
+radius = 1.38949
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_6ruyh"]
 margin = 0.05
@@ -275,6 +279,14 @@ root_bone = &"Bone.002"
 tip_bone = &"Bone.008"
 target_node = NodePath("../../Handle")
 
+[node name="SolidSwordTip" type="Area3D" parent="."]
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SolidSwordTip"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.0216501, -0.337871, 0)
+shape = SubResource("CylinderShape3D_ioggn")
+
 [node name="SwordTipArea" type="Area3D" parent="."]
 
 [node name="swordTip" type="CollisionShape3D" parent="SwordTipArea"]
@@ -314,6 +326,11 @@ shape = SubResource("BoxShape3D_yltf1")
 [node name="swordHandle" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00268555, 4.91359, -0.00192261)
 shape = SubResource("BoxShape3D_6vy08")
+
+[node name="solidSwordTip" type="CollisionPolygon3D" parent="."]
+depth = 0.2
+disabled = true
+polygon = PackedVector2Array(0.661992, 0.645362, 0.73426, 0.00527906, 0.0115849, -1.29553, -0.731737, 0.00527906, -0.65947, 0.650524)
 
 [node name="Handle" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.54722, 0)
@@ -382,6 +399,8 @@ volume_db = -11.278
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="input_event" from="." to="." method="_on_input_event"]
+[connection signal="body_entered" from="SolidSwordTip" to="." method="_on_solid_sword_tip_body_entered"]
+[connection signal="body_exited" from="SolidSwordTip" to="." method="_on_solid_sword_tip_body_exited"]
 [connection signal="body_entered" from="SwordTipArea" to="." method="_on_sword_tip_area_body_entered"]
 [connection signal="body_exited" from="SwordTipArea" to="." method="_on_sword_tip_area_body_exited"]
 [connection signal="body_entered" from="swordCollisions" to="." method="_on_sword_collisions_body_entered"]

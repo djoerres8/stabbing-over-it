@@ -1,4 +1,4 @@
-[gd_scene load_steps=119 format=4 uid="uid://cr8lkpttdhxa1"]
+[gd_scene load_steps=124 format=4 uid="uid://cr8lkpttdhxa1"]
 
 [ext_resource type="Environment" uid="uid://b5rs1rje7ejsu" path="res://resources/sky.tres" id="2_m6u05"]
 [ext_resource type="PackedScene" uid="uid://x66v0k3wphao" path="res://scenes/hud.tscn" id="2_mvvqr"]
@@ -26,6 +26,8 @@
 [ext_resource type="PackedScene" uid="uid://bcqio0stnv33m" path="res://scenes/environment/log.tscn" id="16_qgxun"]
 [ext_resource type="FontFile" uid="uid://b0vxmih2c1kfg" path="res://assets/fonts/Molot.otf" id="17_1styw"]
 [ext_resource type="FontFile" uid="uid://ft8hw5skbwbo" path="res://assets/fonts/MotionControl-Bold.otf" id="18_v5myi"]
+[ext_resource type="PackedScene" uid="uid://c6jaj07s7tjk5" path="res://scenes/environment/ObsidianWall.tscn" id="19_ir54d"]
+[ext_resource type="PackedScene" uid="uid://bte7lnu36qrqd" path="res://scenes/coin.tscn" id="28_xl50e"]
 
 [sub_resource type="GDScript" id="GDScript_xa0gf"]
 
@@ -35,6 +37,8 @@ albedo_color = Color(0.760784, 0.635294, 0.266667, 1)
 [sub_resource type="SphereMesh" id="SphereMesh_86un4"]
 material = SubResource("StandardMaterial3D_a6621")
 height = 0.15
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_hkhnv"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_644bp"]
 albedo_color = Color(0.76, 0.6365, 0.266, 1)
@@ -181,7 +185,7 @@ shader_parameter/texture_normal = SubResource("NoiseTexture2D_wjecl")
 
 [sub_resource type="BoxMesh" id="BoxMesh_rsq86"]
 material = SubResource("ShaderMaterial_fr6df")
-size = Vector3(10000, 10, 10000)
+size = Vector3(10000, 1000, 10000)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0bod1"]
 resource_name = "Hilt"
@@ -1208,6 +1212,13 @@ text = "WIN!"
 font = ExtResource("17_1styw")
 font_size = 127
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_32tsg"]
+albedo_color = Color(0.0430392, 0.0430392, 0.0430392, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_kkj51"]
+material = SubResource("StandardMaterial3D_32tsg")
+size = Vector2(10000, 3000)
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_avq6w"]
 albedo_color = Color(0.237539, 0.237539, 0.237539, 1)
 
@@ -1236,14 +1247,23 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 285.359, -25.501, 0)
 metadata/_edit_lock_ = true
 metadata/material = &"ground"
 
-[node name="Floor" type="Node3D" parent="."]
+[node name="Floor" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -18.258, 0)
 metadata/_edit_group_ = true
-metadata/_edit_lock_ = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
 transform = Transform3D(1000, 0, 0, 0, 1000, 0, 0, 0, 785.468, 297.71, -53.0042, 0)
 mesh = SubResource("SphereMesh_86un4")
+
+[node name="CollisionPolygon3D" type="CollisionPolygon3D" parent="Floor"]
+polygon = PackedVector2Array(-201.546, -56.3519, -201.632, -49.4964, -197.103, -42.5685, -188.158, -35.7029, -174.661, -28.7006, -156.889, -21.9645, -135.032, -15.7918, -108.551, -9.63903, -88.217, -5.54844, -74.1708, -3.2809, -53.637, -0.0685577, -42.1386, 1.89652, -32.8165, 3.03029, -15.621, 5.17185, 15.0168, 8.68092, 36.8734, 10.8225, 63.1833, 13.0566, 573.797, 9.35306, 589.86, 7.90733, 623.965, 3.70801, 665.997, -2.6365, 686.775, -5.65014, 713.736, -11.508, 730.708, -15.4733, 752.438, -21.9765, 769.638, -28.2325, 783.606, -35.345, 792.567, -42.3924, 796.941, -49.3586, 797.047, -56.6151, 792.47, -63.7906, -197.095, -63.2795)
+
+[node name="resetArea" type="Area3D" parent="Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -200.588, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor/resetArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 80.5076, 0)
+shape = SubResource("WorldBoundaryShape3D_hkhnv")
 
 [node name="Sand" type="StaticBody3D" parent="."]
 metadata/_edit_group_ = true
@@ -1262,17 +1282,17 @@ transform = Transform3D(0.992658, -0.120951, 0, 0.120951, 0.992658, 0, 0, 0, 1, 
 shape = SubResource("BoxShape3D_yy8rq")
 
 [node name="Water" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.20526, -17.2445, -422.367)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.205, -512.824, -422.367)
 mesh = SubResource("BoxMesh_rsq86")
-metadata/_edit_lock_ = true
 
 [node name="Cube" type="MeshInstance3D" parent="."]
 transform = Transform3D(2.08883, 2.15332, 0, -2.15332, 2.08883, 0, 0, 0, 3, 248.611, 317.23, 8.58307e-06)
+visible = false
 mesh = SubResource("ArrayMesh_iegh7")
 skin = SubResource("Skin_7rgrl")
 
 [node name="stabbert" parent="." instance=ExtResource("3_7gehv")]
-transform = Transform3D(0.882357, -0.470581, 0, 0.470581, 0.882357, 0, 0, 0, 1, 275.075, 340.195, -3.8147e-06)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.402, 50.056, 0)
 freeze = true
 
 [node name="environment" type="Node" parent="."]
@@ -1282,11 +1302,23 @@ freeze = true
 [node name="envTree1" parent="environment/beach" instance=ExtResource("5_alfo5")]
 transform = Transform3D(1.82284, -0.822965, 0, 0.822965, 1.82284, 0, 0, 0, 2, 81, 17.0794, -33.1448)
 
+[node name="envTree4" parent="environment/beach" instance=ExtResource("5_alfo5")]
+transform = Transform3D(1.82284, -0.822965, 0, 0.822965, 1.82284, 0, 0, 0, 2, 81, 17.0794, -79.2865)
+
 [node name="envTree2" parent="environment/beach" instance=ExtResource("5_alfo5")]
 transform = Transform3D(1.15495, -1.63282, 0, 1.63282, 1.15495, 0, 0, 0, 2, 90.9471, 36.802, -45.8944)
 
+[node name="envTree3" parent="environment/beach" instance=ExtResource("5_alfo5")]
+transform = Transform3D(1.60734, -1.19015, 0, 1.19015, 1.60734, 0, 0, 0, 2, 110.691, 54.9053, -96.3597)
+
 [node name="env_tree_2" parent="environment/beach" instance=ExtResource("6_01bio")]
 transform = Transform3D(2.1424, -0.500129, 0, 0.500129, 2.1424, 0, 0, 0, 2.2, 66.6775, 8.41239, -32.7077)
+
+[node name="env_tree_8" parent="environment/beach" instance=ExtResource("6_01bio")]
+transform = Transform3D(2.1424, -0.500129, 0, 0.500129, 2.1424, 0, 0, 0, 2.2, 53.3623, -2.71574, -136.082)
+
+[node name="env_tree_9" parent="environment/beach" instance=ExtResource("6_01bio")]
+transform = Transform3D(2.1424, -0.500129, 0, 0.484579, 2.07579, 0.544328, -0.123743, -0.530077, 2.1316, 110.501, 22.3661, -168.795)
 
 [node name="env_tree_3" parent="environment/beach" instance=ExtResource("6_01bio")]
 transform = Transform3D(1.67431, -1.42712, 0, 1.42712, 1.67431, 0, 0, 0, 2.2, 121.671, 89.8211, -32.7077)
@@ -1310,6 +1342,11 @@ skeleton = NodePath("")
 
 [node name="Sphere_003" type="MeshInstance3D" parent="environment/beach"]
 transform = Transform3D(7.933, 0, 0, 0, 9.846, 0, 0, 0, 9.344, 28.2115, -9.03714, -44.0418)
+mesh = SubResource("ArrayMesh_0uocq")
+skeleton = NodePath("")
+
+[node name="Sphere_013" type="MeshInstance3D" parent="environment/beach"]
+transform = Transform3D(7.933, 0, 0, 0, -7.08799, -6.48561, 0, 6.83404, -6.72661, 37.1322, -13.3803, -131.164)
 mesh = SubResource("ArrayMesh_0uocq")
 skeleton = NodePath("")
 
@@ -1374,11 +1411,21 @@ transform = Transform3D(-4.37114e-05, -1000, -4.37114e-05, 0, -4.37114e-05, 1000
 mesh = SubResource("ArrayMesh_fgyof")
 skeleton = NodePath("")
 
+[node name="Dock_FirstAge3" type="MeshInstance3D" parent="environment/beach"]
+transform = Transform3D(794.309, -607.514, -2.65553e-05, -2.11758e-19, -4.37114e-05, 1000, -607.514, -794.309, -3.47203e-05, 11.2219, -8.89135, -86.3097)
+mesh = SubResource("ArrayMesh_fgyof")
+skeleton = NodePath("")
+
 [node name="stump" type="Node3D" parent="environment/beach"]
 transform = Transform3D(0.853487, -0.521114, 0, 0.521114, 0.853487, 0, 0, 0, 1, 55.0198, 3.92596, -18.654)
 
 [node name="Plane_018" type="MeshInstance3D" parent="environment/beach/stump"]
 transform = Transform3D(123.676, -4.19617e-05, 0, 3.05176e-05, 115.52, 0, 0, 0, 125.522, 1.89571, -1.3879, -2.26737)
+mesh = SubResource("ArrayMesh_8tv2y")
+skeleton = NodePath("")
+
+[node name="Plane_019" type="MeshInstance3D" parent="environment/beach/stump"]
+transform = Transform3D(123.676, -4.19617e-05, 0, 3.43323e-05, 115.52, 0, 0, 0, 125.522, 20.1889, -1.38579, -101.495)
 mesh = SubResource("ArrayMesh_8tv2y")
 skeleton = NodePath("")
 
@@ -1883,6 +1930,22 @@ metadata/material = &"wood"
 transform = Transform3D(5.12972, -8.58405, 0, 8.58405, 5.12972, 0, 0, 0, 10, 335.228, 343.7, 0)
 metadata/material = &"stone"
 
+[node name="Pillar12" parent="Obstacles/final hill" instance=ExtResource("13_8eppc")]
+transform = Transform3D(10, 0, 0, 0, -4.37114e-07, -10, 0, 10, -4.37114e-07, 358.861, 376.014, -24.9652)
+metadata/material = &"stone"
+
+[node name="Pillar15" parent="Obstacles/final hill" instance=ExtResource("13_8eppc")]
+transform = Transform3D(10, 0, 0, 0, -4.37114e-07, -10, 0, 10, -4.37114e-07, 339.676, 363.121, -24.9652)
+metadata/material = &"stone"
+
+[node name="Pillar13" parent="Obstacles/final hill" instance=ExtResource("13_8eppc")]
+transform = Transform3D(10, 0, 0, 0, -4.37114e-07, -10, 0, 10, -4.37114e-07, 374.624, 388.487, -24.9652)
+metadata/material = &"stone"
+
+[node name="Pillar14" parent="Obstacles/final hill" instance=ExtResource("13_8eppc")]
+transform = Transform3D(10, 0, 0, 0, -4.37114e-07, -10, 0, 10, -4.37114e-07, 398.153, 401.905, -24.9652)
+metadata/material = &"stone"
+
 [node name="Pillar2" parent="Obstacles/final hill" instance=ExtResource("13_8eppc")]
 transform = Transform3D(5.12972, -8.58405, 0, 8.58405, 5.12972, 0, 0, 0, 10, 288.454, 371.557, 0)
 metadata/material = &"stone"
@@ -1908,6 +1971,18 @@ transform = Transform3D(9.99591, -0.285845, -3.32645e-09, 0.280981, 9.82582, -1.
 
 [node name="Pillar5" parent="Obstacles/final hill" instance=ExtResource("13_8eppc")]
 transform = Transform3D(9.99591, -0.285845, 2.30833e-09, 0.282551, 9.88072, -1.51382, 0.0432717, 1.5132, 9.88475, 270.115, 304.985, -17.7355)
+
+[node name="Pillar16" parent="Obstacles/final hill" instance=ExtResource("13_8eppc")]
+transform = Transform3D(9.99591, -0.285845, 2.83341e-09, 0.285746, 9.99246, -0.262991, 0.00751748, 0.262884, 9.99654, 340.456, 336.291, -30.1838)
+
+[node name="Pillar17" parent="Obstacles/final hill" instance=ExtResource("13_8eppc")]
+transform = Transform3D(9.99591, -0.285845, 2.83341e-09, 0.285746, 9.99246, -0.262991, 0.00751748, 0.262884, 9.99654, 358.775, 348.89, -30.1838)
+
+[node name="Pillar18" parent="Obstacles/final hill" instance=ExtResource("13_8eppc")]
+transform = Transform3D(9.99591, -0.285845, 2.83341e-09, 0.285746, 9.99246, -0.262991, 0.00751748, 0.262884, 9.99654, 375.612, 361.462, -30.1838)
+
+[node name="Pillar19" parent="Obstacles/final hill" instance=ExtResource("13_8eppc")]
+transform = Transform3D(9.99591, -0.285845, 2.83341e-09, 0.285746, 9.99246, -0.262991, 0.00751748, 0.262884, 9.99654, 398.84, 375.272, -30.1838)
 
 [node name="Pillar7" parent="Obstacles/final hill" instance=ExtResource("13_8eppc")]
 transform = Transform3D(9.99591, -0.285845, 2.83341e-09, -0.028683, -1.00303, -9.94953, 0.284403, 9.94546, -1.00344, 271.338, 279.946, -24.4832)
@@ -1968,19 +2043,79 @@ metadata/material = &"wood"
 transform = Transform3D(2.54824, -1.55226, -0.311421, 1.49214, 2.552, -0.510688, 0.529156, 0.278889, 2.93976, 300.006, 281.892, -0.952277)
 metadata/material = &"wood"
 
+[node name="lastEffort" type="Node" parent="Obstacles"]
+
+[node name="ObsidianWall2" parent="Obstacles" instance=ExtResource("19_ir54d")]
+transform = Transform3D(4.31287, -6.73789, 0, 6.73789, 4.31287, 0, 0, 0, 8, 373.671, 347.92, 0.5)
+metadata/material = &"obsidian"
+
+[node name="ObsidianWall3" parent="Obstacles" instance=ExtResource("19_ir54d")]
+transform = Transform3D(5.03912, -6.21348, 0, 6.21348, 5.03912, 0, 0, 0, 8, 381.856, 359.404, 0.5)
+metadata/material = &"obsidian"
+
+[node name="ObsidianWall4" parent="Obstacles" instance=ExtResource("19_ir54d")]
+transform = Transform3D(4.80593, -6.39555, 0, 6.39555, 4.80593, 0, 0, 0, 8, 391.589, 371.59, 0.5)
+metadata/material = &"obsidian"
+
+[node name="ObsidianWall5" parent="Obstacles" instance=ExtResource("19_ir54d")]
+transform = Transform3D(7.42352, -2.98183, 0, 2.98183, 7.42352, 0, 0, 0, 8, 396.993, 375.834, 0.5)
+metadata/material = &"obsidian"
+
+[node name="ObsidianWall6" parent="Obstacles" instance=ExtResource("19_ir54d")]
+transform = Transform3D(7.96202, -0.778579, 0, 0.778579, 7.96202, 0, 0, 0, 8, 407.729, 378.45, 0.5)
+metadata/material = &"obsidian"
+
+[node name="ObsidianWall7" parent="Obstacles" instance=ExtResource("19_ir54d")]
+transform = Transform3D(7.72542, -2.07797, 0, 2.07797, 7.72542, 0, 0, 0, 8, 423.612, 381.306, 0.5)
+metadata/material = &"obsidian"
+
+[node name="Wall" parent="Obstacles" instance=ExtResource("8_lmv7a")]
+transform = Transform3D(7.78952, 1.823, 0, -1.823, 7.78952, 0, 0, 0, 8, 462.562, 381.356, 0.5)
+
+[node name="Wall2" parent="Obstacles" instance=ExtResource("8_lmv7a")]
+transform = Transform3D(7.78952, 1.823, 0, -1.823, 7.78952, 0, 0, 0, 8, 477.87, 377.919, 0.5)
+
+[node name="Wall9" parent="Obstacles" instance=ExtResource("8_lmv7a")]
+transform = Transform3D(5.52332, -5.78731, 0, 5.78731, 5.52332, 0, 0, 0, 8, 364.719, 331.633, 0.500002)
+
+[node name="Wall10" parent="Obstacles" instance=ExtResource("8_lmv7a")]
+transform = Transform3D(5.52332, -5.78731, 0, 5.78731, 5.52332, 0, 0, 0, 8, 353.071, 318.153, 0.500002)
+
+[node name="Wall3" parent="Obstacles" instance=ExtResource("8_lmv7a")]
+transform = Transform3D(6.41637, 4.77809, 0, -4.77809, 6.41637, 0, 0, 0, 8, 491.897, 372.978, 0.5)
+
+[node name="Wall4" parent="Obstacles" instance=ExtResource("8_lmv7a")]
+transform = Transform3D(5.70121, 5.61215, 0, -5.61215, 5.70121, 0, 0, 0, 8, 502.14, 364.07, 0.5)
+
+[node name="Wall5" parent="Obstacles" instance=ExtResource("8_lmv7a")]
+transform = Transform3D(5.70121, 5.61215, 0, -5.61215, 5.70121, 0, 0, 0, 8, 511.514, 355.957, 0.5)
+
+[node name="Wall6" parent="Obstacles" instance=ExtResource("8_lmv7a")]
+transform = Transform3D(3.43804, 7.22357, 0, -7.22357, 3.43804, 0, 0, 0, 8, 517.124, 348.215, 0.5)
+
+[node name="Wall7" parent="Obstacles" instance=ExtResource("8_lmv7a")]
+transform = Transform3D(3.43804, 7.22357, 0, -7.22357, 3.43804, 0, 0, 0, 8, 523.578, 334.481, 0.5)
+
+[node name="Wall8" parent="Obstacles" instance=ExtResource("8_lmv7a")]
+transform = Transform3D(3.43804, 7.22357, 0, -7.22357, 3.43804, 0, 0, 0, 8, 530.016, 320.767, 0.5)
+
 [node name="Pedastal" type="Node" parent="."]
 
 [node name="Rock1" parent="Pedastal" instance=ExtResource("4_p3wmb")]
 transform = Transform3D(6, 2.84217e-14, 0, 2.84217e-14, 6, 0, 0, 0, 6, 440.968, 401.432, -2)
+metadata/material = &"stone"
 
 [node name="Rock4" parent="Pedastal" instance=ExtResource("4_p3wmb")]
 transform = Transform3D(-1.31134e-07, 6.21177e-22, -3, 1.42109e-14, 3, 0, 3, -1.42109e-14, -1.31134e-07, 441.156, 403.562, 0)
+metadata/material = &"stone"
 
 [node name="Rock2" parent="Pedastal" instance=ExtResource("4_p3wmb")]
 transform = Transform3D(4.98655, -3.33682, 0, 3.33682, 4.98655, 0, 0, 0, 6, 428.901, 397.757, -2)
+metadata/material = &"stone"
 
 [node name="Rock3" parent="Pedastal" instance=ExtResource("4_p3wmb")]
 transform = Transform3D(-5.10063, -3.15969, 0, 3.15969, -5.10063, 0, 0, 0, 6, 453.262, 397.941, -2)
+metadata/material = &"stone"
 
 [node name="SpotLight3D" type="SpotLight3D" parent="Pedastal"]
 transform = Transform3D(1, 0, 0, 0, 0.541635, 0.840614, 0, -0.840614, 0.541635, 440.985, 442.392, 20.6692)
@@ -2018,6 +2153,10 @@ transform = Transform3D(730, 0, 0, 0, 780, 0, 0, 0, 1978.22, 454.932, 566.086, -
 mesh = SubResource("TextMesh_fjwfb")
 skeleton = NodePath("../../..")
 
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Pedastal"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 341.687, -2102.89, -1068.54)
+mesh = SubResource("PlaneMesh_kkj51")
+
 [node name="tutorial" type="Node" parent="."]
 
 [node name="tutorial sign 1" parent="tutorial" instance=ExtResource("15_ib3jq")]
@@ -2037,8 +2176,14 @@ gravity_scale = 2.4
 
 [node name="goal" type="MeshInstance3D" parent="title"]
 transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 0.5, 2.727, 56.2132, 1)
+cast_shadow = 0
 mesh = SubResource("TextMesh_o33aw")
 skeleton = NodePath("../..")
 
 [node name="Pillar" parent="." instance=ExtResource("13_8eppc")]
 transform = Transform3D(10, 0, 0, 0, 6.76015, 7.36888, 0, -7.36888, 6.76015, 332.368, 311.102, 7.095)
+
+[node name="Collectable1" parent="." instance=ExtResource("28_xl50e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.72066, -3.35899, 0)
+
+[connection signal="body_entered" from="Floor/resetArea" to="stabbert" method="_on_reset_area_body_entered"]

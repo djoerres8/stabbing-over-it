@@ -2,6 +2,7 @@ extends CanvasLayer
 
 @onready var timeLabel: Label = $time
 @onready var flingsLabel: Label = $flings
+@onready var collectablesLabel: Label = $Collectables
 
 var flings: int = 0
 var time: float = 0.0
@@ -10,6 +11,7 @@ var seconds: int = 0
 var msec: int = 0
 var started: bool = false
 var finished: bool = false
+var collectables: int = 0
 
 func _process(delta) -> void:
 	if started and not finished:
@@ -20,6 +22,7 @@ func _process(delta) -> void:
 		
 		timeLabel.text = "Time: " + get_time_formatted()
 		flingsLabel.text = "Flings: " + str(flings)
+		collectablesLabel.text = "Collectables: " + str(collectables) + "/3"
 
 func stop_timer() -> void:
 	set_process(false)

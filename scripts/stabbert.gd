@@ -20,6 +20,10 @@ extends RigidBody3D
 @onready var body_cloud: AudioStreamPlayer = $SFX/bodyCloud
 @onready var tip_sand: AudioStreamPlayer = $SFX/tipSand
 @onready var body_sand: AudioStreamPlayer = $SFX/bodySand
+@onready var solid_sword_tip: CollisionPolygon3D = $solidSwordTip
+@onready var sword_tip_area: Area3D = $SwordTipArea
+
+const start_position: Vector3 = Vector3(-7.402, 50.056, 0)
 
 # Minimum and maximum volume settings
 var MAX_VOL: float = -15.0 # Loudest
@@ -65,9 +69,9 @@ var relative_transform: Transform3D
 func _ready() -> void:
 	
 	#temp debug
-	freeze = false
-	$Camera_Controller/Camera_Target/Camera3D.position = Vector3(-1.958, 0, 0)
-	hud.started = true
+	#freeze = false
+	#$Camera_Controller/Camera_Target/Camera3D.position = Vector3(-1.958, 0, 0)
+	#hud.started = true
 	
 	$Skeleton3D/SkeletonIK3D.start()
 	# Add a MeshInstance3D to display the ImmediateMesh
@@ -109,12 +113,10 @@ func _physics_process(delta: float) -> void:
 			relative_transform.basis = Basis(Vector3(0, 0, 1), MANUAL_ROTATION_SPEED * delta) * relative_transform.basis
 
 
-	# reset position
+	# reset game
 	if Input.is_action_pressed("reset_position"):
-		self.position = Vector3(-7.402, 50.056, 0)  # Reset position to (0, 0, 0)
-		self.rotation_degrees = Vector3(0, 0, 0)  # Reset rotation to (0, 0, 0)
-		self.linear_velocity = Vector3(0, 0, 0)  # Stop linear momentum
-		self.angular_velocity = Vector3(0, 0, 0)  # Stop angular momentum
+		reset_position()
+		reset_hud()
 		
 	if flinging:
 		match handlePos:
@@ -252,8 +254,8 @@ func _input(event):
 
 #when sword tip enters a body
 func _on_sword_tip_area_body_entered(body: Node3D) -> void:
-	stabbed = true
 	var material = body.get_meta("material") if body.has_meta("material") else "ground"
+	stabbed = true
 	play_sound("tip", material)
 	sword_flying.stop()
 	stop_motion()
@@ -391,3 +393,39 @@ func draw_dotted_line(start: Vector3, end: Vector3, segment_length: float) -> vo
 
 		current_length += segment_length * 2  # Adjust gap size
 	
+##Reseting
+
+#reset time and flings
+func reset_hud() -> void:
+	hud.time = 0.0
+	hud.flings = 0
+	
+#reset position to start and realign
+func reset_position() -> void:
+	self.position = start_position  # Reset position to (0, 0, 0)
+	self.rotation_degrees = Vector3(0, 0, 0)  # Reset rotation to (0, 0, 0)
+	self.linear_velocity = Vector3(0, 0, 0)  # Stop linear momentum
+	self.angular_velocity = Vector3(0, 0, 0)  # Stop angular momentum
+	
+# reset position if enter bottom of world
+func _on_reset_area_body_entered(body: Node3D) -> void:
+	reset_position()
+
+#dont stick to obsidian materials
+var overlapping_bodies: Array = []
+
+func _on_solid_sword_tip_body_entered(body: Node3D) -> void:
+	if body not in overlapping_bodies:
+		overlapping_bodies.append(body)
+
+	solid_sword_tip.set_deferred("disabled", false)
+	sword_tip_area.set_deferred("monitoring", false)
+
+func _on_solid_sword_tip_body_exited(body: Node3D) -> void:
+	if body in overlapping_bodies:
+		overlapping_bodies.erase(body)
+
+	# Only disable if no overlapping bodies remain
+	if overlapping_bodies.is_empty():
+		solid_sword_tip.set_deferred("disabled", true)
+		sword_tip_area.set_deferred("monitoring", true)
