@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://c7q6i1f3ksop"]
+
+[ext_resource type="ArrayMesh" uid="uid://dwyuplxg04ix0" path="res://assets/meshes/balloon.res" id="1_lrcuj"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_us6ly"]
+radius = 1.29227
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_wlivl"]
+radius = 1.22981
+
+[node name="balloonBlue" type="StaticBody3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -10.6825, -2.6161, -2.13354)
+mesh = ExtResource("1_lrcuj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.116132, 1.6447, -0.0953739)
+shape = SubResource("SphereShape3D_us6ly")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0494186, 0.535483, -0.149178)
+shape = SubResource("SphereShape3D_wlivl")

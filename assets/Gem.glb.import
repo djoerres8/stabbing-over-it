@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://br0eqooc0d05j"
-path="res://.godot/imported/balloon.glb-dd2b91321988b983f62cea977cd77447.scn"
+uid="uid://dihywfcvc7h8k"
+path="res://.godot/imported/Gem.glb-f9fbb48d4429dd8991b4b6c861312e21.scn"
 
 [deps]
 
-source_file="res://assets/balloon.glb"
-dest_files=["res://.godot/imported/balloon.glb-dd2b91321988b983f62cea977cd77447.scn"]
+source_file="res://assets/Gem.glb"
+dest_files=["res://.godot/imported/Gem.glb-f9fbb48d4429dd8991b4b6c861312e21.scn"]
 
 [params]
 
@@ -33,14 +33,14 @@ animation/import_rest_as_RESET=false
 import_script/path=""
 _subresources={
 "meshes": {
-"balloon_Object001_1": {
+"Gem_Sphere001_1": {
 "generate/lightmap_uv": 0,
 "generate/lods": 0,
 "generate/shadow_meshes": 0,
 "lods/normal_merge_angle": 60.0,
 "lods/normal_split_angle": 25.0,
 "save_to_file/enabled": true,
-"save_to_file/path": "res://assets/meshes/balloon.res"
+"save_to_file/path": "res://assets/meshes/gem.res"
 }
 }
 }

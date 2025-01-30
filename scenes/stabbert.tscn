@@ -131,7 +131,7 @@ bind/13/pose = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_ioggn"]
 height = 0.266945
-radius = 1.38949
+radius = 1.09177
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_6ruyh"]
 margin = 0.05
@@ -288,6 +288,7 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.021
 shape = SubResource("CylinderShape3D_ioggn")
 
 [node name="SwordTipArea" type="Area3D" parent="."]
+priority = 1
 
 [node name="swordTip" type="CollisionShape3D" parent="SwordTipArea"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.0774677, 0)

@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://br0eqooc0d05j"
-path="res://.godot/imported/balloon.glb-dd2b91321988b983f62cea977cd77447.scn"
+uid="uid://cagpekcxoel8p"
+path="res://.godot/imported/Jewel.glb-8d471a8ab3f5d6732c70f37db53060c0.scn"
 
 [deps]
 
-source_file="res://assets/balloon.glb"
-dest_files=["res://.godot/imported/balloon.glb-dd2b91321988b983f62cea977cd77447.scn"]
+source_file="res://assets/Jewel.glb"
+dest_files=["res://.godot/imported/Jewel.glb-8d471a8ab3f5d6732c70f37db53060c0.scn"]
 
 [params]
 
@@ -33,14 +33,14 @@ animation/import_rest_as_RESET=false
 import_script/path=""
 _subresources={
 "meshes": {
-"balloon_Object001_1": {
+"Jewel_Jewel_03_Circle_001-Mesh": {
 "generate/lightmap_uv": 0,
 "generate/lods": 0,
 "generate/shadow_meshes": 0,
 "lods/normal_merge_angle": 60.0,
 "lods/normal_split_angle": 25.0,
 "save_to_file/enabled": true,
-"save_to_file/path": "res://assets/meshes/balloon.res"
+"save_to_file/path": "res://assets/meshes/gemstone.res"
 }
 }
 }

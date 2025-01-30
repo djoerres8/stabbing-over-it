@@ -24,6 +24,9 @@ extends RigidBody3D
 @onready var sword_tip_area: Area3D = $SwordTipArea
 
 const start_position: Vector3 = Vector3(-7.402, 50.056, 0)
+#const start_position: Vector3 = Vector3(160.36, 177.72, 0)
+var debug = true
+#var debug = false
 
 # Minimum and maximum volume settings
 var MAX_VOL: float = -15.0 # Loudest
@@ -36,10 +39,10 @@ const MANUAL_ROTATION_SPEED = 10 # Adjust rotation speed as needed
 const MAX_X_AREA = 5
 const MIN_X_AREA = -5
 const MAX_Y_AREA = 6
-const MIN_Y_AREA = -4
+const MIN_Y_AREA = -3
 
-const MAX_X_PULSE = 50
-const MAX_Y_PULSE = 50
+const MAX_X_PULSE = 42
+const MAX_Y_PULSE = 42
 const MIN_Y_PULSE = 5
 const MAX_TORQUE = 30
 
@@ -68,10 +71,11 @@ var relative_transform: Transform3D
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	
-	#temp debug
-	#freeze = false
-	#$Camera_Controller/Camera_Target/Camera3D.position = Vector3(-1.958, 0, 0)
-	#hud.started = true
+	##temp debug
+	if debug:
+		freeze = false
+		$Camera_Controller/Camera_Target/Camera3D.position = Vector3(-1.958, 0, 0)
+		hud.started = true
 	
 	$Skeleton3D/SkeletonIK3D.start()
 	# Add a MeshInstance3D to display the ImmediateMesh
@@ -364,10 +368,10 @@ func draw_launch_box():
 	debug_mesh.surface_set_color(Color(1, 1, 0, 1))
 
 	# Define the box vertices
-	var v1 = Vector3(-5, -4, 0)            # Bottom-left
+	var v1 = Vector3(-5, -3, 0)            # Bottom-left
 	var v2 = Vector3(-5, 6, 0)            # Top-left
 	var v3 = Vector3(5, 6, 0)            # Top-right
-	var v4 = Vector3(5, -4, 0)            # Bottom-right
+	var v4 = Vector3(5, -3, 0)            # Bottom-right
 
 	# Draw dotted lines for each edge
 	draw_dotted_line(v1, v2, 0.5)  # Bottom-left to Top-left

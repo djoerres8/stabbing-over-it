@@ -1,25 +1,21 @@
 [gd_scene load_steps=5 format=3 uid="uid://bte7lnu36qrqd"]
 
 [ext_resource type="Script" path="res://scripts/coin.gd" id="1_5v8ub"]
+[ext_resource type="ArrayMesh" uid="uid://b3d3ee2d015ol" path="res://assets/meshes/gemstone.res" id="2_7d5wx"]
 [ext_resource type="AudioStream" uid="uid://pxpggkg2j4et" path="res://assets/sounds/collected.mp3" id="2_sdxoh"]
 
-[sub_resource type="CylinderMesh" id="CylinderMesh_hltvf"]
-top_radius = 0.3
-bottom_radius = 0.3
-height = 0.2
-
 [sub_resource type="BoxShape3D" id="BoxShape3D_7bn88"]
-size = Vector3(0.640991, 0.640686, 0.201111)
+size = Vector3(0.640991, 0.522003, 0.645561)
 
 [node name="Callectable" type="Area3D"]
 script = ExtResource("1_5v8ub")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
-mesh = SubResource("CylinderMesh_hltvf")
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0.102033, 0)
+mesh = ExtResource("2_7d5wx")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00115967, -0.0116272, -0.00253296)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00115967, -0.0709686, 0.000476889)
 shape = SubResource("BoxShape3D_7bn88")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
