@@ -124,9 +124,19 @@ text = "Quit
 
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
-text = "Volume:"
+text = "Music Volume:"
 
 [node name="HSlider" type="HSlider" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 1
+min_value = -30.0
+max_value = 30.0
+
+[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "SFX Volume:"
+
+[node name="HSlider2" type="HSlider" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 mouse_filter = 1
 min_value = -30.0
@@ -140,3 +150,4 @@ libraries = {
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
 [connection signal="value_changed" from="MarginContainer/VBoxContainer/HSlider" to="." method="_on_h_slider_value_changed"]
+[connection signal="value_changed" from="MarginContainer/VBoxContainer/HSlider2" to="." method="_on_h_slider_2_value_changed"]

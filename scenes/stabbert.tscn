@@ -358,45 +358,56 @@ target_position = Vector3(-1, 0, 0)
 [node name="tipWood" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource("3_7n05r")
 volume_db = -5.639
+bus = &"SFX"
 
 [node name="bodyWood" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource("5_bv65o")
+bus = &"SFX"
 
 [node name="tipSand" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource("4_ffhwn")
 volume_db = -5.639
+bus = &"SFX"
 
 [node name="bodySand" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource("6_oliow")
 volume_db = -5.639
+bus = &"SFX"
 
 [node name="tipGround" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource("4_ffhwn")
 volume_db = -5.639
+bus = &"SFX"
 
 [node name="bodyGround" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource("5_bv65o")
 volume_db = -5.639
+bus = &"SFX"
 
 [node name="tipStone" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource("7_ord6a")
 volume_db = -5.639
+bus = &"SFX"
 
 [node name="bodyStone" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource("8_yd1b2")
 volume_db = -5.639
+bus = &"SFX"
 
 [node name="tipCloud" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource("9_ubsxk")
 volume_db = -5.639
+bus = &"SFX"
 
 [node name="bodyCloud" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource("10_lvkrc")
 volume_db = -5.639
+bus = &"SFX"
 
 [node name="swordFlying" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource("11_3oejw")
 volume_db = -11.278
+bus = &"SFX"
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 

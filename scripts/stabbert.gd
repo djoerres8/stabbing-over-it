@@ -29,8 +29,8 @@ const start_position: Vector3 = Vector3(-7.402, 50.056, 0)
 var debug = false
 
 # Minimum and maximum volume settings
-var MAX_VOL: float = -15.0 # Loudest
-var MIN_VOL: float = -40.0 # verrry quite
+var MAX_VOL: float = -5.0 # Loudest
+var MIN_VOL: float = -25.0 # verrry quite
 const MAX_SPD_FOR_VOL: float = 30.0 # max speed for volume calculation
 
 const GRAVITY_SCALE = 3
@@ -85,11 +85,7 @@ func _ready() -> void:
 	add_child(mesh_instance)
 
 func _physics_process(delta: float) -> void:	
-	
-	
 		
-	#print("normal")
-	
 	#Make camera controller match position of self
 	$Camera_Controller.position = lerp($Camera_Controller.position, position, .1)
 
@@ -249,7 +245,7 @@ func _input(event):
 					torque_z = torque_z - (.4 * pulse_y)
 				else:
 					torque_z = torque_z + (.4 * pulse_y)
-			print(torque)
+
 			#set pulse and torque
 			torque = Vector3(0, 0, torque_z)
 			pulse = Vector3((pulse_x*-1), (pulse_y*-1), 0)
@@ -329,8 +325,8 @@ func play_sound(swordPart: String, material: String, _speedBased: bool = true) -
 	
 	var sound
 	# Minimum and maximum volume settings
-	MAX_VOL = -15.0 # Loudest
-	MIN_VOL = -40.0 # verrry quite
+	MAX_VOL = -5.0 # Loudest
+	MIN_VOL = -25.0 # verrry quite
 	
 	match material:
 		"ground":
@@ -338,7 +334,7 @@ func play_sound(swordPart: String, material: String, _speedBased: bool = true) -
 				sound = tip_ground
 			else:
 				sound = body_ground
-				MAX_VOL = -10.0
+				MAX_VOL = -5.0
 				MIN_VOL = -30.0
 		"sand":
 			sound = tip_sand if swordPart == "tip" else body_sand
@@ -347,12 +343,19 @@ func play_sound(swordPart: String, material: String, _speedBased: bool = true) -
 				sound = tip_wood
 			else:
 				sound = body_wood
-				MAX_VOL = -10.0
+				MAX_VOL = -5.0
 				MIN_VOL = -30.0
 		"stone":
 			sound = tip_stone if swordPart == "tip" else body_stone
 		"cloud":
-			sound = tip_cloud if swordPart == "tip" else body_cloud
+			#sound = tip_cloud if swordPart == "tip" else body_cloud
+			if swordPart == "tip":
+				sound = tip_cloud
+			else:
+				sound = body_cloud
+				
+			MAX_VOL = 5.0
+			MIN_VOL = -20.0
 		_:
 			sound = tip_ground if swordPart == "tip" else body_ground
 	

@@ -1,4 +1,4 @@
-[gd_scene load_steps=142 format=4 uid="uid://cr8lkpttdhxa1"]
+[gd_scene load_steps=145 format=4 uid="uid://cr8lkpttdhxa1"]
 
 [ext_resource type="Environment" uid="uid://b5rs1rje7ejsu" path="res://resources/sky.tres" id="2_m6u05"]
 [ext_resource type="PackedScene" uid="uid://x66v0k3wphao" path="res://scenes/hud.tscn" id="2_mvvqr"]
@@ -30,6 +30,7 @@
 [ext_resource type="FontFile" uid="uid://ft8hw5skbwbo" path="res://assets/fonts/MotionControl-Bold.otf" id="18_v5myi"]
 [ext_resource type="PackedScene" uid="uid://c6jaj07s7tjk5" path="res://scenes/environment/ObsidianWall.tscn" id="19_ir54d"]
 [ext_resource type="PackedScene" uid="uid://bte7lnu36qrqd" path="res://scenes/coin.tscn" id="28_xl50e"]
+[ext_resource type="AudioStream" uid="uid://dy8yiveuam8hj" path="res://assets/sounds/Fireflys Song (Cams Theme).mp3" id="31_s7yq8"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a6621"]
 albedo_color = Color(0.760784, 0.635294, 0.266667, 1)
@@ -1216,10 +1217,7 @@ albedo_color = Color(0.122252, 0.122252, 0.122252, 1)
 
 [sub_resource type="TextMesh" id="TextMesh_tvwod"]
 material = SubResource("StandardMaterial3D_e7wsf")
-text = "Only real gamers go this way 
-dont even think about trying 
-to go this way unless you 
-are an absolute uber gamer."
+text = "challenge"
 font = ExtResource("18_v5myi")
 font_size = 42
 
@@ -1235,6 +1233,14 @@ albedo_color = Color(0.0980392, 0.0980392, 0.0980392, 1)
 [sub_resource type="PrismMesh" id="PrismMesh_o644y"]
 material = SubResource("StandardMaterial3D_6ydxu")
 
+[sub_resource type="TextMesh" id="TextMesh_p83wv"]
+material = SubResource("StandardMaterial3D_e7wsf")
+text = "High Score:
+Time: 00:00.00
+flings: 999999"
+font = ExtResource("18_v5myi")
+font_size = 42
+
 [sub_resource type="TextMesh" id="TextMesh_qgcqg"]
 material = SubResource("StandardMaterial3D_e7wsf")
 text = "Summit
@@ -1245,6 +1251,14 @@ font_size = 42
 [sub_resource type="TextMesh" id="TextMesh_3bsfy"]
 material = SubResource("StandardMaterial3D_e7wsf")
 text = "Don't give up!"
+font = ExtResource("18_v5myi")
+font_size = 42
+
+[sub_resource type="TextMesh" id="TextMesh_m63b4"]
+material = SubResource("StandardMaterial3D_e7wsf")
+text = "There are 3 hidden collectables 
+to be found along your path, 
+so be on the look out for them!"
 font = ExtResource("18_v5myi")
 font_size = 42
 
@@ -1892,12 +1906,13 @@ mesh = SubResource("TextMesh_5ob7v")
 skeleton = NodePath("../../Hill1-tower")
 
 [node name="PToPause" type="MeshInstance3D" parent="Obstacles/Beach"]
-transform = Transform3D(0.999285, -0.0376502, -0.00340755, 0.0306154, 0.753091, 0.657204, -0.0221777, -0.656838, 0.753705, 15.9849, -6.74796, 2.64093)
+transform = Transform3D(0.998307, -0.0299155, -0.0498791, 0.0553367, 0.752581, 0.656171, 0.0179084, -0.657819, 0.752962, 16.0672, -6.74796, 2.64093)
 mesh = SubResource("TextMesh_2v55k")
 skeleton = NodePath("../../Hill1-tower")
 
 [node name="timetogoup" type="StaticBody3D" parent="Obstacles/Beach"]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 100.104, 26.1769, 0.389323)
+transform = Transform3D(1.97138, -0.337151, 0, 0.337151, 1.97138, 0, 0, 0, 2, 101.028, 24.9871, 0.137252)
+metadata/material = "wood"
 
 [node name="Sign" type="MeshInstance3D" parent="Obstacles/Beach/timetogoup"]
 transform = Transform3D(199.999, 0.516702, -2.25856e-08, -0.516702, 199.999, -8.74225e-06, -1.60982e-13, 8.74228e-06, 200, 0.0100063, -0.313154, 0.0159957)
@@ -2025,21 +2040,33 @@ shape = SubResource("BoxShape3D_0j5vo")
 [node name="danger" type="Node3D" parent="Obstacles/Hill1-tower"]
 
 [node name="Sign" type="MeshInstance3D" parent="Obstacles/Hill1-tower/danger"]
-transform = Transform3D(569.107, 0.964133, 143.986, -1.57594, 399.999, -1.74845e-05, -219.577, -0.371971, 373.186, 160.461, 171.605, -6.80483)
+transform = Transform3D(597.726, 1.01261, 79.8296, -1.57594, 399.999, -1.74452e-05, -121.739, -0.206222, 391.953, 160.451, 171.605, -6.77993)
 mesh = ExtResource("12_3hyy8")
 skeleton = NodePath("")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Obstacles/Hill1-tower/danger"]
-transform = Transform3D(3.76659, 0, 1.34641, 0, 4, 0, -1.34641, 0, 3.76659, 160.265, 182.186, -6.68896)
+transform = Transform3D(3.92268, 0, 0.78269, 0, 4, 0, -0.78269, 0, 3.92268, 160.709, 179.509, -6.90694)
 mesh = SubResource("TextMesh_tvwod")
 
 [node name="MeshInstance3D6" type="MeshInstance3D" parent="Obstacles/Hill1-tower/danger"]
-transform = Transform3D(1.78099, 0.000848365, 0.184971, -0.00729377, 0.239998, -6.46331e-11, -0.709172, -0.000337811, 0.464528, 161.198, 177.863, -7.29918)
+transform = Transform3D(1.87422, 0.000892774, 0.105031, -0.00729377, 0.239998, -2.08706e-10, -0.402685, -0.000191818, 0.488845, 161.26, 177.863, -7.14464)
 mesh = SubResource("BoxMesh_ang48")
 
 [node name="MeshInstance3D7" type="MeshInstance3D" parent="Obstacles/Hill1-tower/danger"]
-transform = Transform3D(-0.0646566, -1.48459, 0.31437, 1.09772, -0.104718, -1.75319e-09, 0.0287383, 0.659863, 0.707282, 159.615, 177.879, -6.77041)
+transform = Transform3D(-0.0685395, -1.57375, 0.192198, 1.09772, -0.104718, -6.08023e-10, 0.0175699, 0.403424, 0.749758, 159.611, 177.879, -6.88687)
 mesh = SubResource("PrismMesh_o644y")
+
+[node name="HighScoreTime" type="Node3D" parent="Obstacles/Hill1-tower"]
+transform = Transform3D(0.974232, 0, -0.225546, 0, 1, 0, 0.225546, 0, 0.974232, 25.8855, -3.47524, -4.91011)
+
+[node name="Sign" type="MeshInstance3D" parent="Obstacles/Hill1-tower/HighScoreTime"]
+transform = Transform3D(597.726, 1.01261, 79.8296, -1.57594, 399.999, -1.74452e-05, -121.739, -0.206222, 391.953, -1.43295, -4.43696, 3.47946)
+mesh = ExtResource("12_3hyy8")
+skeleton = NodePath("")
+
+[node name="highScore" type="MeshInstance3D" parent="Obstacles/Hill1-tower/HighScoreTime"]
+transform = Transform3D(2.45452, 0, 0.474667, 0, 2.5, 0, -0.474667, 0, 2.45452, -1.17468, 2.57917, 3.40781)
+mesh = SubResource("TextMesh_p83wv")
 
 [node name="go this way" type="Node3D" parent="Obstacles/Hill1-tower"]
 
@@ -2078,6 +2105,10 @@ mesh = SubResource("BoxMesh_ang48")
 [node name="MeshInstance3D7" type="MeshInstance3D" parent="Obstacles/Hill1-tower/KeepItUp!"]
 transform = Transform3D(1.02956, 0.532044, -0.101404, -0.371801, 1.52739, -0.0575839, 0.108463, 0.185455, 0.765165, 244.78, 177.954, -4.04819)
 mesh = SubResource("PrismMesh_o644y")
+
+[node name="infodump" type="MeshInstance3D" parent="Obstacles/Hill1-tower"]
+transform = Transform3D(2.23437, 0.187405, -1.10566, 1.02946, 0.634774, 2.18798, 0.444752, -2.4108, 0.490157, 165.876, 114.442, 7.51077)
+mesh = SubResource("TextMesh_m63b4")
 
 [node name="Windmill" type="Node" parent="Obstacles"]
 
@@ -2284,7 +2315,7 @@ transform = Transform3D(7.78952, 1.823, 0, -1.823, 7.78952, 0, 0, 0, 8, 477.87, 
 transform = Transform3D(5.52332, -5.78731, 0, 5.78731, 5.52332, 0, 0, 0, 8, 364.719, 331.633, 0.500002)
 
 [node name="Wall10" parent="Obstacles/lastEffort" instance=ExtResource("8_lmv7a")]
-transform = Transform3D(5.52332, -5.78731, 0, 5.78731, 5.52332, 0, 0, 0, 8, 353.071, 318.153, 0.500002)
+transform = Transform3D(5.20693, -6.07354, 0, 6.07354, 5.20693, 0, 0, 0, 8, 354.42, 319.573, 0.500002)
 
 [node name="Wall3" parent="Obstacles/lastEffort" instance=ExtResource("8_lmv7a")]
 transform = Transform3D(6.41637, 4.77809, 0, -4.77809, 6.41637, 0, 0, 0, 8, 491.897, 372.978, 0.5)
@@ -2420,5 +2451,12 @@ transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 104.758, 277.801, 0)
 
 [node name="Collectable3" parent="." instance=ExtResource("28_xl50e")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 168.274, 348.546, 3.8147e-06)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("31_s7yq8")
+volume_db = -9.75
+autoplay = true
+bus = &"Music"
+parameters/looping = true
 
 [connection signal="body_entered" from="Floor/resetArea" to="stabbert" method="_on_reset_area_body_entered"]

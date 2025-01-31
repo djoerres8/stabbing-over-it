@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dy8yiveuam8hj"
+path="res://.godot/imported/Fireflys Song (Cams Theme).mp3-b10056261cd8765a3f0878be80a3d415.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/Fireflys Song (Cams Theme).mp3"
+dest_files=["res://.godot/imported/Fireflys Song (Cams Theme).mp3-b10056261cd8765a3f0878be80a3d415.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
