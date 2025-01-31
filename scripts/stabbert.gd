@@ -334,8 +334,8 @@ func play_sound(swordPart: String, material: String, _speedBased: bool = true) -
 				sound = tip_ground
 			else:
 				sound = body_ground
-				MAX_VOL = -5.0
-				MIN_VOL = -30.0
+				MAX_VOL = 5.0
+				MIN_VOL = -20.0
 		"sand":
 			sound = tip_sand if swordPart == "tip" else body_sand
 		"wood":
@@ -343,8 +343,8 @@ func play_sound(swordPart: String, material: String, _speedBased: bool = true) -
 				sound = tip_wood
 			else:
 				sound = body_wood
-				MAX_VOL = -5.0
-				MIN_VOL = -30.0
+				MAX_VOL = 5.0
+				MIN_VOL = -20.0
 		"stone":
 			sound = tip_stone if swordPart == "tip" else body_stone
 		"cloud":
