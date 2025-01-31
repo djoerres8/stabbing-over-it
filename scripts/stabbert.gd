@@ -25,8 +25,8 @@ extends RigidBody3D
 
 const start_position: Vector3 = Vector3(-7.402, 50.056, 0)
 #const start_position: Vector3 = Vector3(160.36, 177.72, 0)
-var debug = true
-#var debug = false
+#var debug = true
+var debug = false
 
 # Minimum and maximum volume settings
 var MAX_VOL: float = -15.0 # Loudest
@@ -41,8 +41,8 @@ const MIN_X_AREA = -5
 const MAX_Y_AREA = 6
 const MIN_Y_AREA = -3
 
-const MAX_X_PULSE = 42
-const MAX_Y_PULSE = 42
+const MAX_X_PULSE = 40
+const MAX_Y_PULSE = 50
 const MIN_Y_PULSE = 5
 const MAX_TORQUE = 30
 
@@ -54,6 +54,7 @@ var selected : bool = false
 
 #wether or not stabbert is currently impaling a surface
 var stabbed : bool = false
+var unstabbable : int = 0;
 
 #track while the sword is being animated from release to fling
 var flinging : bool = false
@@ -84,6 +85,11 @@ func _ready() -> void:
 	add_child(mesh_instance)
 
 func _physics_process(delta: float) -> void:	
+	
+	
+		
+	#print("normal")
+	
 	#Make camera controller match position of self
 	$Camera_Controller.position = lerp($Camera_Controller.position, position, .1)
 
@@ -93,12 +99,18 @@ func _physics_process(delta: float) -> void:
 	#launch box
 	#if selected and not flinging:
 		#draw_launch_box()
+		
+	#get if tip is coliding with anything. this prevents the sliding bug
+	var bodies = sword_tip_area.get_overlapping_bodies()
 	
 	#stop linear motion if impaled
-	if stabbed:
+	if stabbed or (bodies.size() > 0 and unstabbable == 0):
 		stop_motion()
 	else:
 		sword_flying.volume_db += -.5
+		
+	if unstabbable > 0:
+		unstabbable -= 1
 		
 	if stabbed or is_motionless():
 			#rotate left/right while stabbed
@@ -161,6 +173,9 @@ func get_midpoint(vec1: Vector3, vec2: Vector3) -> Vector3:
 
 # given a pulse and torque apply force and rotation to the sword
 func shoot()->void:	
+	
+	#create unstabable frames to not slide along ground
+	unstabbable = 5
 	
 	# allow sword to leave a surface
 	continue_motion()
@@ -231,10 +246,10 @@ func _input(event):
 			var torque_z = ((pulse_x + MAX_X_PULSE) / (MAX_X_PULSE + MAX_X_PULSE)) * (MAX_TORQUE*2) - MAX_TORQUE
 			if area_y < 4:
 				if torque_z > 0:
-					torque_z = torque_z - (.5 * pulse_y)
+					torque_z = torque_z - (.4 * pulse_y)
 				else:
-					torque_z = torque_z + (.5 * pulse_y)
-			
+					torque_z = torque_z + (.4 * pulse_y)
+			print(torque)
 			#set pulse and torque
 			torque = Vector3(0, 0, torque_z)
 			pulse = Vector3((pulse_x*-1), (pulse_y*-1), 0)
@@ -277,6 +292,26 @@ func _on_sword_tip_area_body_exited(_body: Node3D) -> void:
 	stabbed = false
 	is_on_moving_obj = false
 	
+#dont stick to obsidian materials. This works because obsidian wall are set to collision layer and mask 3 & 1 and the moniter area in stabbert is only set to 3
+var overlapping_bodies: Array = []
+
+# dont stick
+func _on_solid_sword_tip_body_entered(body: Node3D) -> void:
+	if body not in overlapping_bodies:
+		overlapping_bodies.append(body)
+
+	solid_sword_tip.set_deferred("disabled", false)
+	sword_tip_area.set_deferred("monitoring", false)
+
+func _on_solid_sword_tip_body_exited(body: Node3D) -> void:
+	if body in overlapping_bodies:
+		overlapping_bodies.erase(body)
+
+	# Only disable if no overlapping bodies remain
+	if overlapping_bodies.is_empty():
+		solid_sword_tip.set_deferred("disabled", true)
+		sword_tip_area.set_deferred("monitoring", true)
+	
 	
 # if spin out of wall, and holding bent, you can flip from air
 ##SOUND EFFECTS
@@ -288,11 +323,6 @@ func _on_sword_collisions_body_entered(body: Node3D) -> void:
 	play_sound("body", material)
 	#stop sword flying sound
 	sword_flying.stop()
-
-
-#func pick_random_sound(soundList: ) -> AudioStreamPlayer:
-	#var random_index = randi() % soundList.size()
-	#return soundList[random_index]
 
 #play sound based on sword part and coliding material volume based on speed of contact
 func play_sound(swordPart: String, material: String, _speedBased: bool = true) -> void:
@@ -336,27 +366,30 @@ func play_sound(swordPart: String, material: String, _speedBased: bool = true) -
 
 ##GUIDELINES
 
-#display launch direction
 func draw_launch_direction(projected_pulse: Vector3):
 	# Clear any previously drawn surfaces
 	debug_mesh.clear_surfaces()
+	
+	# Start creating the curved rectangle
+	debug_mesh.surface_begin(Mesh.PRIMITIVE_LINE_STRIP)
 
-	# Start creating the line geometry
-	debug_mesh.surface_begin(Mesh.PRIMITIVE_LINES)
+	# Set color (optional)
+	debug_mesh.surface_set_color(Color(1, 1, 1, 1))  # Red color
 
-	# Set line color (optional)
-	debug_mesh.surface_set_color(Color(0, 1, 0))
+	var num_points = 10  # Number of points in the curve
+	var time_step = 0.05  # Small time increment for simulation
+	var position = Vector3.ZERO
+	var velocity = projected_pulse  # Initial velocity
+	#var width = 0.5  # Width of the rectangle
 
-	# Line start (object's position in global space)
-	var start = Vector3.ZERO
-	debug_mesh.surface_add_vertex(start)
-
-	# Line end (in the direction of the projected_pulse)
-	var end = projected_pulse * 10   # Adjust the length as needed
-	debug_mesh.surface_add_vertex(end)
-
-	# Finish creating the line
+	for i in range(num_points):
+		velocity.y -= 9.8 * GRAVITY_SCALE * time_step  # Gravity effect
+		debug_mesh.surface_add_vertex(position)
+		position += velocity * time_step
+		
+	# Finish drawing the shape
 	debug_mesh.surface_end()
+
 	
 #display launch box bounds
 func draw_launch_box():
@@ -399,13 +432,15 @@ func draw_dotted_line(start: Vector3, end: Vector3, segment_length: float) -> vo
 	
 ##Reseting
 
-#reset time and flings
+#reset time and flings and won back to 0.
 func reset_hud() -> void:
 	hud.time = 0.0
 	hud.flings = 0
+	hud.finished = false
 	
 #reset position to start and realign
 func reset_position() -> void:
+	stabbed = false
 	self.position = start_position  # Reset position to (0, 0, 0)
 	self.rotation_degrees = Vector3(0, 0, 0)  # Reset rotation to (0, 0, 0)
 	self.linear_velocity = Vector3(0, 0, 0)  # Stop linear momentum
@@ -414,22 +449,3 @@ func reset_position() -> void:
 # reset position if enter bottom of world
 func _on_reset_area_body_entered(body: Node3D) -> void:
 	reset_position()
-
-#dont stick to obsidian materials
-var overlapping_bodies: Array = []
-
-func _on_solid_sword_tip_body_entered(body: Node3D) -> void:
-	if body not in overlapping_bodies:
-		overlapping_bodies.append(body)
-
-	solid_sword_tip.set_deferred("disabled", false)
-	sword_tip_area.set_deferred("monitoring", false)
-
-func _on_solid_sword_tip_body_exited(body: Node3D) -> void:
-	if body in overlapping_bodies:
-		overlapping_bodies.erase(body)
-
-	# Only disable if no overlapping bodies remain
-	if overlapping_bodies.is_empty():
-		solid_sword_tip.set_deferred("disabled", true)
-		sword_tip_area.set_deferred("monitoring", true)

@@ -75,6 +75,7 @@ size = Vector3(1.96924, 1.95776, 0.27002)
 collision_layer = 5
 collision_mask = 5
 constant_linear_velocity = Vector3(-5, 0, 0)
+metadata/material = &"obsidian"
 
 [node name="RootNode" type="Node3D" parent="."]
 

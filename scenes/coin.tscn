@@ -7,7 +7,7 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_7bn88"]
 size = Vector3(0.640991, 0.522003, 0.645561)
 
-[node name="Callectable" type="Area3D"]
+[node name="Collectable" type="Area3D"]
 script = ExtResource("1_5v8ub")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]

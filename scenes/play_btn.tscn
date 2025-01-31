@@ -5,11 +5,11 @@
 [ext_resource type="ArrayMesh" uid="uid://cg0bwaavgsfsu" path="res://assets/sign.res" id="2_llgr0"]
 [ext_resource type="AudioStream" uid="uid://cyeo7e2v0nxtn" path="res://assets/sounds/thud.wav" id="4_lujxm"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7m8u0"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pxk5g"]
 albedo_color = Color(0.237539, 0.237539, 0.237539, 1)
 
 [sub_resource type="TextMesh" id="TextMesh_nvpet"]
-material = SubResource("StandardMaterial3D_7m8u0")
+material = SubResource("StandardMaterial3D_pxk5g")
 text = "Play"
 font = ExtResource("1_ueg3m")
 font_size = 40

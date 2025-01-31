@@ -152,7 +152,7 @@ axis_lock_linear_z = true
 axis_lock_angular_x = true
 axis_lock_angular_y = true
 physics_material_override = SubResource("PhysicsMaterial_7of3c")
-gravity_scale = 3.0
+gravity_scale = 1.51
 center_of_mass_mode = 1
 center_of_mass = Vector3(0, 0.5, 0)
 continuous_cd = true
@@ -397,6 +397,8 @@ volume_db = -5.639
 [node name="swordFlying" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource("11_3oejw")
 volume_db = -11.278
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="input_event" from="." to="." method="_on_input_event"]

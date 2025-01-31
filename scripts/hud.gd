@@ -22,7 +22,8 @@ func _process(delta) -> void:
 		
 		timeLabel.text = "Time: " + get_time_formatted()
 		flingsLabel.text = "Flings: " + str(flings)
-		collectablesLabel.text = "Collectables: " + str(collectables) + "/3"
+	
+	collectablesLabel.text = "Collectables: " + str(collectables) + "/3"
 
 func stop_timer() -> void:
 	set_process(false)

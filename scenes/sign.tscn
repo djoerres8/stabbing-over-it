@@ -1,0 +1,39 @@
+[gd_scene load_steps=7 format=3 uid="uid://dk6h562dhdisk"]
+
+[ext_resource type="ArrayMesh" uid="uid://cg0bwaavgsfsu" path="res://assets/sign.res" id="1_7uywm"]
+[ext_resource type="FontFile" uid="uid://b0vxmih2c1kfg" path="res://assets/fonts/Molot.otf" id="2_0n2lq"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_76jbo"]
+albedo_color = Color(0.237539, 0.237539, 0.237539, 1)
+
+[sub_resource type="TextMesh" id="TextMesh_mqdij"]
+material = SubResource("StandardMaterial3D_76jbo")
+text = "Play"
+font = ExtResource("2_0n2lq")
+font_size = 40
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_c1vnm"]
+size = Vector3(1.38666, 0.806366, 0.124084)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_whq6u"]
+size = Vector3(0.164917, 1.3017, 0.0700073)
+
+[node name="sign" type="StaticBody3D"]
+
+[node name="Sign" type="MeshInstance3D" parent="."]
+transform = Transform3D(199.999, 0.516702, -2.25856e-08, -0.516702, 199.999, -8.74225e-06, -1.60982e-13, 8.74228e-06, 200, 0.0100063, -0.313154, 0.0159957)
+mesh = ExtResource("1_7uywm")
+skeleton = NodePath("")
+
+[node name="Play" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.99965, 0.0372082, 0, -0.0372082, 1.99965, 0, 0, 0, 2, 0.0597737, 3.23375, 0.0348623)
+mesh = SubResource("TextMesh_mqdij")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0.0711975, 3.13454, -0.0247109)
+shape = SubResource("BoxShape3D_c1vnm")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0.127019, 1.02955, -0.0751982)
+shape = SubResource("BoxShape3D_whq6u")

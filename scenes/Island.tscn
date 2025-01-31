@@ -1,4 +1,4 @@
-[gd_scene load_steps=134 format=4 uid="uid://cr8lkpttdhxa1"]
+[gd_scene load_steps=142 format=4 uid="uid://cr8lkpttdhxa1"]
 
 [ext_resource type="Environment" uid="uid://b5rs1rje7ejsu" path="res://resources/sky.tres" id="2_m6u05"]
 [ext_resource type="PackedScene" uid="uid://x66v0k3wphao" path="res://scenes/hud.tscn" id="2_mvvqr"]
@@ -39,20 +39,6 @@ material = SubResource("StandardMaterial3D_a6621")
 height = 0.15
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_hkhnv"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_644bp"]
-albedo_color = Color(0.76, 0.6365, 0.266, 1)
-normal_scale = 0.53
-uv1_scale = Vector3(7, 7, 7)
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_gjvtw"]
-material = SubResource("StandardMaterial3D_644bp")
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_kdwvr"]
-size = Vector3(6, 108, 1)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_yy8rq"]
-size = Vector3(70.5525, 1, 49.3068)
 
 [sub_resource type="Shader" id="Shader_py3ov"]
 code = "// NOTE: Shader automatically converted from Godot Engine 4.3.stable's StandardMaterial3D.
@@ -299,6 +285,20 @@ bind/12/pose = Transform3D(0.172753, -0.372806, -0.911687, -0.911686, -0.410859,
 bind/13/name = &"neutral_bone"
 bind/13/bone = -1
 bind/13/pose = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_644bp"]
+albedo_color = Color(0.76, 0.6365, 0.266, 1)
+normal_scale = 0.53
+uv1_scale = Vector3(7, 7, 7)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_gjvtw"]
+material = SubResource("StandardMaterial3D_644bp")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_kdwvr"]
+size = Vector3(6, 108, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_yy8rq"]
+size = Vector3(70.5525, 1, 49.3068)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_357r4"]
 resource_name = "Material.029"
@@ -1102,6 +1102,44 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_vefyw")
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w8krg"]
+albedo_color = Color(0.0980392, 0.0980392, 0.0980392, 1)
+
+[sub_resource type="TextMesh" id="TextMesh_5ob7v"]
+material = SubResource("StandardMaterial3D_w8krg")
+text = "Press 
+\"R\" 
+to reset 
+to 
+the 
+beginning. "
+font = ExtResource("18_v5myi")
+font_size = 110
+
+[sub_resource type="TextMesh" id="TextMesh_2v55k"]
+material = SubResource("StandardMaterial3D_w8krg")
+text = "\"P\"
+to
+Pause"
+font = ExtResource("18_v5myi")
+font_size = 80
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7m8u0"]
+albedo_color = Color(0.237539, 0.237539, 0.237539, 1)
+
+[sub_resource type="TextMesh" id="TextMesh_ol7ho"]
+material = SubResource("StandardMaterial3D_7m8u0")
+text = "Time to go 
+Up!"
+font = ExtResource("17_1styw")
+font_size = 40
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_s6rdr"]
+size = Vector3(1.38666, 0.806366, 0.192581)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_pxnwc"]
+size = Vector3(0.164917, 1.3017, 0.195663)
+
 [sub_resource type="ArrayMesh" id="ArrayMesh_m5p07"]
 _surfaces = [{
 "aabb": AABB(-0.951056, -1.59977, -3.01669, 5.02952, 15.3743, 3.82571),
@@ -1178,7 +1216,10 @@ albedo_color = Color(0.122252, 0.122252, 0.122252, 1)
 
 [sub_resource type="TextMesh" id="TextMesh_tvwod"]
 material = SubResource("StandardMaterial3D_e7wsf")
-text = "Danger"
+text = "Only real gamers go this way 
+dont even think about trying 
+to go this way unless you 
+are an absolute uber gamer."
 font = ExtResource("18_v5myi")
 font_size = 42
 
@@ -1194,27 +1235,18 @@ albedo_color = Color(0.0980392, 0.0980392, 0.0980392, 1)
 [sub_resource type="PrismMesh" id="PrismMesh_o644y"]
 material = SubResource("StandardMaterial3D_6ydxu")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w8krg"]
-albedo_color = Color(0.0980392, 0.0980392, 0.0980392, 1)
-
-[sub_resource type="TextMesh" id="TextMesh_5ob7v"]
-material = SubResource("StandardMaterial3D_w8krg")
-text = "Press 
-\"R\" 
-to reset 
-to 
-the 
-beginning. "
+[sub_resource type="TextMesh" id="TextMesh_qgcqg"]
+material = SubResource("StandardMaterial3D_e7wsf")
+text = "Summit
+"
 font = ExtResource("18_v5myi")
-font_size = 110
+font_size = 42
 
-[sub_resource type="TextMesh" id="TextMesh_2v55k"]
-material = SubResource("StandardMaterial3D_w8krg")
-text = "\"P\"
-to
-Pause"
+[sub_resource type="TextMesh" id="TextMesh_3bsfy"]
+material = SubResource("StandardMaterial3D_e7wsf")
+text = "Don't give up!"
 font = ExtResource("18_v5myi")
-font_size = 80
+font_size = 42
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_0c7xy"]
 height = 2.12703
@@ -1262,6 +1294,19 @@ albedo_color = Color(0.0430392, 0.0430392, 0.0430392, 1)
 material = SubResource("StandardMaterial3D_32tsg")
 size = Vector2(10000, 3000)
 
+[sub_resource type="TextMesh" id="TextMesh_aangk"]
+material = SubResource("StandardMaterial3D_e7wsf")
+text = "Wow, nice job. 
+You found nothing"
+font = ExtResource("18_v5myi")
+font_size = 42
+
+[sub_resource type="TextMesh" id="TextMesh_87102"]
+material = SubResource("StandardMaterial3D_e7wsf")
+text = "Time to go up!"
+font = ExtResource("18_v5myi")
+font_size = 42
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_avq6w"]
 albedo_color = Color(0.237539, 0.237539, 0.237539, 1)
 
@@ -1284,7 +1329,13 @@ directional_shadow_pancake_size = 67.0
 
 [node name="Hud" parent="." instance=ExtResource("2_mvvqr")]
 
-[node name="PauseMenu" parent="." instance=ExtResource("4_kr2uf")]
+[node name="stabbert" parent="." instance=ExtResource("3_7gehv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.402, 50.056, 0)
+freeze = true
+
+[node name="Pause_Menu" type="CanvasLayer" parent="."]
+
+[node name="PauseMenu" parent="Pause_Menu" instance=ExtResource("4_kr2uf")]
 
 [node name="Mountain" parent="." instance=ExtResource("5_ly6dr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 285.359, -25.501, 0)
@@ -1294,13 +1345,15 @@ metadata/material = &"ground"
 [node name="Floor" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -18.258, 0)
 metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
 transform = Transform3D(1000, 0, 0, 0, 1000, 0, 0, 0, 785.468, 297.71, -53.0042, 0)
 mesh = SubResource("SphereMesh_86un4")
 
 [node name="CollisionPolygon3D" type="CollisionPolygon3D" parent="Floor"]
-polygon = PackedVector2Array(-201.546, -56.3519, -201.632, -49.4964, -197.103, -42.5685, -188.158, -35.7029, -174.661, -28.7006, -156.889, -21.9645, -135.032, -15.7918, -108.551, -9.63903, -88.217, -5.54844, -74.1708, -3.2809, -53.637, -0.0685577, -42.1386, 1.89652, -32.8165, 3.03029, -15.621, 5.17185, 15.0168, 8.68092, 36.8734, 10.8225, 63.1833, 13.0566, 573.797, 9.35306, 589.86, 7.90733, 623.965, 3.70801, 665.997, -2.6365, 686.775, -5.65014, 713.736, -11.508, 730.708, -15.4733, 752.438, -21.9765, 769.638, -28.2325, 783.606, -35.345, 792.567, -42.3924, 796.941, -49.3586, 797.047, -56.6151, 792.47, -63.7906, -197.095, -63.2795)
+depth = 3.0
+polygon = PackedVector2Array(-201.546, -56.3519, -201.632, -49.4964, -197.103, -42.5685, -188.158, -35.7029, -174.661, -28.7006, -156.889, -21.9645, -135.032, -15.7918, -108.551, -9.63903, -88.217, -5.54844, -74.1708, -3.2809, -53.637, -0.0685577, -42.1386, 1.89652, -32.2633, -1.69619, -14.8398, 0.561071, 15.3038, 3.67951, 36.2321, 6.52847, 63.1833, 13.0566, 573.797, 9.35306, 589.86, 7.90733, 623.965, 3.70801, 665.997, -2.6365, 686.775, -5.65014, 713.736, -11.508, 730.708, -15.4733, 752.438, -21.9765, 769.638, -28.2325, 783.606, -35.345, 792.567, -42.3924, 796.941, -49.3586, 797.047, -56.6151, 792.47, -63.7906, -197.095, -63.2795)
 
 [node name="resetArea" type="Area3D" parent="Floor"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -200.588, 0)
@@ -1309,9 +1362,21 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -200.588, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 80.5076, 0)
 shape = SubResource("WorldBoundaryShape3D_hkhnv")
 
+[node name="Water" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.205, -512.824, -422.367)
+mesh = SubResource("BoxMesh_rsq86")
+metadata/_edit_lock_ = true
+
+[node name="Cube" type="MeshInstance3D" parent="."]
+transform = Transform3D(2.08883, 2.15332, 0, -2.15332, 2.08883, 0, 0, 0, 3, 248.611, 317.23, 8.58307e-06)
+visible = false
+mesh = SubResource("ArrayMesh_iegh7")
+skin = SubResource("Skin_7rgrl")
+
 [node name="Sand" type="StaticBody3D" parent="."]
 metadata/_edit_group_ = true
 metadata/material = &"sand"
+metadata/_edit_lock_ = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Sand"]
 transform = Transform3D(0.74513, 53.5577, 0, -6.18003, 6.45748, 0, 0, 0, 118.607, 0, -12.7683, -30.5206)
@@ -1324,20 +1389,6 @@ shape = SubResource("BoxShape3D_kdwvr")
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="Sand"]
 transform = Transform3D(0.992658, -0.120951, 0, 0.120951, 0.992658, 0, 0, 0, 1, 14.1678, -8.57764, -29.7306)
 shape = SubResource("BoxShape3D_yy8rq")
-
-[node name="Water" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.205, -512.824, -422.367)
-mesh = SubResource("BoxMesh_rsq86")
-
-[node name="Cube" type="MeshInstance3D" parent="."]
-transform = Transform3D(2.08883, 2.15332, 0, -2.15332, 2.08883, 0, 0, 0, 3, 248.611, 317.23, 8.58307e-06)
-visible = false
-mesh = SubResource("ArrayMesh_iegh7")
-skin = SubResource("Skin_7rgrl")
-
-[node name="stabbert" parent="." instance=ExtResource("3_7gehv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.35376, -1.43026, 0)
-freeze = true
 
 [node name="environment" type="Node" parent="."]
 
@@ -1713,7 +1764,7 @@ skeleton = NodePath("")
 [node name="Beach" type="Node" parent="Obstacles"]
 
 [node name="log1" type="StaticBody3D" parent="Obstacles/Beach"]
-transform = Transform3D(0.560501, -0.497693, -0.0253165, 0.498336, 0.559777, 0.0284746, -1.35015e-09, -0.0381016, 0.749031, 115.424, 41.6065, 0.264526)
+transform = Transform3D(0.560501, -0.497693, -0.0253165, 0.498336, 0.559777, 0.0284746, -1.35015e-09, -0.0381016, 0.749031, 113.329, 41.6065, 0.264526)
 metadata/material = &"wood"
 
 [node name="Plane_019" type="MeshInstance3D" parent="Obstacles/Beach/log1"]
@@ -1835,6 +1886,37 @@ metadata/material = &"cloud"
 transform = Transform3D(-5, 0, -4.37114e-07, 0, 5, 0, 4.37114e-07, 0, -5, 90.0565, 90.4455, -3.8147e-06)
 metadata/material = &"cloud"
 
+[node name="PressR" type="MeshInstance3D" parent="Obstacles/Beach"]
+transform = Transform3D(1.18046, 0.0522932, -0.20925, -0.0200423, 1.18575, 0.183264, 0.214752, -0.176784, 1.16732, 90.0188, 29.0694, -6.96895)
+mesh = SubResource("TextMesh_5ob7v")
+skeleton = NodePath("../../Hill1-tower")
+
+[node name="PToPause" type="MeshInstance3D" parent="Obstacles/Beach"]
+transform = Transform3D(0.999285, -0.0376502, -0.00340755, 0.0306154, 0.753091, 0.657204, -0.0221777, -0.656838, 0.753705, 15.9849, -6.74796, 2.64093)
+mesh = SubResource("TextMesh_2v55k")
+skeleton = NodePath("../../Hill1-tower")
+
+[node name="timetogoup" type="StaticBody3D" parent="Obstacles/Beach"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 100.104, 26.1769, 0.389323)
+
+[node name="Sign" type="MeshInstance3D" parent="Obstacles/Beach/timetogoup"]
+transform = Transform3D(199.999, 0.516702, -2.25856e-08, -0.516702, 199.999, -8.74225e-06, -1.60982e-13, 8.74228e-06, 200, 0.0100063, -0.313154, 0.0159957)
+mesh = ExtResource("12_3hyy8")
+skeleton = NodePath("")
+
+[node name="Play" type="MeshInstance3D" parent="Obstacles/Beach/timetogoup"]
+transform = Transform3D(0.999827, 0.0186041, 0, -0.0186041, 0.999827, 0, 0, 0, 1, 0.0597737, 3.23375, 0.0348623)
+mesh = SubResource("TextMesh_ol7ho")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Obstacles/Beach/timetogoup"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0.0711975, 3.13454, -0.0319892)
+shape = SubResource("BoxShape3D_s6rdr")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Obstacles/Beach/timetogoup"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0.127018, 1.02955, -0.0777464)
+shape = SubResource("BoxShape3D_pxnwc")
+
 [node name="Hill1-tower" type="Node" parent="Obstacles"]
 
 [node name="Wall" parent="Obstacles/Hill1-tower" instance=ExtResource("8_lmv7a")]
@@ -1881,6 +1963,10 @@ metadata/material = &"stone"
 transform = Transform3D(0.487564, 0, -6.983, 0, 7, 0, 6.983, 0, 0.487564, 174.674, 114.758, -1.3063)
 metadata/material = &"stone"
 
+[node name="Wall6" parent="Obstacles/Hill1-tower" instance=ExtResource("8_lmv7a")]
+transform = Transform3D(0.407449, -3.84449, -5.83557, -1.60536, 5.63765, -3.82619, 6.80124, 1.56102, -0.553532, 149.846, 89.347, -1.3063)
+metadata/material = &"stone"
+
 [node name="Wall3" parent="Obstacles/Hill1-tower" instance=ExtResource("8_lmv7a")]
 transform = Transform3D(0.487564, 0, -6.983, 0, 7, 0, 6.983, 0, 0.487564, 174.674, 128.523, -1.3063)
 metadata/material = &"stone"
@@ -1919,7 +2005,7 @@ transform = Transform3D(8.71709, -2.23882, 0, 2.23882, 8.71709, 0, 0, 0, 9, 204.
 metadata/material = &"ground"
 
 [node name="mushroom2" type="StaticBody3D" parent="Obstacles/Hill1-tower"]
-transform = Transform3D(-18.3061, -4.84427, -1.5551, -4.0441, 17.3784, -6.52955, 3.08717, -5.96009, -17.7749, 226.623, 138.39, 0)
+transform = Transform3D(-18.3061, -4.84429, -1.5551, -4.04411, 17.3784, -6.52956, 3.08717, -5.9601, -17.7749, 226.623, 138.39, 0)
 metadata/material = &"ground"
 
 [node name="Cylinder_015" type="MeshInstance3D" parent="Obstacles/Hill1-tower/mushroom2"]
@@ -1936,32 +2022,62 @@ skeleton = NodePath("")
 transform = Transform3D(0.910639, 0.388777, -0.139942, -0.318906, 0.876649, 0.360262, 0.262742, -0.283439, 0.922297, 0.195817, 1.11589, -0.34417)
 shape = SubResource("BoxShape3D_0j5vo")
 
-[node name="Node3D" type="Node3D" parent="Obstacles/Hill1-tower"]
+[node name="danger" type="Node3D" parent="Obstacles/Hill1-tower"]
 
-[node name="Sign" type="MeshInstance3D" parent="Obstacles/Hill1-tower/Node3D"]
+[node name="Sign" type="MeshInstance3D" parent="Obstacles/Hill1-tower/danger"]
 transform = Transform3D(569.107, 0.964133, 143.986, -1.57594, 399.999, -1.74845e-05, -219.577, -0.371971, 373.186, 160.461, 171.605, -6.80483)
 mesh = ExtResource("12_3hyy8")
 skeleton = NodePath("")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Obstacles/Hill1-tower/Node3D"]
-transform = Transform3D(3.76659, 0, 1.34641, 0, 4, 0, -1.34641, 0, 3.76659, 160.265, 179.311, -6.79121)
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Obstacles/Hill1-tower/danger"]
+transform = Transform3D(3.76659, 0, 1.34641, 0, 4, 0, -1.34641, 0, 3.76659, 160.265, 182.186, -6.68896)
 mesh = SubResource("TextMesh_tvwod")
 
-[node name="MeshInstance3D6" type="MeshInstance3D" parent="Obstacles/Hill1-tower/Node3D"]
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="Obstacles/Hill1-tower/danger"]
 transform = Transform3D(1.78099, 0.000848365, 0.184971, -0.00729377, 0.239998, -6.46331e-11, -0.709172, -0.000337811, 0.464528, 161.198, 177.863, -7.29918)
 mesh = SubResource("BoxMesh_ang48")
 
-[node name="MeshInstance3D7" type="MeshInstance3D" parent="Obstacles/Hill1-tower/Node3D"]
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="Obstacles/Hill1-tower/danger"]
 transform = Transform3D(-0.0646566, -1.48459, 0.31437, 1.09772, -0.104718, -1.75319e-09, 0.0287383, 0.659863, 0.707282, 159.615, 177.879, -6.77041)
 mesh = SubResource("PrismMesh_o644y")
 
-[node name="PressR" type="MeshInstance3D" parent="Obstacles/Hill1-tower"]
-transform = Transform3D(1.18046, 0.0522932, -0.20925, -0.0200423, 1.18575, 0.183264, 0.214752, -0.176784, 1.16732, 90.0188, 29.0694, -6.96895)
-mesh = SubResource("TextMesh_5ob7v")
+[node name="go this way" type="Node3D" parent="Obstacles/Hill1-tower"]
 
-[node name="PToPause" type="MeshInstance3D" parent="Obstacles/Hill1-tower"]
-transform = Transform3D(0.999285, -0.0376502, -0.00340755, 0.0306154, 0.753091, 0.657204, -0.0221777, -0.656838, 0.753705, 15.9849, -6.74796, 2.64093)
-mesh = SubResource("TextMesh_2v55k")
+[node name="Sign" type="MeshInstance3D" parent="Obstacles/Hill1-tower/go this way"]
+transform = Transform3D(574.653, 0.973516, -134.18, -1.57594, 399.999, -1.74403e-05, 204.625, 0.346672, 376.823, 173.555, 171.605, -6.7821)
+mesh = ExtResource("12_3hyy8")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Obstacles/Hill1-tower/go this way"]
+transform = Transform3D(3.73362, 0, -1.4353, 0, 4, 0, 1.4353, 0, 3.73362, 173.398, 179.311, -6.89958)
+mesh = SubResource("TextMesh_qgcqg")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="Obstacles/Hill1-tower/go this way"]
+transform = Transform3D(-1.82516, -0.00410421, -0.152667, 0.0377898, -0.239949, -0.00273675, -0.585021, -0.00269527, 0.476115, 172.856, 177.892, -7.20128)
+mesh = SubResource("BoxMesh_ang48")
+
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="Obstacles/Hill1-tower/go this way"]
+transform = Transform3D(0.0516738, 1.52762, -0.265104, -1.0987, 0.0785278, -0.00374936, 0.0131736, 0.557324, 0.727174, 174.471, 177.85, -6.7827)
+mesh = SubResource("PrismMesh_o644y")
+
+[node name="KeepItUp!" type="Node3D" parent="Obstacles/Hill1-tower"]
+
+[node name="Sign" type="MeshInstance3D" parent="Obstacles/Hill1-tower/KeepItUp!"]
+transform = Transform3D(228.721, -367.001, -53.0679, 561.401, 154.239, -26.25, 67.9355, -38.9975, 395.594, 249.824, 174.745, -3.22891)
+mesh = ExtResource("12_3hyy8")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Obstacles/Hill1-tower/KeepItUp!"]
+transform = Transform3D(1.48285, -3.6791, -0.515153, 3.68671, 1.52566, -0.283867, 0.45758, -0.369571, 3.95652, 243.023, 177.946, -3.98581)
+mesh = SubResource("TextMesh_3bsfy")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="Obstacles/Hill1-tower/KeepItUp!"]
+transform = Transform3D(-0.756557, 0.218763, -0.0578658, -1.75447, -0.0962722, -0.0192025, -0.1561, 0.0217829, 0.496269, 244.103, 176.429, -4.0911)
+mesh = SubResource("BoxMesh_ang48")
+
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="Obstacles/Hill1-tower/KeepItUp!"]
+transform = Transform3D(1.02956, 0.532044, -0.101404, -0.371801, 1.52739, -0.0575839, 0.108463, 0.185455, 0.765165, 244.78, 177.954, -4.04819)
+mesh = SubResource("PrismMesh_o644y")
 
 [node name="Windmill" type="Node" parent="Obstacles"]
 
@@ -2084,7 +2200,7 @@ transform = Transform3D(9.99591, -0.285845, 2.83341e-09, -0.028683, -1.00303, -9
 metadata/material = &"stone"
 
 [node name="Pillar8" parent="Obstacles/final hill" instance=ExtResource("13_8eppc")]
-transform = Transform3D(8.99941, 4.33547, -0.463012, -0.028683, -1.00303, -9.94953, -4.36003, 8.95531, -0.890235, 264.001, 332.488, -22.5909)
+transform = Transform3D(8.99941, 4.33547, -0.463012, -0.028683, -1.00303, -9.94953, -4.36003, 8.95531, -0.890235, 264.001, 332.488, -21.6471)
 metadata/material = &"stone"
 
 [node name="Pillar6" parent="Obstacles/final hill" instance=ExtResource("13_8eppc")]
@@ -2142,27 +2258,21 @@ metadata/material = &"wood"
 
 [node name="ObsidianWall2" parent="Obstacles/lastEffort" instance=ExtResource("19_ir54d")]
 transform = Transform3D(4.31287, -6.73789, 0, 6.73789, 4.31287, 0, 0, 0, 8, 373.671, 347.92, 0.5)
-metadata/material = &"obsidian"
 
 [node name="ObsidianWall3" parent="Obstacles/lastEffort" instance=ExtResource("19_ir54d")]
 transform = Transform3D(5.03912, -6.21348, 0, 6.21348, 5.03912, 0, 0, 0, 8, 381.856, 359.404, 0.5)
-metadata/material = &"obsidian"
 
 [node name="ObsidianWall4" parent="Obstacles/lastEffort" instance=ExtResource("19_ir54d")]
 transform = Transform3D(4.80593, -6.39555, 0, 6.39555, 4.80593, 0, 0, 0, 8, 391.589, 371.59, 0.5)
-metadata/material = &"obsidian"
 
 [node name="ObsidianWall5" parent="Obstacles/lastEffort" instance=ExtResource("19_ir54d")]
 transform = Transform3D(7.42352, -2.98183, 0, 2.98183, 7.42352, 0, 0, 0, 8, 396.993, 375.834, 0.5)
-metadata/material = &"obsidian"
 
 [node name="ObsidianWall6" parent="Obstacles/lastEffort" instance=ExtResource("19_ir54d")]
 transform = Transform3D(7.96202, -0.778579, 0, 0.778579, 7.96202, 0, 0, 0, 8, 407.729, 378.45, 0.5)
-metadata/material = &"obsidian"
 
 [node name="ObsidianWall7" parent="Obstacles/lastEffort" instance=ExtResource("19_ir54d")]
 transform = Transform3D(7.90888, -1.20401, 0, 1.20401, 7.90888, 0, 0, 0, 8, 416.391, 379.252, 0.5)
-metadata/material = &"obsidian"
 
 [node name="Wall" parent="Obstacles/lastEffort" instance=ExtResource("8_lmv7a")]
 transform = Transform3D(7.78952, 1.823, 0, -1.823, 7.78952, 0, 0, 0, 8, 462.562, 381.356, 0.5)
@@ -2226,7 +2336,7 @@ spot_angle_attenuation = 0.392292
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 441.173, 406.498, 0.0543718)
 
 [node name="youWin" type="Node3D" parent="Pedastal"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0126343, -3001.33, 0.221375)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.40851, -3001.33, 0.00616455)
 
 [node name="You" type="MeshInstance3D" parent="Pedastal/youWin"]
 transform = Transform3D(700, 0, 0, 0, 700, 0, 0, 0, 1978.22, 454.932, 1288.31, -1358.94)
@@ -2251,6 +2361,30 @@ skeleton = NodePath("../../..")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Pedastal"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 341.687, -2102.89, -1068.54)
 mesh = SubResource("PlaneMesh_kkj51")
+
+[node name="nothingSign" type="Node3D" parent="Pedastal"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 566.038, 0.358677, 0)
+
+[node name="Sign" type="MeshInstance3D" parent="Pedastal/nothingSign"]
+transform = Transform3D(569.107, 0.964133, 143.986, -1.57594, 399.999, -1.74845e-05, -219.577, -0.371971, 373.186, -2.1897, -8.00719, -6.80483)
+mesh = ExtResource("12_3hyy8")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Pedastal/nothingSign"]
+transform = Transform3D(2.80074, 0, 1.0751, 0, 3, 0, -1.0751, 0, 2.80074, -1.8573, -0.765188, -6.97342)
+mesh = SubResource("TextMesh_aangk")
+
+[node name="nothingSign2" type="Node3D" parent="Pedastal"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 553.462, 3.13068, 11.8836)
+
+[node name="Sign" type="MeshInstance3D" parent="Pedastal/nothingSign2"]
+transform = Transform3D(569.107, 0.964133, 143.986, -1.57594, 399.999, -1.74845e-05, -219.577, -0.371971, 373.186, -2.1897, -8.00719, -6.80483)
+mesh = ExtResource("12_3hyy8")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Pedastal/nothingSign2"]
+transform = Transform3D(2.80074, 0, 1.0751, 0, 3, 0, -1.0751, 0, 2.80074, -1.8573, -0.765188, -6.97342)
+mesh = SubResource("TextMesh_87102")
 
 [node name="tutorial" type="Node" parent="."]
 
@@ -2279,12 +2413,12 @@ skeleton = NodePath("../..")
 transform = Transform3D(10, 0, 0, 0, 6.76015, 7.36888, 0, -7.36888, 6.76015, 332.368, 311.102, 7.095)
 
 [node name="Collectable1" parent="." instance=ExtResource("28_xl50e")]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -9.62808, 62.4232, -1.90735e-06)
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -10.028, 63.4386, -1.90735e-06)
 
 [node name="Collectable2" parent="." instance=ExtResource("28_xl50e")]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 105.183, 281.261, 0)
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 104.758, 277.801, 0)
 
 [node name="Collectable3" parent="." instance=ExtResource("28_xl50e")]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 169.808, 356.42, 3.8147e-06)
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 168.274, 348.546, 3.8147e-06)
 
 [connection signal="body_entered" from="Floor/resetArea" to="stabbert" method="_on_reset_area_body_entered"]
